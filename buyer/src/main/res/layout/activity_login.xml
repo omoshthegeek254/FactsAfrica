@@ -55,6 +55,8 @@
         app:layout_constraintVertical_bias="0.115" />
     <Button
         android:id="@+id/button"
+        android:background="@drawable/btn_edit"
+        android:text="Sign in"
         android:layout_width="304dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
