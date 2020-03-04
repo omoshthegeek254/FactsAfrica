@@ -56,3 +56,6 @@ dependencies {
     implementation project(path: ':common')
 
 }
+
+
+apply plugin: 'com.google.gms.google-services'
