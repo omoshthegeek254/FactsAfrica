@@ -6,7 +6,10 @@ import android.os.Bundle;
 
 import com.example.factsafrica.R;
 
+
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
