@@ -20,7 +20,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Login Details below"
+        android:textSize="36sp"
+        android:text="Log In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.416"
@@ -53,22 +54,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mail"
         app:layout_constraintVertical_bias="0.115" />
+
     <Button
         android:id="@+id/button"
-        android:background="@drawable/btn_edit"
-        android:text="Sign in"
         android:layout_width="304dp"
         android:layout_height="50dp"
+        android:background="@drawable/btn_edit"
+        android:text="Sign in"
+        android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.201" />
+
+
+    <Button
+        android:id="@+id/googleSignIn"
+        android:layout_width="286dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="40dp"
+        android:background="#FFFF"
+        android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:text="SIGN IN WITH GOOGLE"
+        android:textColor="#0B6B4D"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot Password ?"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.847"
         app:layout_constraintStart_toStartOf="parent"
