@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.factsafrica.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -85,6 +86,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mEd2.requestFocus();
             return;
         }
+
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    finish();
+                    Intent intent = new Intent (LoginActivity.this,MainActivity.class);
+
+                    startActivity(intent);
+
+                }else {Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        if(auth.getCurrentUser()!=null){
+            finish();
+        }
+        startActivity(new Intent(this,MainActivity.class));
+
 
     }
 
