@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "360382257104",
+    "firebase_url": "https://factsafricaapp.firebaseio.com",
+    "project_id": "factsafricaapp",
+    "storage_bucket": "factsafricaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360382257104:android:95c93f9c126ad5027ecbd5",
+        "android_client_info": {
+          "package_name": "com.example.factsafrica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360382257104-mn1lsqvl8iporm02t5kt01ipbuud4keq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.factsafrica",
+            "certificate_hash": "9e06104b171542250a1ab83dd4a49a21e53bfb0a"
+          }
+        },
+        {
+          "client_id": "360382257104-lq1o6fs0qmig7lhmmeis45cnampjutvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA00milDnmLBiNTI0e8GRncvzxZviaHWHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360382257104-lq1o6fs0qmig7lhmmeis45cnampjutvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
