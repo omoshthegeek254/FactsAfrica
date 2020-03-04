@@ -41,6 +41,7 @@
            android:layout_width="150dp"
            android:layout_height="wrap_content"
            android:layout_marginLeft="52dp"
+        android:inputType="textPassword"
            android:layout_below="@id/emailId"
            android:hint="Enter password" />
 
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
         android:layout_below="@id/emailId"
         android:layout_toRightOf="@id/password"
         android:hint="Confirm password" />

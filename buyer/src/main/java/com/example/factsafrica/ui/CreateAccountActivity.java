@@ -72,7 +72,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         if (view == mLogin) {
-            Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
@@ -96,8 +96,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                             Toast.makeText(CreateAccountActivity.this, "Authentication Successful.",
                                     Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAccountActivity.this, "Authentication failed 1."+task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 });
