@@ -107,6 +107,17 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                                 Toast.LENGTH_SHORT).show();
 //getting just registered user
                         FirebaseUser userMM = mAuth.getCurrentUser();
+                        userMM.sendEmailVerification()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(CreateAccountActivity.this, "Confirmation Email Sent to : "+email,
+                                                Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateAccountActivity.this, "Verify Your Email to Login",
+                                                Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
 
 
                     }else {
