@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "737442151222-6138ds8ed94i628dcjilnialeglmvl4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.factsafrica",
+            "certificate_hash": "f1b4f0ac6e37ae9305d4256be9b124427a56b340"
+          }
+        },
+        {
           "client_id": "737442151222-ib2vd0rcutc19pvb5kqj24p3a7mtflb5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
