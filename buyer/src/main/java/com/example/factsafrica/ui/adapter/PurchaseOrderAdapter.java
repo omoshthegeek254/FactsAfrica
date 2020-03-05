@@ -43,7 +43,7 @@ public class PurchaseOrderAdapter extends  RecyclerView.Adapter<PurchaseOrderAda
 
     @Override
     public int getItemCount() {
-        return 0;
+        return purchaseorders.size();
     }
 
     public class PurchaseOrderViewHolder extends RecyclerView.ViewHolder {
