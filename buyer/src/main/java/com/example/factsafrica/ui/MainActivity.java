@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.factsafrica.R;
+import com.example.factsafrica.ui.utils.InvoiceFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mLogOut.setOnClickListener(this);
+
+        InvoiceFragment invoiceFragment = new InvoiceFragment();
     }
 
     @Override
