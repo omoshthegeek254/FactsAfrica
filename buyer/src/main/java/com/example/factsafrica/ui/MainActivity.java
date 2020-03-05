@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mLogOut.setOnClickListener(this);
+
+//        Fragment invoiceFragment = new InvoiceFragment();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().add(R.id.hold_fragment, invoiceFragment).commit();
     }
 
     @Override
