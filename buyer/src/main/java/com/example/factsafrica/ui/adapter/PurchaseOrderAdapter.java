@@ -1,6 +1,7 @@
 package com.example.factsafrica.ui.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,7 +31,9 @@ public class PurchaseOrderAdapter extends  RecyclerView.Adapter<PurchaseOrderAda
     @NonNull
     @Override
     public PurchaseOrderAdapter.PurchaseOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_list, parent, false);
+        PurchaseOrderViewHolder viewHolder = new PurchaseOrderViewHolder(view);
+        return viewHolder;
     }
 
     @Override
