@@ -17,8 +17,18 @@ import com.example.factsafrica.R;
 public class ComputersFragment extends Fragment {
 
 
-    public ComputersFragment() {
-        // Required empty public constructor
+    // Store instance variables
+    private String title;
+    private int page;
+
+    // newInstance constructor for creating fragment with arguments
+    public static SuppliersFragment newInstance(int page, String title) {
+        SuppliersFragment fragmentFirst = new SuppliersFragment();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fragmentFirst.setArguments(args);
+        return fragmentFirst;
     }
 
 

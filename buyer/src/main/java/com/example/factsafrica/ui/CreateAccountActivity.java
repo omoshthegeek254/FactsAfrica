@@ -103,8 +103,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                     mProgressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(CreateAccountActivity.this, "Authentication Successful.",
+                        Toast.makeText(CreateAccountActivity.this, "Registration Successful.",
                                 Toast.LENGTH_SHORT).show();
+//getting just registered user
+                        FirebaseUser userMM = mAuth.getCurrentUser();
+
+
                     }else {
                         mProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(CreateAccountActivity.this, "Authentication failed 1."+task.getException().getMessage(),
