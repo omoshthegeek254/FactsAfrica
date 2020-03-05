@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +32,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    @BindView(R.id.go_to_create_account) TextView mGoToCreateAccount;
     @BindView(R.id.mail) EditText mEd1;  //bind email text
     @BindView(R.id.password) EditText mEd2;//bind password text
     @BindView(R.id.googleSignIn)
     Button signInWithGoogle;
+    ProgressBar mProgressBarLogin;
     private GoogleSignInClient mGoogleSigInClient;
-    //private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private int RC_SIGN_IN = 123;
 
@@ -49,9 +51,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+        mProgressBarLogin = findViewById(R.id.progressBarLoginPage);
         findViewById(R.id.textView2).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         signInWithGoogle.setOnClickListener(this);
+        mGoToCreateAccount.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
 
@@ -78,7 +82,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         if (v== signInWithGoogle) {
+            mProgressBarLogin.setVisibility(View.VISIBLE);
             signIn();
+        }
+
+        if(v==mGoToCreateAccount){
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
         }
 
         switch (v.getId()){
@@ -90,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button:
-
+                mProgressBarLogin.setVisibility(View.VISIBLE);
                 userLogin();
                 break;
         }
@@ -126,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void FirebaseGoogleAuth(GoogleSignInAccount signInAccount) {
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
         auth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            mProgressBarLogin.setVisibility(View.INVISIBLE);
             if(task.isSuccessful()){
                 Toast.makeText(this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -135,6 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 FirebaseUser user = auth.getCurrentUser();
                 updateUI(user);
             } else {
+                mProgressBarLogin.setVisibility(View.INVISIBLE);
                 Toast.makeText(this, "Sign In Unsuccessful!", Toast.LENGTH_SHORT).show();
                 updateUI(null);
             }        });
@@ -154,18 +166,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = mEd2.getText().toString().trim();
         if (email.isEmpty()) {
             mEd1.setError("Email is required"); //mail validation
+            mProgressBarLogin.setVisibility(View.INVISIBLE);
             mEd1.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEd1.setError("Please enter a valid email");
+            mProgressBarLogin.setVisibility(View.INVISIBLE);
             mEd1.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
             mEd2.setError("Password is required"); //password validation
+            mProgressBarLogin.setVisibility(View.INVISIBLE);
             mEd2.requestFocus();
             return;
         }
@@ -173,6 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (password.length() < 6) {
             mEd2.setError("Minimum length of password should be 6"); //password length
+            mProgressBarLogin.setVisibility(View.INVISIBLE);
             mEd2.requestFocus();
             return;
         }
@@ -180,13 +196,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                mProgressBarLogin.setVisibility(View.INVISIBLE);
                 if(task.isSuccessful()){
                     finish();
                     Intent intent = new Intent (LoginActivity.this,MainActivity.class);
 
                     startActivity(intent);
 
-                }else {Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }else {
+                    mProgressBarLogin.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
                 }
 
