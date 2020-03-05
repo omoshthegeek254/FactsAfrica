@@ -1,6 +1,7 @@
 package com.example.factsafrica.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     public class InvoiceViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.invoiceNo) TextView mInvoiceId;
         @BindView(R.id.invoiceDate) TextView mInvoiceDate;
+        @BindView(R.id.invoice_status) TextView mInvoiceStatus;
         Context mContext;
 
         public InvoiceViewHolder(@NonNull View itemView) {
@@ -56,8 +58,22 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         }
 
         public void bindInvoice(Invoice invoice) {
-            mInvoiceId.setText(invoice.getId().toString());
+
+            if(invoice.getStatus().equals("pending") || invoice.getStatus().equals("Pending")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
+            mInvoiceStatus.setText(invoice.getStatus());
+            } else if(invoice.getStatus().equals("approved") || invoice.getStatus().equals("Approved")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
+                mInvoiceStatus.setText(invoice.getStatus());
+            } else if(invoice.getStatus().equals("declined") || invoice.getStatus().equals("Declined")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
+                mInvoiceStatus.setText(invoice.getStatus());
+            }
+
+            mInvoiceId.setText(invoice.getName());
+
             mInvoiceDate.setText(invoice.getInvoiceDate());
+//            mInvoiceStatus.setText(invoice.getStatus());
         }
     }
 }
