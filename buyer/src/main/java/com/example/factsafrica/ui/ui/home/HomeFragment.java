@@ -13,6 +13,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.factsafrica.R;
+import com.example.factsafrica.ui.models.PurchaseOrder;
+import com.example.factsafrica.ui.network.FactsAfricaApi;
+import com.example.factsafrica.ui.network.FactsAfricaClient;
+
+import java.util.List;
+
+import butterknife.ButterKnife;
+import retrofit2.Call;
 
 
 public class HomeFragment extends Fragment {
@@ -24,13 +32,13 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        ButterKnife.bind(this, root);
+        getOrders();
         return root;
+    }
+    public void getOrders() {
+
+
     }
 }
