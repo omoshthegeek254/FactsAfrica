@@ -1,6 +1,8 @@
 package com.example.factsafrica.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         mLogOut.setOnClickListener(this);
 
-        InvoiceFragment invoiceFragment = new InvoiceFragment();
+//        Fragment invoiceFragment = new InvoiceFragment();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().add(R.id.hold_fragment, invoiceFragment).commit();
     }
 
     @Override
