@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
+            if (user != null && user.isEmailVerified()) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -198,10 +198,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 mProgressBarLogin.setVisibility(View.INVISIBLE);
                 if(task.isSuccessful()){
-                    finish();
-                    Intent intent = new Intent (LoginActivity.this, HomeActivity.class);
+                    if(auth.getCurrentUser().isEmailVerified()){
+                        finish();
+                        Intent intent = new Intent (LoginActivity.this, HomeActivity.class);
 
-                    startActivity(intent);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Please Verify your email address first", Toast.LENGTH_LONG).show();
+                    }
+
 
                 }else {
                     mProgressBarLogin.setVisibility(View.INVISIBLE);

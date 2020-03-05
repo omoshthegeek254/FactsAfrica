@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,18 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.factsafrica.R;
 import com.example.factsafrica.ui.models.Invoice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder> {
+public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder> implements Filterable {
     private List<Invoice> invoices;
+    private List<Invoice> invoiceList;
     private Context mContext;
 
     public InvoiceAdapter(List<Invoice> invoices, Context mContext) {
         this.invoices = invoices;
         this.mContext = mContext;
+        invoiceList = new ArrayList<>(invoices);
     }
 
     @NonNull
@@ -44,6 +49,40 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     public void onBindViewHolder(@NonNull InvoiceViewHolder holder, int position) {
         holder.bindInvoice(invoices.get(position));
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleInvoice;
+    }
+
+    private Filter exampleInvoice = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Invoice> filteredList = new ArrayList<>();
+            if(constraint == null || constraint.length()==0){
+                filteredList.addAll(invoiceList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Invoice invoice: invoiceList){
+                    if(invoice.getStatus().toLowerCase().contains(filterPattern)){
+                        filteredList.add(invoice);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            invoices.clear();
+            invoiceList.addAll((List)results.values);
+            notifyDataSetChanged();
+
+        }
+    };
 
     public class InvoiceViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.invoiceNo) TextView mInvoiceId;

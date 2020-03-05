@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +33,11 @@ public class DashboardFragment extends Fragment {
 
     @BindView(R.id.invoicesRecycler) RecyclerView mInvoicesRecycler;
     private List<Invoice> invoices;
+    //InvoiceAdapter invoiceAdapter = new InvoiceAdapter(invoices, getContext());
+
+    SearchView mSearch;
+
+
 
     private DashboardViewModel dashboardViewModel;
 
@@ -42,16 +49,22 @@ public class DashboardFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-
-//        final TextView textView = rootView.findViewById(R.id.text_dashboard);
-//        dashboardViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+//        mSearch = rootView.findViewById(R.id.invoiceSearch);
+//        mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ButterKnife.bind(this, rootView);
         getInvoices();
+//        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //invoiceAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
         return rootView;
     }
 
@@ -78,4 +91,5 @@ public class DashboardFragment extends Fragment {
             }
         });
     }
+
 }
