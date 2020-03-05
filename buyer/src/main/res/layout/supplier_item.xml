@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    android:textAlignment="center">
+
+<TextView
+    android:id="@+id/supplier"
+    android:layout_width="255dp"
+    android:layout_height="wrap_content"
+    android:text="Supplier Name"
+    android:textColor="@color/colorPrimary"
+    android:textSize="20dp"
+    android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/movieTitleNameTextView"
+        android:layout_width="255dp"
+        android:layout_height="wrap_content"
+        android:text="Computers,Furniture , Food"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10dp"
+        android:textStyle="bold" />
+
+
+
+
+</LinearLayout>
