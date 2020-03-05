@@ -62,7 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mAuthListener = firebaseAuth -> {
             final FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
-                Intent intent = new Intent(CreateAccountActivity.this, HomeActivity.class);
+                Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -103,8 +103,17 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                     mProgressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(CreateAccountActivity.this, "Authentication Successful.",
-                                Toast.LENGTH_SHORT).show();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
+                            if(task1.isSuccessful()){
+                                Toast.makeText(CreateAccountActivity.this, "Authentication Successful. Please Check Your Email for a verification link",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(CreateAccountActivity.this, "Authentication failed 1."+ task1.getException().getMessage(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
                     }else {
                         mProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(CreateAccountActivity.this, "Authentication failed 1."+task.getException().getMessage(),
