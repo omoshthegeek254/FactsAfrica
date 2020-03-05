@@ -38,7 +38,7 @@ public class PurchaseOrderAdapter extends  RecyclerView.Adapter<PurchaseOrderAda
 
     @Override
     public void onBindViewHolder(@NonNull PurchaseOrderAdapter.PurchaseOrderViewHolder holder, int position) {
-
+        holder.bindPurchaseOrder(purchaseorders.get(position));
     }
 
     @Override
