@@ -1,4 +1,4 @@
-package com.example.factsafrica.ui.models;
+package com.example.factsafrica.ui;
 
 
 import android.os.Bundle;
