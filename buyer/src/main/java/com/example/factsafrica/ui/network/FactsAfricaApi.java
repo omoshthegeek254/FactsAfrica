@@ -12,5 +12,5 @@ public interface FactsAfricaApi {
     @GET("invoices")
     Call<List<Invoice>> getAllInvoices();
     @GET("purchase_orders")
-    Call<List<PurchaseOrder>> getOrders();
+    Call<List<PurchaseOrder>> getAllOrders();
 }
