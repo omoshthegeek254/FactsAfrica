@@ -18,9 +18,10 @@
             android:id="@+id/invoiceNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order no "
+            android:text="Invoice Number"
             android:textStyle="bold"
             android:textSize="20sp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,16 +30,18 @@
             android:text="Invoice Date: "
             android:id="@+id/invoice_date"
             />
+
         <TextView
-            android:id="@+id/invoiceDate"
-            android:layout_below="@id/invoiceNo"
-            android:layout_marginTop="24sp"
-            android:layout_toEndOf="@id/invoice_date"
+            android:id="@+id/invoiceCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Order no "
-            android:textSize="15sp"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="0dp"
+            android:text="Customer"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/invoice_status"
@@ -50,5 +53,11 @@
             android:text="approved"
             android:layout_alignParentBottom="true"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Amount"
+            android:textStyle="bold"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
