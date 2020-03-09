@@ -20,8 +20,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeVendor"
-        android:layout_width="411dp"
-        android:layout_height="590dp"
+        android:layout_width="401dp"
+        android:layout_height="554dp"
         android:padding="4dp"
         android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +33,14 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#0B6B4D"
+        android:src="@drawable/add_black_24dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/homeVendor"
-        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeVendor"
-        app:layout_constraintVertical_bias="0.117"
-        android:backgroundTint="#0B6B4D"/>
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
