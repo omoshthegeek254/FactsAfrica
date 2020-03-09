@@ -31,6 +31,7 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <TextView
+        android:id="@+id/dueDate"
         android:layout_width="131dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
@@ -42,7 +43,14 @@
 
     <TextView
         android:layout_width="143dp"
-        android:layout_height="33dp"/>
+        android:layout_height="33dp"
+        android:layout_marginStart="44dp"
+        android:drawableLeft="@drawable/ic_date_range_red_32dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dueDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.173" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
