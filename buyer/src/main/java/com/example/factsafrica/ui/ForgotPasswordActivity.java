@@ -52,7 +52,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         mProgressBar.setVisibility(View.INVISIBLE);
 
                         if(task.isSuccessful()){
-                            Toast.makeText(ForgotPasswordActivity.this,"Please check your email account for a reset link",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgotPasswordActivity.this,"Please check your email account for a confirmation link",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

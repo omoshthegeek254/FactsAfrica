@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">vendor</string>
+    <string name="app_name">Facts Africa</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="account">Account</string>
+    <string name="invoices_vendor">Invoices</string>
+    <string name="invoice_statement">Invoice Statements</string>
+    <string name="past_requests">Past Requests</string>
+    <string name="buyers">Buyers</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
 </resources>
