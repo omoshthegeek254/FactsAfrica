@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -16,14 +17,14 @@ import java.util.Calendar;
 public class MakeInvoiceActivity extends AppCompatActivity {
 
 
-    private EditText mText1;
+    private TextView mText1;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_invoice);
-        mText1= (EditText) findViewById(R.id.editTextDate);
+        mText1= (TextView) findViewById(R.id.editImageDate);
 
         mText1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,7 @@ public class MakeInvoiceActivity extends AppCompatActivity {
                 month = month+1;
 
                 String date = month  + "/" + day + "/" + year;
+
 
                 mText1.setText(date);
 
