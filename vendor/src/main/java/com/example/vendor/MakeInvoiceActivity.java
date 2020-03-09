@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class MakeInvoiceActivity extends AppCompatActivity {
+public class MakeInvoiceActivity extends AppCompatActivity  {
 
 
     private TextView mText1;
