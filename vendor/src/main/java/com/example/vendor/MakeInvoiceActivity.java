@@ -21,6 +21,9 @@ public class MakeInvoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar myCal = Calendar.getInstance();
+                int year =myCal.get(Calendar.YEAR);
+                int month = myCal.get(Calendar.MONTH);
+                int day = myCal.get(Calendar.DAY_OF_WEEK);
 
             }
         });
