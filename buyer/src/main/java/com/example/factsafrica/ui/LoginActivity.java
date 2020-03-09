@@ -32,11 +32,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.go_to_create_account) TextView mGoToCreateAccount;
+    //@BindView(R.id.go_to_create_account) TextView mGoToCreateAccount;
     @BindView(R.id.mail) EditText mEd1;  //bind email text
     @BindView(R.id.password) EditText mEd2;//bind password text
-    @BindView(R.id.googleSignIn)
-    Button signInWithGoogle;
+    @BindView(R.id.go_to_create_acc) TextView mGoBack;
+//    @BindView(R.id.googleSignIn)
+//    Button signInWithGoogle;
     ProgressBar mProgressBarLogin;
     private GoogleSignInClient mGoogleSigInClient;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -54,8 +55,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mProgressBarLogin = findViewById(R.id.progressBarLoginPage);
         findViewById(R.id.textView2).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
-        signInWithGoogle.setOnClickListener(this);
-        mGoToCreateAccount.setOnClickListener(this);
+        mGoBack.setOnClickListener(this);
+        //signInWithGoogle.setOnClickListener(this);
+        //mGoToCreateAccount.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
 
@@ -81,15 +83,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        if (v== signInWithGoogle) {
-            mProgressBarLogin.setVisibility(View.VISIBLE);
-            signIn();
-        }
-
-        if(v==mGoToCreateAccount){
-            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+        if(v==mGoBack){
+            Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
             startActivity(intent);
         }
+
+//        if (v== signInWithGoogle) {
+//            mProgressBarLogin.setVisibility(View.VISIBLE);
+//            signIn();
+//        }
+//
+//        if(v==mGoToCreateAccount){
+//            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         switch (v.getId()){
             case R.id.textView2:
