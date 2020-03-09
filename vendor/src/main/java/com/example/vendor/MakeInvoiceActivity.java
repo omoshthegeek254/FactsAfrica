@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class MakeInvoiceActivity extends AppCompatActivity {
     private TextView mText1;
 
@@ -18,6 +20,7 @@ public class MakeInvoiceActivity extends AppCompatActivity {
         mText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar myCal = Calendar.getInstance();
 
             }
         });
