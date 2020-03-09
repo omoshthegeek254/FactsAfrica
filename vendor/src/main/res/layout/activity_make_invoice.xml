@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MakeInvoiceActivity">
+
+    <TextView
+        android:id="@+id/createDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invoice Date  :"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editImageDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/editImageDate"
+        android:layout_width="143dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="48dp"
+        android:drawableLeft="@drawable/ic_date_range_black_24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/createDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/dueDate"
+        android:layout_width="131dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:text="Payment Due in"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createDate" />
+
+    <TextView
+        android:id="@+id/payBy"
+        android:layout_width="143dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="44dp"
+        android:drawableLeft="@drawable/ic_date_range_red_32dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dueDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.173" />
+
+    <RelativeLayout
+        android:layout_width="385dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payBy"
+        app:layout_constraintVertical_bias="0.109">
+
+        <TextView
+            android:id="@+id/customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_group_add"
+            android:text="Customer"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/customerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customer"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:text="Name" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
+            android:id="@+id/items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/customerName"
+            android:layout_marginTop="22dp"
+            android:text="Items"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
