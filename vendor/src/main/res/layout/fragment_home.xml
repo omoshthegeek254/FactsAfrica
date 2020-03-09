@@ -33,7 +33,6 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0B6B4D"
         app:fabCustomSize="60sp"
         android:src="@drawable/add_black_24dp"
         app:fabSize="normal"
