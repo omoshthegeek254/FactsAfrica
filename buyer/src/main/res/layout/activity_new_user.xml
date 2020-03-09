@@ -21,7 +21,7 @@
 
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextEmailCreate"
         android:layout_width="300dp"
         android:layout_height="43dp"
         android:background="@drawable/login_edits"
@@ -34,19 +34,19 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintVertical_bias="0.404" />
 
     <Button
-        android:id="@+id/ResetPasswordButton"
+        android:id="@+id/createAccResetButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_edit"
-        android:text="Reset Password"
+        android:text="Create Account"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailCreate"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538" />
 
@@ -63,30 +63,28 @@
         app:srcCompat="@drawable/facts" />
 
     <TextView
-        android:id="@+id/forgot_password_back_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to sign in"
+        android:id="@+id/new_user_back_to_login"
+        android:layout_width="104dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="232dp"
+        android:text="Sign In"
         android:textColor="#124995"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ResetPasswordButton"
-        app:layout_constraintHorizontal_bias="0.552"
-        app:layout_constraintStart_toStartOf="@+id/ResetPasswordButton"
-        app:layout_constraintTop_toBottomOf="@+id/ResetPasswordButton"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintEnd_toEndOf="@+id/createAccResetButton"
+        app:layout_constraintStart_toStartOf="@+id/createAccResetButton" />
 
     <ProgressBar
-        android:id="@+id/progressBarForgotPassword"
+        android:id="@+id/progressBarNewPassword"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.26" />
 </androidx.constraintlayout.widget.ConstraintLayout>
