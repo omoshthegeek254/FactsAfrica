@@ -7,23 +7,25 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeVendor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="402dp"
+        android:layout_height="605dp"
         android:padding="4dp"
         android:scrollbars="horizontal"
-        tools:layout_editor_absoluteX="-47dp"
-        tools:layout_editor_absoluteY="19dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/homeVendor"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.845"
-        app:fabSize="normal"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/homeVendor"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
