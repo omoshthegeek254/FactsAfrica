@@ -42,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/createDate" />
 
     <TextView
+        android:id="@+id/payBy"
         android:layout_width="143dp"
         android:layout_height="33dp"
         android:layout_marginStart="44dp"
