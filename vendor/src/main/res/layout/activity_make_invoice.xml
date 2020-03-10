@@ -44,9 +44,10 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <View
+        android:id="@+id/view"
         style="@style/Divider"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="24sp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,12 +109,12 @@
             android:layout_marginEnd="10dp"
             android:text="Name" />
 
-        <View style="@style/Divider"
+        <View
+            style="@style/Divider"
             android:layout_below="@+id/customerName"
-            android:layout_marginTop="16sp"
             android:layout_marginStart="24sp"
-            android:layout_marginEnd="24sp"
-            />
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="24sp" />
 
         <TextView
             android:id="@+id/items"
@@ -125,16 +126,125 @@
             android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
             android:text="Items"
             android:textSize="20sp" />
-        <View style="@style/Divider"
+
+        <View
+            style="@style/Divider"
             android:layout_below="@+id/items"
-            android:layout_marginTop="16sp"
             android:layout_marginStart="24sp"
-            android:layout_marginEnd="24sp"
-            />
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="24sp" />
 
 
     </RelativeLayout>
 
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sub Total"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Tax Payable"
+        android:textSize="15sp"
+
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.143" />
+
+    <TextView
+        android:id="@+id/subTotal"
+        android:background="@drawable/amounts_display_edits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="subTotalAmount"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
+    <TextView
+        android:background="@drawable/amounts_display_edits"
+        android:id="@+id/taxPayable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tax amount"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Amount Due"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.154" />
+
+    <TextView
+        android:id="@+id/finalTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00.00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <Button
+        android:id="@+id/sendInvoice"
+            android:background="@color/colorPrimary"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Send Invoice"
+        android:textColor="#ffffff"
+        android:elevation="20dp"
+        android:shadowColor="#5e6e5e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalTotal"
+        app:layout_constraintVertical_bias="0.2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
