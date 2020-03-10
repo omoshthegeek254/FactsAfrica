@@ -44,18 +44,18 @@ public class BuyersFragment extends Fragment {
 
         //dummy data
         lstBuyer=new ArrayList<>();
-        lstBuyer.add(new BuyersTestClass("Nakumatt",1,"Prestige",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Naivas",2,"Moi Avenue",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Jumia",3,"The Junction",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Kamala",4,"Kayole1",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Loise",5,"Langata",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Kebaso",6,"Kericho2",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Uchumi",7,"Kayole",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Ukwala2",8,"Kayole",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Uchumi2",9,"Kayole",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Phone Express",10,"Kayole",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Uchumi4",11,"Kayole",R.drawable.naivas_logo));
-        lstBuyer.add(new BuyersTestClass("Safaricom",12,"Kayole",R.drawable.naivas_logo));
+        lstBuyer.add(new BuyersTestClass("Nakumatt",1,"Prestige",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Naivas",2,"Moi Avenue",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Jumia",3,"The Junction",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Kamala",4,"Kayole1",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Loise",5,"Langata",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Kebaso",6,"Kericho2",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Uchumi",7,"Kayole",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Ukwala2",8,"Kayole",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Uchumi2",9,"Kayole",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Phone Express",10,"Kayole",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Uchumi4",11,"Kayole",R.drawable.brookside));
+        lstBuyer.add(new BuyersTestClass("Safaricom",12,"Kayole",R.drawable.brookside));
 
 
         View root = inflater.inflate(R.layout.fragment_buyers, container, false);
