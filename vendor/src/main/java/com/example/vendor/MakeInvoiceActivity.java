@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MakeInvoiceActivity extends AppCompatActivity  {
+public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnClickListener{
 
 
     private TextView mText1;
@@ -72,6 +73,22 @@ public class MakeInvoiceActivity extends AppCompatActivity  {
 //
 //            }
 //        };
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.editImageDate:
+                /// Do this
+
+                break;
+
+            case R.id.payBy:
+                ////Do this
+
+                break;
+        }
 
     }
 }
