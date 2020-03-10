@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ui.buyers.BuyerDetailFragment">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:src="@tools:sample/avatars[1]" />
+
+    <TextView
+        android:id="@+id/buyerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buyer Id" />
+
+    <TextView
+        android:id="@+id/buyerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buyer Name" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="example@email.com" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+254722333222" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ngong Lane Plaza- Off Ngong Rd" />
+</LinearLayout>

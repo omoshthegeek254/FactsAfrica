@@ -1,5 +1,6 @@
 package com.example.vendor.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.vendor.R;
@@ -26,6 +27,14 @@ public class BottomNavigation extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+//        //receiving intent data
+//        Intent intent = getIntent();
+//        String name = intent.getStringExtra("name");
+//        String branch = intent.getStringExtra("branch");
+//        String id = intent.getStringExtra("id");
+//        int logo= intent.getIntExtra("logo",0);
     }
 
 }
