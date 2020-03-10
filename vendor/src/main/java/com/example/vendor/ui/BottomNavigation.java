@@ -14,7 +14,12 @@ import androidx.navigation.ui.NavigationUI;
 
 public class BottomNavigation extends AppCompatActivity {
 
-    public static final String EXTRA_DETAIL = "detail";
+    public static final String EXTRA_NAME = "name";
+    public static final String EXTRA_ID = "NO ID";
+    public static final String EXTRA_EMAIL = "email";
+    public static final String EXTRA_ADDRESS = "NO email address";
+    public static final String EXTRA_PHONE = " No 0722111222";
+    public static final String EXTRA_LOGO = "logo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

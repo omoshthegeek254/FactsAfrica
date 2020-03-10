@@ -2,14 +2,14 @@ package com.example.vendor.adapters;
 
 public class BuyersTestClass {
 
-    int id ;
+    String id ;
     String name;
     String email;
-    int phone;
+    String phone;
     String address;
     int logo;
 
-    public BuyersTestClass(int id, String name, String email, int phone, String address, int logo) {
+    public BuyersTestClass(String id, String name, String email, String phone, String address, int logo) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -18,11 +18,11 @@ public class BuyersTestClass {
         this.logo = logo;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class BuyersTestClass {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
