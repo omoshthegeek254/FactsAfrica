@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invoice Date  :"
+
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/editImageDate"
@@ -33,6 +34,7 @@
     <TextView
         android:id="@+id/editImageDate"
         android:layout_width="143dp"
+        android:textColor="#000000"
         android:layout_height="33dp"
         android:layout_marginStart="48dp"
         android:drawableLeft="@drawable/ic_date_range_black_24dp"
@@ -73,6 +75,7 @@
         android:layout_height="33dp"
         android:drawableLeft="@drawable/ic_date_range_red_32dp"
         android:textSize="20sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editImageDate"
         app:layout_constraintStart_toStartOf="@+id/editImageDate"
@@ -81,8 +84,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="385dp"
-        android:layout_height="150dp"
+        android:layout_width="398dp"
+        android:layout_height="206dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -107,8 +110,8 @@
             android:layout_marginStart="24sp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
-            android:textColor="#000000"
-            android:text="Name" />
+            android:text="Name"
+            android:textColor="#000000" />
 
         <View
             style="@style/Divider"
@@ -127,6 +130,17 @@
             android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
             android:text="Items"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/itemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/items"
+            android:layout_marginStart="24sp"
+            android:layout_marginTop="10dp"
+            android:text="Item Details"
+            android:textSize="20sp" />
+
 
         <View
             style="@style/Divider"
