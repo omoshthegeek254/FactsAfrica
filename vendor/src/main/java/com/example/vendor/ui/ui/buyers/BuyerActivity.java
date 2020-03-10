@@ -23,7 +23,7 @@ import static com.example.vendor.ui.BottomNavigation.EXTRA_PHONE;
 public class BuyerActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.textViewSupplierNameM) TextView mSupplierName;
+    @BindView(R.id.buyerNameM) TextView mSupplierName;
     @BindView(R.id.buyerIdM) TextView mSupplierId;
     @BindView(R.id.emailM) TextView mSupplierEmail;
     @BindView(R.id.addressM) TextView mSupplierAddress;
