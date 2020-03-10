@@ -20,6 +20,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
 
     Context mContext;
     List<BuyersTestClass> mData;
+    private static ClickListener clickListener;
 
     public BuyersAdapter(Context mContext, List<BuyersTestClass> mData) {
         this.mContext = mContext;
@@ -40,19 +41,6 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
 
         holder.buyer_name.setText(mData.get(position).getName());
         holder.buyer_logo.setImageResource(mData.get(position).getOrderId() );
-
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent =new Intent(mContext, BuyerDetail.class);
-//                intent.putExtra("name",mData.get(position).getName());
-//                intent.putExtra("branch",mData.get(position).getBranch());
-//                intent.putExtra("id",mData.get(position).getId());
-//                intent.putExtra("logo",mData.get(position).getOrderId());
-//                mContext.startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -60,7 +48,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cardView;
         TextView buyer_name;
         ImageView buyer_logo;
@@ -69,7 +57,20 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
             buyer_name=(TextView) itemView.findViewById(R.id.buyerName);
             buyer_logo=(ImageView) itemView.findViewById(R.id.buyerLogo);
             cardView = (CardView) itemView.findViewById(R.id.cardViewId);
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public void setOnClickListener(ClickListener clickListener){
+        BuyersAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onClick(View view, int position);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.vendor.ui.ui.buyers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.example.vendor.adapters.BuyersTestClass;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.vendor.ui.BottomNavigation.EXTRA_DETAIL;
 
 
 public class BuyersFragment extends Fragment {
@@ -55,8 +58,6 @@ public class BuyersFragment extends Fragment {
         lstBuyer.add(new BuyersTestClass("Safaricom",12,"Kayole",R.drawable.naivas_logo));
 
 
-
-
         View root = inflater.inflate(R.layout.fragment_buyers, container, false);
         final TextView textView = root.findViewById(R.id.text_buyers);
         final  RecyclerView rvBuyers =root.findViewById(R.id.rvBuyers);
@@ -64,8 +65,13 @@ public class BuyersFragment extends Fragment {
         rvBuyers.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         rvBuyers.setAdapter(myAdapter);
 
+        myAdapter.setOnClickListener((view, position) -> {
+            TextView mSupplierName = view.findViewById(R.id.buyerName);
+            Intent intent = new Intent(getActivity(), BuyerActivity.class);
+            intent.putExtra(EXTRA_DETAIL, mSupplierName.getText().toString());
+            startActivity(intent);
 
-
+        });
 
         buyersViewModel.getText().observe(this, new Observer<String>() {
             @Override
