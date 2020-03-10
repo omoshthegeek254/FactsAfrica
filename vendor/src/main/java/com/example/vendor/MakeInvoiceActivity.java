@@ -1,24 +1,20 @@
 package com.example.vendor;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.DatePickerDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,7 +26,7 @@ import butterknife.ButterKnife;
 public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnClickListener{
 
 
-    private TextView mText1;
+
 
     @BindView(R.id.editImageDate) TextView mInvoiceDate;
     @BindView(R.id.payBy) TextView mDue;
@@ -38,6 +34,8 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
     @BindView(R.id.items) TextView mPickItems;
     @BindView(R.id.customerName) TextView mPickedName;
     @BindView(R.id.sendInvoice) Button mSend;
+
+    static final int REQUEST_SELECT_PHONE_NUMBER = 1;
 
 
 
@@ -148,8 +146,19 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 
                 break;
             case R.id.customer:
-                Snackbar.make(v, "Contact intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_SELECT_PHONE_NUMBER);
+
+                }
+
+
+
+//                Snackbar.make(v, "Contact intent", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
                 break;
 
             case R.id.items:
@@ -167,6 +176,50 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 
         }
 
-    }
 
+    }
+//    public String getEmail(String contactId) {
+//        String emailStr = "";
+//        final String[] projection = new String[]{ContactsContract.CommonDataKinds.Email.DATA,
+//                ContactsContract.CommonDataKinds.Email.TYPE};
+//
+//        Cursor emailq = managedQuery(ContactsContract.CommonDataKinds.Email.CONTENT_URI, projection, ContactsContract.Data.CONTACT_ID + "=?", new String[]{contactId}, null);
+//
+//        if (emailq.moveToFirst()) {
+//            final int contactEmailColumnIndex = emailq.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA);
+//
+//            while (!emailq.isAfterLast()) {
+//                emailStr = emailStr + emailq.getString(contactEmailColumnIndex) + ";";
+//                emailq.moveToNext();
+//            }
+//        }
+//        return emailStr;
+//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SELECT_PHONE_NUMBER && resultCode == RESULT_OK) {
+            // Get the URI and query the content provider for the phone number
+            Uri contactUri = data.getData();
+            String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
+            Cursor cursor = getContentResolver().query(contactUri, projection,
+                    null, null, null);
+//            Cursor cursor = getContentResolver().query(emailUri, null, null, null, null);
+//            String email = cursor.getString(cursor.getColumnIndex(Email.DATA)); // get the email itself
+//
+//            DatabaseUtils.dumpCursor(cursor); // dump the cursor so you can see the fields and data you can access
+//            cursor.close();
+
+
+            // If the cursor returned is valid, get the phone number
+            if (cursor != null && cursor.moveToFirst()) {
+                int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                String number = cursor.getString(numberIndex);
+                // Do something with the phone number
+                mPickedName.setText(number);
+                //...
+            }
+        }
+    }
 }
