@@ -1,10 +1,12 @@
 package com.example.vendor.ui.ui.buyers;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -60,22 +62,26 @@ public class BuyersFragment extends Fragment   {
         View root = inflater.inflate(R.layout.fragment_buyers, container, false);
         //final TextView textView = root.findViewById(R.id.text_buyers);
         final  RecyclerView rvBuyers =root.findViewById(R.id.rvBuyers);
-        CardView cardView =root.findViewById(R.id.cardViewId);
+        CardView cardView =(CardView) root.findViewById(R.id.cardViewId);
         BuyersAdapter myAdapter = new BuyersAdapter(this.getContext(),lstBuyer);
         rvBuyers.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         rvBuyers.setAdapter(myAdapter);
 
         // cardview click listner
 
+        Activity activity = getActivity();
+
 //      cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                BuyerDetailFragment buyersFragment =new BuyerDetailFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("name","elvin");
-//                buyersFragment.setArguments(bundle);
-//                FragmentManager manager = getFragmentManager();
-//                manager.beginTransaction().replace(R.id.nav_host_fragment,buyersFragment).commit();
+////                BuyerDetailFragment buyersFragment =new BuyerDetailFragment();
+////                Bundle bundle = new Bundle();
+////                bundle.putString("name","elvin");
+////                buyersFragment.setArguments(bundle);
+////                FragmentManager manager = getFragmentManager();
+////                manager.beginTransaction().replace(R.id.nav_host_fragment,buyersFragment).commit();
+//
+//                Toast.makeText(getActivity(), "aminia", Toast.LENGTH_SHORT).show();
 //            }
 //        });
 
