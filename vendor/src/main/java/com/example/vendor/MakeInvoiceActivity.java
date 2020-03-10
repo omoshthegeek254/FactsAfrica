@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -32,6 +36,7 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
     @BindView(R.id.payBy) TextView mDue;
     @BindView(R.id.customer) TextView mCustomer;
     @BindView(R.id.items) TextView mPickItems;
+    @BindView(R.id.customerName) TextView mPickedName;
     @BindView(R.id.sendInvoice) Button mSend;
 
 
@@ -49,6 +54,10 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
         mInvoiceDate.setOnClickListener(this);
         mDue.setOnClickListener(this);
         mCustomer.setOnClickListener(this);
+        mPickItems.setOnClickListener(this);
+        mSend.setOnClickListener(this);
+
+
 
 
 //        mText1= (TextView) findViewById(R.id.editImageDate);
@@ -139,11 +148,25 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 
                 break;
             case R.id.customer:
-                Snackbar.make(v, "Customer list incoming", Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Contact intent", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 break;
+
+            case R.id.items:
+                Snackbar.make(v, "Items List to be populated", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+//
+                break;
+
+            case R.id.sendInvoice:
+                Snackbar.make(v, "Send above detail to pdf", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                break;
+
 
         }
 
     }
+
 }
