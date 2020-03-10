@@ -1,7 +1,7 @@
 package com.example.vendor.adapters;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
 
     Context mContext;
     List<BuyersTestClass> mData;
-    Dialog myDialog;
+    private static ClickListener clickListener;
 
     public BuyersAdapter(Context mContext, List<BuyersTestClass> mData) {
         this.mContext = mContext;
@@ -33,21 +33,6 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         view=mInflater.inflate(R.layout.buyers_item,parent,false);
-        // MyViewHolder vHolder = new MyViewHolder(view);
-
-      //  myDialog = new Dialog(mContext);
-      //  myDialog.setContentView(R.layout.fragment_buyer_detail);
-//        vHolder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                myDialog.show();
-//
-//            }
-//        });
-
-
-
-
         return new MyViewHolder(view);
     }
 
@@ -56,23 +41,6 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
 
         holder.buyer_name.setText(mData.get(position).getName());
         holder.buyer_logo.setImageResource(mData.get(position).getLogo() );
-
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                //sending data from fragment to bottom activity
-
-//                Intent intent =new Intent(mContext, BottomNavigation.class);
-//                intent.putExtra("name",mData.get(position).getName());
-//                intent.putExtra("branch",mData.get(position).getBranch());
-//                intent.putExtra("id",mData.get(position).getId());
-//                intent.putExtra("logo",mData.get(position).getOrderId());
-                //mContext.startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -80,7 +48,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView cardView;
         TextView buyer_name;
         ImageView buyer_logo;
@@ -89,10 +57,20 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
             buyer_name=(TextView) itemView.findViewById(R.id.buyerName);
             buyer_logo=(ImageView) itemView.findViewById(R.id.buyerLogo);
             cardView = (CardView) itemView.findViewById(R.id.cardViewId);
+            itemView.setOnClickListener(this);
         }
 
-
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
     }
 
+    public void setOnClickListener(ClickListener clickListener){
+        BuyersAdapter.clickListener = clickListener;
+    }
 
+    public interface ClickListener {
+        void onClick(View view, int position);
+    }
 }
