@@ -13,6 +13,8 @@ import androidx.navigation.ui.NavigationUI;
 
 public class BottomNavigation extends AppCompatActivity {
 
+    public static final String EXTRA_DETAIL = "detail";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
