@@ -179,7 +179,7 @@
 
     <TextView
         android:id="@+id/subTotal"
-        android:background="@drawable/in_app_btn_edits"
+        android:background="@drawable/amounts_display_edits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="subTotalAmount"
@@ -191,7 +191,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
     <TextView
-        android:background="@drawable/in_app_btn_edits"
+        android:background="@drawable/amounts_display_edits"
         android:id="@+id/taxPayable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -231,11 +231,13 @@
 
     <Button
         android:id="@+id/sendInvoice"
-        android:background="@drawable/send_btn_bck"
-        android:layout_width="wrap_content"
+            android:background="@color/colorPrimary"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Send Invoice"
         android:textColor="#ffffff"
+        android:elevation="20dp"
+        android:shadowColor="#5e6e5e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.882"
