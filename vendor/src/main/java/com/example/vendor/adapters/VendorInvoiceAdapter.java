@@ -90,9 +90,13 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
   public class VendorInvoiceViewHolder extends RecyclerView.ViewHolder{
       @BindView(R.id.invoiceNo)
       TextView mInvoiceId;
+      @BindView(R.id.payAmount) TextView mPayAmount;
       @BindView(R.id.invoice_date) TextView mInvoiceDate;
       @BindView(R.id.invoice_status) TextView mInvoiceStatus;
       Context mContext;
+      String currency = " Amount Ksh: ";
+      String dueBy = "Due by: ";
+      String invoiceNumber = " Invoice Number: ";
       public VendorInvoiceViewHolder(@NonNull View itemView) {
           super(itemView);
           this.mContext = mContext;
@@ -111,9 +115,10 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
               mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
           }
 
-          mInvoiceId.setText(invoice.getBuyerId().toString());
+          mInvoiceId.setText(invoiceNumber + invoice.getBuyerId().toString());
+          mPayAmount.setText(currency + invoice.getAmount());
 
-          mInvoiceDate.setText(invoice.getDueDate());
+          mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());
       }
   }
