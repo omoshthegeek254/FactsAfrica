@@ -102,13 +102,13 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
 
           if(invoice.getInvoiceStatus().toString().equals("1")){
               mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
-              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+              mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
           } else if(invoice.getInvoiceStatus().toString().equals("2")){
               mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
-              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+              mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
           } else if(invoice.getInvoiceStatus().toString().equals("3")){
               mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
-              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+              mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
           }
 
           mInvoiceId.setText(invoice.getBuyerId().toString());

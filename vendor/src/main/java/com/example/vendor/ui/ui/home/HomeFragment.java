@@ -1,7 +1,9 @@
 package com.example.vendor.ui.ui.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,8 @@ import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
+    private String token;
+    private SharedPreferences mPreference;
     @BindView(R.id.homeVendor) RecyclerView mInvoicesRecycler;
     private List<Invoice> invoices;
 
@@ -45,9 +49,12 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        //View root = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
         //final TextView textView = root.findViewById(R.id.text_home);
-        floatingActionButton = root.findViewById(R.id.fab_invoice);
+        floatingActionButton = rootView.findViewById(R.id.fab_invoice);
+        mPreference = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+        token = mPreference.getString("token", "");
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +74,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         getAllInvoices();
 
-        return root;
+        return rootView;
     }
 
 
@@ -76,7 +83,7 @@ public class HomeFragment extends Fragment {
     public void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<List<Invoice>> call = service.getAllInvoices();
+        Call<List<Invoice>> call = service.getAllInvoices(token);
         Log.v("URL", call.request().url().toString());
         call.enqueue(new Callback<List<Invoice>>() {
             @Override
