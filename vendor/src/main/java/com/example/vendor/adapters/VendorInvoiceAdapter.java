@@ -1,6 +1,7 @@
 package com.example.vendor.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -9,6 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vendor.R;
 import com.example.vendor.models.Invoice;
 
 import java.util.ArrayList;
@@ -33,7 +35,9 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
     @NonNull
     @Override
     public VendorInvoiceAdapter.VendorInvoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoices_list, parent, false);
+        VendorInvoiceViewHolder viewHolder = new VendorInvoiceViewHolder(view);
+        return viewHolder;
     }
 
     @Override
