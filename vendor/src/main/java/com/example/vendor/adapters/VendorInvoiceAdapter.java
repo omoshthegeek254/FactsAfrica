@@ -37,6 +37,38 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
         return null;
     }
 
+
+    // Ft Filter
+    private Filter testInvoice = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Invoice> filteredList = new ArrayList<>();
+            if(constraint == null || constraint.length()==0){
+                filteredList.addAll(mInvoiceList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Invoice invoice: mInvoiceList){
+                    if(invoice.getInvoiceStatus().toString().toLowerCase().contains(filterPattern)){
+                        filteredList.add(invoice);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mInvoices.clear();
+            mInvoiceList.addAll((List)results.values);
+            notifyDataSetChanged();
+
+        }
+    };
+
+
     @NonNull
     @Override
     public VendorInvoiceAdapter.VendorInvoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
