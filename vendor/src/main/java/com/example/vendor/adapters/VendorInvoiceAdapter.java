@@ -29,5 +29,5 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
         return 0;
     }
 
-    public class VendorInvoiceViewHolder extends RecyclerView.Adapter{}
+  public class VendorInvoiceViewHolder extends RecyclerView.ViewHolder{}
 }
