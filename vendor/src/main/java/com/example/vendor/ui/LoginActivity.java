@@ -2,8 +2,11 @@ package com.example.vendor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,11 +27,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.mail)
-    EditText mEmail;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+    @BindView(R.id.mail) EditText mEmail;
     @BindView(R.id.password) EditText mPassword;
-    @BindView(R.id.login)
-    Button mLogin;
+    @BindView(R.id.login) Button mLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Welcome " + response.body().getFirstName(), Toast.LENGTH_SHORT).show();
                     String token = response.body().getApiToken();
+                    String bearerToken = "Bearer " + token;
+                    mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    mEditor = mPreferences.edit();
+                    mEditor.putString("token", bearerToken);
+                    mEditor.commit();
                     Intent homeIntent = new Intent(LoginActivity.this, BottomNavigation.class);
-                    homeIntent.putExtra("token", token);
                     startActivity(homeIntent);
                     finish();
                 } else {
