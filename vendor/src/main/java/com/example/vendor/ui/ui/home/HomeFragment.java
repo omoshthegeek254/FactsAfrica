@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment {
     private List<Invoice> invoices;
 
     private HomeViewModel homeViewModel;
+    private View rootView;
     FloatingActionButton floatingActionButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,8 +46,10 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        //final TextView textView = root.findViewById(R.id.text_home);
         floatingActionButton = root.findViewById(R.id.fab_invoice);
+
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,12 +58,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        homeViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+        ButterKnife.bind(this, rootView);
+        getAllInvoices();
+
         return root;
     }
 
