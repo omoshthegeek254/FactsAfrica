@@ -11,14 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ui.buyers.BuyerActivity"></activity>
+        <activity android:name=".ui.BottomNavigation">
+
+        </activity>
+        <activity android:name=".ui.ui.buyers.BuyerActivity" />
         <activity android:name=".MakeInvoiceActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.vendor.MainActivity"></meta-data>
+                android:value="com.example.vendor.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.BottomNavigation"
+            android:name=".ui.LoginActivity"
             android:label="@string/title_activity_bottom_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

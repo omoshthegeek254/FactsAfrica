@@ -11,19 +11,28 @@ public class Invoice implements Serializable
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("userId")
+    @SerializedName("user_id")
     @Expose
     private Integer userId;
-    @SerializedName("invoiceDate")
+    @SerializedName("buyer_id")
     @Expose
-    private String invoiceDate;
-    private final static long serialVersionUID = 7250269546991406573L;
+    private Integer buyerId;
+    @SerializedName("due_date")
+    @Expose
+    private String dueDate;
+    @SerializedName("amount")
+    @Expose
+    private String amount;
+    @SerializedName("invoice_status")
+    @Expose
+    private Integer invoiceStatus;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    private final static long serialVersionUID = 7048087709706871645L;
 
     /**
      * No args constructor for use in serialization
@@ -34,19 +43,25 @@ public class Invoice implements Serializable
 
     /**
      * 
-     * @param name
+     * @param createdAt
+     * @param amount
+     * @param dueDate
      * @param id
-     * @param invoiceDate
+     * @param buyerId
+     * @param invoiceStatus
      * @param userId
-     * @param status
+     * @param updatedAt
      */
-    public Invoice(Integer id, String name, String status, Integer userId, String invoiceDate) {
+    public Invoice(Integer id, Integer userId, Integer buyerId, String dueDate, String amount, Integer invoiceStatus, String createdAt, String updatedAt) {
         super();
         this.id = id;
-        this.name = name;
-        this.status = status;
         this.userId = userId;
-        this.invoiceDate = invoiceDate;
+        this.buyerId = buyerId;
+        this.dueDate = dueDate;
+        this.amount = amount;
+        this.invoiceStatus = invoiceStatus;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Integer getId() {
@@ -57,22 +72,6 @@ public class Invoice implements Serializable
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Integer getUserId() {
         return userId;
     }
@@ -81,12 +80,52 @@ public class Invoice implements Serializable
         this.userId = userId;
     }
 
-    public String getInvoiceDate() {
-        return invoiceDate;
+    public Integer getBuyerId() {
+        return buyerId;
     }
 
-    public void setInvoiceDate(String invoiceDate) {
-        this.invoiceDate = invoiceDate;
+    public void setBuyerId(Integer buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public Integer getInvoiceStatus() {
+        return invoiceStatus;
+    }
+
+    public void setInvoiceStatus(Integer invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }

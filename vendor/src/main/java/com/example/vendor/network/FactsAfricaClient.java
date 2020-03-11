@@ -1,6 +1,8 @@
 package com.example.vendor.network;
 
 
+import com.example.vendor.Constants;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -10,7 +12,7 @@ public class FactsAfricaClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://dummy-api-facts-africa.herokuapp.com/")
+                    .baseUrl(Constants.BASE_URL)
                     .build();
         }
         return retrofit;
