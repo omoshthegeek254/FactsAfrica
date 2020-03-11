@@ -1,7 +1,6 @@
 package com.example.vendor.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,8 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         ImageView buyer_logo;
         public MyViewHolder(View itemView){
             super(itemView);
-            buyer_name=(TextView) itemView.findViewById(R.id.buyerName);
-            buyer_logo=(ImageView) itemView.findViewById(R.id.buyerLogo);
+            buyer_name =(TextView) itemView.findViewById(R.id.buyerName);
+            buyer_logo =(ImageView) itemView.findViewById(R.id.buyerLogo);
             cardView = (CardView) itemView.findViewById(R.id.cardViewId);
             itemView.setOnClickListener(this);
         }

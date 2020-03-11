@@ -59,11 +59,12 @@ public class BuyersFragment extends Fragment {
 
 
         View root = inflater.inflate(R.layout.fragment_buyers, container, false);
-        final TextView textView = root.findViewById(R.id.text_buyers);
+        //final TextView textView = root.findViewById(R.id.text_buyers);
         final  RecyclerView rvBuyers =root.findViewById(R.id.rvBuyers);
         BuyersAdapter myAdapter = new BuyersAdapter(this.getContext(),lstBuyer);
-        rvBuyers.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        rvBuyers.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
         rvBuyers.setAdapter(myAdapter);
+        rvBuyers.setHasFixedSize(true);
 
         myAdapter.setOnClickListener((view, position) -> {
             TextView mSupplierName = view.findViewById(R.id.buyerName);
@@ -76,7 +77,7 @@ public class BuyersFragment extends Fragment {
         buyersViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         return root;

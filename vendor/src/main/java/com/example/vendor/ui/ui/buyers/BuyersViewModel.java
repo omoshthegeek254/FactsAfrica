@@ -10,7 +10,7 @@ public class BuyersViewModel extends ViewModel {
 
     public BuyersViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is buyers fragment");
+//        mText.setValue("This is buyers fragment");
     }
 
     public LiveData<String> getText() {
