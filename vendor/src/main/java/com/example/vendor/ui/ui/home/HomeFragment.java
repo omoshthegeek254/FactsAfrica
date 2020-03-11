@@ -26,12 +26,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
+    @BindView(R.id.homeVendor) RecyclerView mInvoicesRecycler;
+    private List<Invoice> invoices;
 
     private HomeViewModel homeViewModel;
     FloatingActionButton floatingActionButton;
