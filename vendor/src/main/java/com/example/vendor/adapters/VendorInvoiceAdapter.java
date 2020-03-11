@@ -1,6 +1,7 @@
 package com.example.vendor.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
 
     @Override
     public void onBindViewHolder(@NonNull VendorInvoiceAdapter.VendorInvoiceViewHolder holder, int position) {
-       // holder.bindInvoice(mInvoices.get(position));
+       holder.bindInvoice(mInvoices.get(position));
     }
 
     @Override
@@ -64,6 +65,24 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
           super(itemView);
           this.mContext = mContext;
           ButterKnife.bind(this, itemView);
+      }
+      public void bindInvoice(Invoice invoice) {
+
+          if(invoice.getInvoiceStatus().equals("1") || invoice.getInvoiceStatus().equals("1")){
+              mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
+              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+          } else if(invoice.getInvoiceStatus().equals("2") || invoice.getInvoiceStatus().equals("2")){
+              mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
+              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+          } else if(invoice.getInvoiceStatus().equals("3") || invoice.getInvoiceStatus().equals("3")){
+              mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
+              mInvoiceStatus.setText(invoice.getInvoiceStatus());
+          }
+
+          mInvoiceId.setText(invoice.getBuyerId().toString());
+
+          mInvoiceDate.setText(invoice.getDueDate());
+//            mInvoiceStatus.setText(invoice.getStatus());
       }
   }
 }
