@@ -34,7 +34,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
 
     @Override
     public Filter getFilter() {
-        return null;
+        return testInvoice;
     }
 
 
