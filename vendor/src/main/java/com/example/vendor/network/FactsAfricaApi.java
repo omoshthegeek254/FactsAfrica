@@ -22,8 +22,8 @@ public interface FactsAfricaApi {
     @GET("loggeduser")
     Call<User> getUser(@Header("Authorization") String bearerToken);
 
-    @GET("/invoices")
-    Call<List<Invoice>> getAllInvoices();
-    @GET("/user/2")
+    @GET("invoices")
+    Call<List<Invoice>> getAllInvoices(@Header("Authorization") String bearerToken);
+    @GET("user/2")
     Call<List<User>> getUserByRole();
 }
