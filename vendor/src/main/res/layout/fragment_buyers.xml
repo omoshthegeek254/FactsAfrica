@@ -5,16 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Toolbar
-        android:id="@+id/green"
-        android:layout_width="match_parent"
-        android:layout_height="183dp"
-        android:background="@drawable/background" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBuyers"
-            android:layout_below="@id/green"
             android:layout_width="403dp"
             android:layout_height="642dp"
             android:layout_marginStart="8dp"
