@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdapter.VendorInvoiceViewHolder> implements Filterable {
    private List<Invoice> mInvoices;
@@ -61,6 +62,8 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
       Context mContext;
       public VendorInvoiceViewHolder(@NonNull View itemView) {
           super(itemView);
+          this.mContext = mContext;
+          ButterKnife.bind(this, itemView);
       }
   }
 }
