@@ -28,4 +28,6 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
     public int getItemCount() {
         return 0;
     }
+
+    public class VendorInvoiceViewHolder extends RecyclerView.Adapter{}
 }
