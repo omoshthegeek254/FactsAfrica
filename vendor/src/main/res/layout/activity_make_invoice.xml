@@ -215,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/price_heading"
-                    android:layout_marginStart="170dp"
+                    android:layout_marginStart="165dp"
                     android:layout_marginTop="18dp"
                     android:hint="Amount"
                     android:textSize="20sp" />
@@ -230,13 +230,13 @@
                     android:elevation="10sp"
                     android:layout_marginTop="24dp"
                     android:textSize="20sp"
-                    android:layout_marginLeft="160dp"/>
+                    android:layout_marginStart="155dp"/>
                 <EditText
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/price_heading"
-                    android:layout_marginStart="300dp"
+                    android:layout_marginStart="280dp"
                     android:layout_marginTop="18dp"
                     android:hint="Quantity"
                     android:textSize="20sp" />
@@ -275,7 +275,7 @@
                 <View
                     style="@style/Divider"
                     android:elevation="10sp"
-                    android:layout_below="@+id/items"
+                    android:layout_below="@+id/itemDetailsTwoDisplay"
                     android:layout_marginStart="24sp"
                     android:layout_marginTop="57dp"
                     android:layout_marginEnd="24sp" />

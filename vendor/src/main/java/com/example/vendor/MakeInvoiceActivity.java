@@ -59,6 +59,10 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
     TextView mSubTotal;
     @BindView(R.id.finalTotal)
     TextView mFinalTotal;
+    @BindView(R.id.quantity)
+    EditText addQuanityEditText;
+    @BindView(R.id.itemQuantityDisplay)
+    TextView mQuantityDisplay;
 
     static final int REQUEST_SELECT_PHONE_NUMBER = 1;
 
@@ -191,9 +195,11 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 
                 mItemsDisplay.setText(mAddItemsEditor.getText().toString().trim());
                 mPriceDisplay.setText(mItemsPrice.getText().toString().trim());
-                double amount = Double.parseDouble(mItemsPrice.getText().toString().trim());
+                int quantity = Integer.parseInt(addQuanityEditText.getText().toString().trim());
+                Double amount = Double.parseDouble(mItemsPrice.getText().toString().trim())*quantity;
                 Double amount_due = amount+(amount * 0.16);
-                mSubTotal.setText(mItemsPrice.getText().toString().trim());
+                mQuantityDisplay.setText(addQuanityEditText.getText().toString().trim());
+                mSubTotal.setText(amount.toString());
                 mFinalTotal.setText(amount_due.toString());
                 break;
 
@@ -235,8 +241,9 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
     String items = mAddItemsEditor.getText().toString().trim();
     String contacts = mPickedName.toString().trim();
     int itemsPrice = Integer.parseInt(mItemsPrice.getText().toString().trim());
+    int quantity = Integer.parseInt(addQuanityEditText.getText().toString().trim());
     int subTotal = Integer.parseInt(mItemsPrice.getText().toString().trim());
-    double finalTotal = subTotal + (Integer.parseInt(mItemsPrice.getText().toString().trim()) *0.16);
+    double finalTotal = subTotal + ((Integer.parseInt(mItemsPrice.getText().toString().trim()) * quantity) *0.16);
 
         InvoiceDbHelper dbHelper = new InvoiceDbHelper(this);
 
