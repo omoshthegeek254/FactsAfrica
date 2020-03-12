@@ -2,6 +2,8 @@ package com.example.vendor.ui.ui.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -10,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vendor.MakeInvoiceActivity;
 import com.example.vendor.R;
 import com.example.vendor.adapters.VendorInvoiceAdapter;
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
 import com.example.vendor.models.Invoice;
 import com.example.vendor.network.FactsAfricaApi;
 import com.example.vendor.network.FactsAfricaClient;
@@ -39,7 +41,10 @@ public class HomeFragment extends Fragment {
     private String token;
     private SharedPreferences mPreference;
     @BindView(R.id.homeVendor) RecyclerView mInvoicesRecycler;
+    @BindView(R.id.count_rows)
+    TextView mCountRows;
     private List<Invoice> invoices;
+    private InvoiceDbHelper mDbHelper;
 
     private HomeViewModel homeViewModel;
     private View rootView;
@@ -102,6 +107,29 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    //display database info
+    private void displayDatabaseInfo(){
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        String[] projection = {InvoiceContract.InvoiceEntry._ID,
+                InvoiceContract.InvoiceEntry.COLUMN_CUSTOMER_CONTACT,
+                InvoiceContract.InvoiceEntry.COLUMN_AMOUNT_DUE,
+                InvoiceContract.InvoiceEntry.COLUMN_STATUS,
+                InvoiceContract.InvoiceEntry.COLUMN_INVOICE_DATE
+        };
+        Cursor cursor = db.query(
+                InvoiceContract.InvoiceEntry.TABLE_NAME,
+                projection, null, null, null, null, null);
+
+                try{
+                    mCountRows.setText(cursor.getCount());
+        } finally {
+            cursor.close();
+        }
+
+
     }
 
 

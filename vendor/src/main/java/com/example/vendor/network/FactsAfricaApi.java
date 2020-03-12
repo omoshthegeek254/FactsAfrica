@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface FactsAfricaApi {
 
@@ -22,6 +23,14 @@ public interface FactsAfricaApi {
     @GET("loggeduser")
     Call<User> getUser(@Header("Authorization") String bearerToken);
 
+    @GET("invoice/buyers")
+    Call<List<User>> getBuyerId(@Header("Authorization") String bearerToken);
+
+    @GET("user/{id}")
+    Call<List<User>> getUserByRole(@Path("id") int id,
+                                   @Header("Authorization") String bearerToken
+
+    );
     @GET("invoices")
     Call<List<Invoice>> getAllInvoices(@Header("Authorization") String bearerToken);
     @GET("user/2")

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.vendor.Constants;
@@ -32,11 +33,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.mail) EditText mEmail;
     @BindView(R.id.password) EditText mPassword;
     @BindView(R.id.login) Button mLogin;
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mProgressBar = findViewById(R.id.login_progress_bar);
         ButterKnife.bind(this);
         mLogin.setOnClickListener(this);
     }
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == mLogin) {
+            mProgressBar.setVisibility(View.VISIBLE);
             login(mEmail.getText().toString(), mPassword.getText().toString());
         }
     }
@@ -57,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    mProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Welcome " + response.body().getFirstName(), Toast.LENGTH_SHORT).show();
                     String token = response.body().getApiToken();
                     String bearerToken = "Bearer " + token;
@@ -68,12 +73,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(homeIntent);
                     finish();
                 } else {
+                    mProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                mProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(LoginActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
             }
         });

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,11 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
    private List<Invoice> mInvoices;
    private List<Invoice>mInvoiceList;
    private Context mContext;
+   int row_index = -1;
+
+   ItemClickListener itemClickListener;
+
+
 
    public VendorInvoiceAdapter(List<Invoice> mInvoices,Context mContext){
        this.mInvoices=mInvoices;
@@ -87,7 +93,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
         return mInvoices.size();
     }
 
-  public class VendorInvoiceViewHolder extends RecyclerView.ViewHolder{
+  public class VendorInvoiceViewHolder extends RecyclerView.ViewHolder {
       @BindView(R.id.invoiceNo)
       TextView mInvoiceId;
       @BindView(R.id.payAmount) TextView mPayAmount;
@@ -107,12 +113,15 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
           if(invoice.getInvoiceStatus().toString().equals("1")){
               mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
               mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+              mInvoiceStatus.setText("pending");
           } else if(invoice.getInvoiceStatus().toString().equals("2")){
               mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
               mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+              mInvoiceStatus.setText("approved");
           } else if(invoice.getInvoiceStatus().toString().equals("3")){
               mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
               mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+              mInvoiceStatus.setText("declined");
           }
 
           mInvoiceId.setText(invoiceNumber + invoice.getBuyerId().toString());
@@ -121,5 +130,13 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
           mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());
       }
+
   }
+
+  public interface ItemClickListener{
+        void onClick(View view, int position);
+    }
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
 }

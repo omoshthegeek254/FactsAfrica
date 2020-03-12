@@ -32,6 +32,9 @@ public class Invoice implements Serializable
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("is_checked")
+    @Expose
+    private boolean isChecked;
     private final static long serialVersionUID = 7048087709706871645L;
 
     /**
@@ -52,7 +55,7 @@ public class Invoice implements Serializable
      * @param userId
      * @param updatedAt
      */
-    public Invoice(Integer id, Integer userId, Integer buyerId, String dueDate, String amount, Integer invoiceStatus, String createdAt, String updatedAt) {
+    public Invoice(Integer id, Integer userId, Integer buyerId, String dueDate, String amount, Integer invoiceStatus, String createdAt, String updatedAt, boolean isChecked) {
         super();
         this.id = id;
         this.userId = userId;
@@ -62,6 +65,15 @@ public class Invoice implements Serializable
         this.invoiceStatus = invoiceStatus;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isChecked = isChecked;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public Integer getId() {

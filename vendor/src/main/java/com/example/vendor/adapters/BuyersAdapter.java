@@ -12,16 +12,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendor.R;
+import com.example.vendor.models.User;
 
 import java.util.List;
 
 public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHolder>{
 
     Context mContext;
-    List<BuyersTestClass> mData;
+    List<User> mData;
     private static ClickListener clickListener;
 
-    public BuyersAdapter(Context mContext, List<BuyersTestClass> mData) {
+    public BuyersAdapter(Context mContext, List<User> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -38,8 +39,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
     @Override
     public void onBindViewHolder(@NonNull BuyersAdapter.MyViewHolder holder, int position) {
 
-        holder.buyer_name.setText(mData.get(position).getName());
-        holder.buyer_logo.setImageResource(mData.get(position).getOrderId() );
+        holder.buyer_name.setText(mData.get(position).getFirstName());
     }
 
     @Override
@@ -54,7 +54,6 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         public MyViewHolder(View itemView){
             super(itemView);
             buyer_name =(TextView) itemView.findViewById(R.id.buyerName);
-            buyer_logo =(ImageView) itemView.findViewById(R.id.buyerLogo);
             cardView = (CardView) itemView.findViewById(R.id.cardViewId);
             itemView.setOnClickListener(this);
         }
