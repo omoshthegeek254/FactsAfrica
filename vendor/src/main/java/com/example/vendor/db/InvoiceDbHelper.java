@@ -17,6 +17,13 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
+    private static final String DATABASE_ALTER_INVOICE_1 = "ALTER TABLE "
+            + InvoiceContract.InvoiceEntry.TABLE_NAME + " ADD COLUMN " + InvoiceContract.InvoiceEntry.COLUMN_STATUS + " TEXT;";
+
+    private static final String DATABASE_ALTER_INVOICE_2 = "ALTER TABLE "
+            + InvoiceContract.InvoiceEntry.TABLE_NAME + " ADD COLUMN " + InvoiceContract.InvoiceEntry.COLUMN_STATUS + " TEXT;";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -25,6 +32,7 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
                 + InvoiceContract.InvoiceEntry.COLUMN_INVOICE_DATE + " INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + InvoiceContract.InvoiceEntry.COLUMN_PAYMENT_DUE + " INTEGER NOT NULL DEFAULT 90, "
                 + InvoiceContract.InvoiceEntry.COLUMN_CUSTOMER_CONTACT + " TEXT NOT NULL, "
+                + InvoiceContract.InvoiceEntry.COLUMN_STATUS + " INTEGER NOT NULL DEFAULT 1, "
                 + InvoiceContract.InvoiceEntry.COLUMN_ITEM + " TEXT NOT NULL, "
                 + InvoiceContract.InvoiceEntry.COLUMN_SUB_TOTAL + " INTEGER NOT NULL, "
                 + InvoiceContract.InvoiceEntry.COLUMN_TAX_PAYABLE + " REAL NOT NULL DEFAULT 0.16, "
@@ -36,6 +44,8 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + InvoiceContract.InvoiceEntry.TABLE_NAME);
+        onCreate(db);
 
     }
 }
