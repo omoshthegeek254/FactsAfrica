@@ -10,6 +10,20 @@
         <item name="android:actionModeBackground">@color/colorDarkBlue2</item>
         <item name="android:dialogTheme">@style/Dialog.Theme</item>
     </style>
+
+<!--    No ActionBar STYLE -->
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/colorDarkBlue2</item>
+        <item name="android:dialogTheme">@style/Dialog.Theme</item>
+
+    </style>
+    <!--    No ActionBar STYLE -->
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
