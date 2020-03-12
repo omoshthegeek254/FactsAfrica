@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.vendor.Constants;
-
 public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "invoices";
