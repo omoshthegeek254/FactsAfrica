@@ -6,8 +6,9 @@
     android:padding="10dp"
     android:elevation="5dp"
     app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
+    app:cardElevation="10dp"
     android:layout_margin="5dp">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,6 +47,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+
         <TextView
             android:id="@+id/invoice_status"
             android:layout_width="wrap_content"
@@ -65,4 +67,7 @@
             android:textColor="#cc0000"
             android:textStyle="bold"/>
     </RelativeLayout>
+
+
+
 </androidx.cardview.widget.CardView>

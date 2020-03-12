@@ -1,8 +1,10 @@
 package com.example.vendor;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -11,11 +13,16 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
@@ -34,6 +41,24 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
     @BindView(R.id.items) TextView mPickItems;
     @BindView(R.id.customerName) TextView mPickedName;
     @BindView(R.id.sendInvoice) Button mSend;
+    @BindView(R.id.invoice_ref_display)
+    TextView mInvoiceRef;
+    @BindView(R.id.invoice_name)
+    EditText mInvoiceName;
+    @BindView(R.id.add_invoice_ref)
+    ImageView mAddInvoiceRef;
+    @BindView(R.id.itemDetailsOne)
+    EditText mAddItemsEditor;
+    @BindView(R.id.itemDetailsTwo)
+    EditText mItemsPrice;
+    @BindView(R.id.itemDetailsOneDisplay)
+    TextView mItemsDisplay;
+    @BindView(R.id.itemDetailsTwoDisplay)
+    TextView mPriceDisplay;
+    @BindView(R.id.subTotal)
+    TextView mSubTotal;
+    @BindView(R.id.finalTotal)
+    TextView mFinalTotal;
 
     static final int REQUEST_SELECT_PHONE_NUMBER = 1;
 
@@ -54,6 +79,7 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
         mCustomer.setOnClickListener(this);
         mPickItems.setOnClickListener(this);
         mSend.setOnClickListener(this);
+        mAddInvoiceRef.setOnClickListener(this);
 
 
 
@@ -103,8 +129,6 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 
 
                 mDue.setText(date);
-
-
             }
         };
 
@@ -164,13 +188,23 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
             case R.id.items:
                 Snackbar.make(v, "Items List to be populated", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-//
+
+                mItemsDisplay.setText(mAddItemsEditor.getText().toString().trim());
+                mPriceDisplay.setText(mItemsPrice.getText().toString().trim());
+                double amount = Double.parseDouble(mItemsPrice.getText().toString().trim());
+                Double amount_due = amount+(amount * 0.16);
+                mSubTotal.setText(mItemsPrice.getText().toString().trim());
+                mFinalTotal.setText(amount_due.toString());
                 break;
 
             case R.id.sendInvoice:
                 Snackbar.make(v, "Send above detail to pdf", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                insertInvoiceValuesToDb();
+                break;
 
+            case R.id.add_invoice_ref:
+                mInvoiceRef.setText(mInvoiceName.getText().toString().trim());
                 break;
 
 
@@ -195,6 +229,40 @@ public class MakeInvoiceActivity extends AppCompatActivity  implements View.OnCl
 //        }
 //        return emailStr;
 //    }
+
+    public void insertInvoiceValuesToDb(){
+    String invoiceRef = mInvoiceName.getText().toString().trim();
+    String items = mAddItemsEditor.getText().toString().trim();
+    String contacts = mPickedName.toString().trim();
+    int itemsPrice = Integer.parseInt(mItemsPrice.getText().toString().trim());
+    int subTotal = Integer.parseInt(mItemsPrice.getText().toString().trim());
+    double finalTotal = subTotal + (Integer.parseInt(mItemsPrice.getText().toString().trim()) *0.16);
+
+        InvoiceDbHelper dbHelper = new InvoiceDbHelper(this);
+
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(InvoiceContract.InvoiceEntry.COLUMN_ITEM, items);
+        values.put(InvoiceContract.InvoiceEntry.COLUMN_CUSTOMER_CONTACT, contacts);
+        values.put(InvoiceContract.InvoiceEntry.COLUMN_PAYMENT_DUE, itemsPrice);
+        values.put(InvoiceContract.InvoiceEntry.COLUMN_SUB_TOTAL, subTotal);
+        values.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT_DUE, finalTotal);
+
+        long newRowId = database.insert(InvoiceContract.InvoiceEntry.TABLE_NAME, null, values);
+
+        // Show a toast message depending on whether or not the insertion was successful
+        if (newRowId == -1) {
+            // If the row ID is -1, then there was an error with insertion.
+            Toast.makeText(this, "Error saving invoice", Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast with the row ID.
+            Toast.makeText(this, "Invoice  saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

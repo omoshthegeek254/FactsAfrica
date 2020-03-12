@@ -104,5 +104,17 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void getData(){
+        for(int i=0;i<=invoices.size();i++){
+            Invoice invoice = new Invoice();
+            invoice.setId(i);
+            if(i%2==0){
+                invoice.setChecked(true);
+            } else
+                invoice.setChecked(false);
+            invoices.add(invoice);
+        }
+    }
+
 
 }
