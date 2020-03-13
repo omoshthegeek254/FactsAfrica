@@ -25,15 +25,17 @@
             android:text="@string/invoice_001"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_marginStart="18dp"
-            android:textColor="#000000"/>
+            android:textColor="@color/colorAccent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textStyle="bold"
             android:text="@string/due_on_receipt"
             android:layout_marginStart="290dp"
-            android:textColor="#000000" />
+            android:textColor="@color/colorAccent" />
         <TextView
             android:id="@+id/business_name_details"
             android:layout_width="wrap_content"
@@ -68,9 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="22dp"
+            android:textStyle="bold"
             android:drawableEnd="@drawable/ic_chevron_right"
             android:text="@string/to_client"
-            android:textColor="#000000" />
+            android:textColor="@color/colorAccent" />
 
         <View
             style="@style/Divider"
@@ -83,7 +86,8 @@
             android:layout_marginTop="80dp"
             android:drawableEnd="@drawable/ic_chevron_right"
             android:text="@string/add_items"
-            android:textColor="#000000" />
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent" />
 
     </androidx.cardview.widget.CardView>
 
