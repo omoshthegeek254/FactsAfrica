@@ -42,6 +42,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
     //firebase
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-core:17.2.2'

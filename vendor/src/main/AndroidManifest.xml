@@ -17,7 +17,7 @@
 
         </activity>
         <activity android:name=".ui.ui.buyers.BuyerActivity" />
-        <activity android:name=".MakeInvoiceActivity">
+        <activity android:name=".ui.MakeInvoiceActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.vendor.MainActivity" />

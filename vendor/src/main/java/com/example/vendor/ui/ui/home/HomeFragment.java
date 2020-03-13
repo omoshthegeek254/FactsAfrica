@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vendor.MakeInvoiceActivity;
+import com.example.vendor.ui.MakeInvoiceActivity;
 import com.example.vendor.R;
 import com.example.vendor.adapters.VendorInvoiceAdapter;
 import com.example.vendor.db.InvoiceContract;

@@ -18,4 +18,6 @@
     <string name="username">John Doe</string>
     <string name="email">supplier@mail.com</string>
     <string name="title_Login">FactsAfrica</string>
+    <string name="create_invoice_fragment">create invoice fragment</string>
+    <string name="preview_fragment">Preview fragment</string>
 </resources>
