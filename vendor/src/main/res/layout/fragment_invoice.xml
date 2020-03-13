@@ -1,307 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.InvoiceFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="24dp"
-        android:id="@+id/card_invoice_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="24dp"
+            android:id="@+id/card_invoice_name"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invoice_001"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="18dp"
+                android:textColor="@color/colorAccent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="@string/due_on_receipt"
+                android:layout_marginStart="290dp"
+                android:textColor="@color/colorAccent" />
+            <TextView
+                android:id="@+id/business_name_details"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="66dp"
+                android:layout_marginStart="18dp"
+                android:layout_height="wrap_content"
+                android:text="@string/business_name_details"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="290dp"
+                android:layout_marginTop="66dp"
+                android:text="@string/date_today"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_customer_and_product"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/card_invoice_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_invoice_name">
+
+            <TextView
+                android:id="@+id/add_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="22dp"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/ic_chevron_right"
+                android:text="@string/to_client"
+                android:textColor="@color/colorAccent" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="60dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="80dp"
+                android:drawableEnd="@drawable/ic_chevron_right"
+                android:text="@string/add_items"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_customer_and_product">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/item"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/quantity"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/price"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/amount"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/item_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/item" />
+
+            <TextView
+                android:id="@+id/quantity_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/quantity" />
+
+            <TextView
+                android:id="@+id/price_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/price" />
+
+            <TextView
+                android:id="@+id/amount_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/amount" />
+
+            <TextView
+                android:id="@+id/item_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/item" />
+
+            <TextView
+                android:id="@+id/quantity_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/quantity" />
+
+            <TextView
+                android:id="@+id/price_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/price" />
+
+            <TextView
+                android:id="@+id/amount_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="80dp"
+                android:text="@string/amount" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="120dp"
+                android:text="Subtotal"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtotal_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="120dp"
+                android:text="@string/subtotal_amount" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="170dp"
+                android:text="Discount" />
+
+            <TextView
+                android:id="@+id/discount_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="170dp"
+                android:text="8%" />
+
+            <TextView
+                android:id="@+id/tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="190dp"
+                android:text="Tax" />
+
+            <TextView
+                android:id="@+id/tax_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="190dp"
+                android:text="16%" />
+
+            <TextView
+                android:id="@+id/total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="220dp"
+                android:text="Total"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_amount_to_be_paid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="230dp"
+                android:text="........" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="12dp"
+            android:id="@+id/card_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:elevation="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Add Photo (Optional) "
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/ic_attach_file"/>
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="52dp"
+                />
+
+            <EditText
+                android:id="@+id/additional_info"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:ems="10"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="60dp"
+                android:hint="@string/additional_information"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/wrap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/invoice_001"
-            android:layout_marginTop="8dp"
+            android:drawableEnd="@drawable/ic_chevron_right"
+            android:text="@string/swipe_to_preview_invoice_and_send"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
             android:textStyle="bold"
-            android:layout_marginStart="18dp"
-            android:textColor="@color/colorAccent"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:text="@string/due_on_receipt"
-            android:layout_marginStart="290dp"
-            android:textColor="@color/colorAccent" />
-        <TextView
-            android:id="@+id/business_name_details"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="66dp"
-            android:layout_marginStart="18dp"
-            android:layout_height="wrap_content"
-            android:text="@string/business_name_details"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="290dp"
-            android:layout_marginTop="66dp"
-            android:text="@string/date_today"/>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/add_customer_and_product"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/card_invoice_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_invoice_name">
-
-        <TextView
-            android:id="@+id/add_client"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="22dp"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/ic_chevron_right"
-            android:text="@string/to_client"
-            android:textColor="@color/colorAccent" />
+            app:layout_constraintEnd_toEndOf="@+id/card_bottom"
+            app:layout_constraintStart_toStartOf="@+id/card_bottom"
+            app:layout_constraintTop_toBottomOf="@+id/card_bottom" />
 
         <View
-            style="@style/Divider"
-            android:layout_marginTop="60dp" />
-
-        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="80dp"
-            android:drawableEnd="@drawable/ic_chevron_right"
-            android:text="@string/add_items"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_customer_and_product">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/item"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/quantity"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/price"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/amount"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <View
-            style="@style/Divider"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/item_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/item" />
-
-        <TextView
-            android:id="@+id/quantity_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/quantity" />
-
-        <TextView
-            android:id="@+id/price_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/price" />
-
-        <TextView
-            android:id="@+id/amount_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/amount" />
-
-        <TextView
-            android:id="@+id/item_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/item" />
-
-        <TextView
-            android:id="@+id/quantity_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/quantity" />
-
-        <TextView
-            android:id="@+id/price_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/price" />
-
-        <TextView
-            android:id="@+id/amount_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="80dp"
-            android:text="@string/amount" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="120dp"
-            android:text="Subtotal"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/subtotal_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="120dp"
-            android:text="@string/subtotal_amount" />
-
-        <View
-            style="@style/Divider"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="110dp"
-            android:layout_marginEnd="12dp" />
-
-        <TextView
-            android:id="@+id/discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="170dp"
-            android:text="Discount" />
-
-        <TextView
-            android:id="@+id/discount_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="320dp"
-            android:layout_marginTop="170dp"
-            android:text="8%" />
-
-        <TextView
-            android:id="@+id/tax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="190dp"
-            android:text="Tax" />
-
-        <TextView
-            android:id="@+id/tax_percentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="320dp"
-            android:layout_marginTop="190dp"
-            android:text="16%" />
-
-        <TextView
-            android:id="@+id/total_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="220dp"
-            android:text="Total"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/total_amount_to_be_paid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="320dp"
-            android:layout_marginTop="230dp"
-            android:text="........" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/swipe_to_preview_invoice_and_send"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        android:drawableEnd="@drawable/ic_chevron_right"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            android:layout_height="30dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="@+id/wrap"
+            app:layout_constraintStart_toStartOf="@+id/wrap"
+            app:layout_constraintTop_toBottomOf="@+id/wrap"
+            />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
