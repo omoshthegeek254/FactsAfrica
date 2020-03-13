@@ -18,4 +18,18 @@
     <string name="username">John Doe</string>
     <string name="email">supplier@mail.com</string>
     <string name="title_Login">FactsAfrica</string>
+    <string name="create_invoice_fragment">create invoice fragment</string>
+    <string name="preview_fragment">Preview fragment</string>
+    <string name="invoice_001">INVOICE#001</string>
+    <string name="due_on_receipt">Due on receipt</string>
+    <string name="business_name_details">Business Name, Details</string>
+    <string name="date_today">Date today</string>
+    <string name="to_client">To Client</string>
+    <string name="add_items">Add items</string>
+    <string name="item">Item</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="amount">Amount</string>
+    <string name="subtotal_amount">.............</string>
+    <string name="swipe_to_preview_invoice_and_send">Swipe to preview invoice and send</string>
 </resources>

@@ -1,9 +1,12 @@
 
 package com.example.vendor.models;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 
 public class User implements Serializable
 {
