@@ -23,7 +23,7 @@
     <string name="invoice_001">INVOICE#001</string>
     <string name="due_on_receipt">Due on receipt</string>
     <string name="business_name_details">Business Name, Details</string>
-    <string name="date_today">Date today</string>
+    <string name="date_today">Select Date</string>
     <string name="to_client">To Client</string>
     <string name="add_items">Add items</string>
     <string name="item">Item</string>
