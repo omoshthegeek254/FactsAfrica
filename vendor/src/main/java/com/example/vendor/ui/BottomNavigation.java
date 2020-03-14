@@ -3,6 +3,7 @@ package com.example.vendor.ui;
 import android.os.Bundle;
 
 import com.example.vendor.R;
+import com.example.vendor.ui.ui.buyers.BuyersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +12,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class BottomNavigation extends AppCompatActivity {
+public class BottomNavigation extends AppCompatActivity implements BuyersFragment.BuyersFragmentListener {
 
     public static final String EXTRA_DETAIL = "detail";
+    public static final String EXTRA_EMAIL = "email";
+    public static final String EXTRA_ADDRESS = "address";
+
+    InvoiceFragment invoiceFragment = new InvoiceFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,4 +36,18 @@ public class BottomNavigation extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void onInputNameSent(String buyerName) {
+        invoiceFragment.mBusinessName.setText(buyerName);
+    }
+
+    @Override
+    public void onInputEmailSent(String buyerEmail) {
+    invoiceFragment.mBusinessName.setText(buyerEmail);
+    }
+
+    @Override
+    public void onInputAddressSent(String buyerAddress) {
+    invoiceFragment.mBusinessAddress.setText(buyerAddress);
+    }
 }

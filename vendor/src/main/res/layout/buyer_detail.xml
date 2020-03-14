@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:id="@+id/cardViewId"
     android:layout_height="wrap_content"
-    xmlns:cardView="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
-    android:clickable="true"
-    cardView:cardElevation="10dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    cardView:cardCornerRadius="5dp">
+    android:clickable="true">
 
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/first_contact_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:layout_width="160dp"
-            android:id="@+id/buyerLogo"
-            android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baccc"
-            android:background="#000"
-            />
-
+        android:elevation="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="100dp">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Buyer Name"
-            android:padding="12sp"
-            android:id="@+id/buyerName"
-            android:gravity="center"
+            android:id="@+id/business_name_hardcoded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/the_geek_electronics"
             android:textSize="16sp"
-            android:textColor="#000"/>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/business_email_hardcoded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_chevron_right"
+            android:text="thegeek@geek.com"
+            android:layout_marginTop="22dp"
+            android:padding="8dp"
+            />
+        <TextView
+            android:id="@+id/business_address_one_hardcoded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234  Lavington , Nairobi"
+            android:layout_marginTop="42dp"
+            android:padding="8dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

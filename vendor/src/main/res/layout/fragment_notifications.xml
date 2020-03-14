@@ -30,7 +30,7 @@
 
             android:text="Past Requests"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/colorAccent"
             android:layout_marginTop="5dp"
             android:textAlignment="center"
             android:textSize="25sp" />

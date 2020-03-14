@@ -30,13 +30,12 @@
 
                     android:text="Buyers"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorAccent"
                         android:layout_marginTop="5dp"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
                 <ImageView
-
                     android:layout_width="30dp"
                     android:layout_height="22dp"
                     android:layout_marginLeft="10dp"
