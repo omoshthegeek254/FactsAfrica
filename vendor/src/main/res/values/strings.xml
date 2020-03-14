@@ -33,4 +33,13 @@
     <string name="subtotal_amount">.............</string>
     <string name="swipe_to_preview_invoice_and_send">Swipe to preview invoice and send</string>
     <string name="additional_information">Additional Information</string>
+    <string name="discount">Discount</string>
+    <string name="_8">8%</string>
+    <string name="tax">Tax</string>
+    <string name="_5">5%</string>
+    <string name="total">Total</string>
+    <string name="amount_to_be_paid">........</string>
+    <string name="add_photo_optional">Add Photo (Optional)</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="add_photo">Add Photo</string>
 </resources>

@@ -102,7 +102,6 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_customer_and_product">
@@ -222,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="120dp"
-                android:text="Subtotal"
+                android:text="@string/subtotal"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -247,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="170dp"
-                android:text="Discount" />
+                android:text="@string/discount" />
 
             <TextView
                 android:id="@+id/discount_amount"
@@ -255,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="320dp"
                 android:layout_marginTop="170dp"
-                android:text="8%" />
+                android:text="@string/_8" />
 
             <TextView
                 android:id="@+id/tax"
@@ -263,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="190dp"
-                android:text="Tax" />
+                android:text="@string/tax" />
 
             <TextView
                 android:id="@+id/tax_percentage"
@@ -271,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="320dp"
                 android:layout_marginTop="190dp"
-                android:text="16%" />
+                android:text="@string/_5" />
 
             <TextView
                 android:id="@+id/total_amount"
@@ -279,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="220dp"
-                android:text="Total"
+                android:text="@string/total"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -290,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="320dp"
                 android:layout_marginTop="230dp"
-                android:text="........" />
+                android:text="@string/amount_to_be_paid" />
 
         </androidx.cardview.widget.CardView>
 
@@ -298,7 +297,7 @@
             android:layout_marginTop="12dp"
             android:id="@+id/card_bottom"
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="375dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:elevation="12dp"
@@ -309,18 +308,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Add Photo (Optional) "
-                android:layout_marginTop="16dp"
+                android:text="@string/add_photo_optional"
+                android:layout_marginTop="24dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/ic_attach_file"/>
+            <ImageView
+                android:id="@+id/invoice_photo"
+                android:layout_width="100dp"
+                android:contentDescription="@string/add_photo"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_attach_file"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="12dp"/>
 
             <View
                 style="@style/Divider"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="182dp"
                 />
 
             <EditText
@@ -331,7 +338,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="200dp"
                 android:hint="@string/additional_information"
                 android:gravity="start|top"
                 android:inputType="textMultiLine" />
