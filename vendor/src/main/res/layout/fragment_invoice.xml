@@ -298,7 +298,7 @@
             android:layout_marginTop="12dp"
             android:id="@+id/card_bottom"
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="375dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:elevation="12dp"
@@ -310,17 +310,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Add Photo (Optional) "
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/ic_attach_file"/>
+            <ImageView
+                android:id="@+id/invoice_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_attach_file"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="12dp"/>
 
             <View
                 style="@style/Divider"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="182dp"
                 />
 
             <EditText
@@ -331,7 +338,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="200dp"
                 android:hint="@string/additional_information"
                 android:gravity="start|top"
                 android:inputType="textMultiLine" />
