@@ -36,6 +36,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.date_today)
     TextView mPickDate;
 
+
     private Invoice mInvoice;
     private String title;
     private int page;

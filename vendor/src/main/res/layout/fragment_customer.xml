@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ui.CustomerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/first_contact_card"
+        android:layout_width="match_parent"
+        android:elevation="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/business_name_hardcoded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/the_geek_electronics"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/business_email_hardcoded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_chevron_right"
+            android:text="thegeek@geek.com"
+            android:layout_marginTop="22dp"
+            android:padding="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234  Lavington , Nairobi"
+            android:layout_marginTop="42dp"
+            android:padding="8dp"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/second_contact_hardcoded"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_below="@id/first_contact_card">
+
+        <TextView
+            android:id="@+id/business_name_two_hardcoded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kamala Wines And Spirits"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/business_email_two_hardcoded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_chevron_right"
+            android:text="kamala@manchester.com"
+            android:layout_marginTop="22dp"
+            android:padding="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234  Ngusso , Nairobi"
+            android:layout_marginTop="42dp"
+            android:padding="8dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
