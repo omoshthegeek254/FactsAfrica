@@ -22,8 +22,8 @@
     <string name="preview_fragment">Preview fragment</string>
     <string name="invoice_001">INVOICE#001</string>
     <string name="due_on_receipt">Due on receipt</string>
-    <string name="business_name_details">Business Name, Details</string>
-    <string name="date_today">Date today</string>
+    <string name="business_name_details">Business Name</string>
+    <string name="date_today">Invoice Due Date</string>
     <string name="to_client">To Client</string>
     <string name="add_items">Add items</string>
     <string name="item">Item</string>
@@ -42,4 +42,7 @@
     <string name="add_photo_optional">Add Photo (Optional)</string>
     <string name="subtotal">Subtotal</string>
     <string name="add_photo">Add Photo</string>
+    <string name="the_geek_electronics">The Geek Electronics</string>
+    <string name="email_address">Email Address</string>
+    <string name="physical_address">Physical Address</string>
 </resources>

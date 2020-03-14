@@ -40,21 +40,24 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
     public void onBindViewHolder(@NonNull BuyersAdapter.MyViewHolder holder, int position) {
 
         holder.buyer_name.setText(mData.get(position).getFirstName());
+        holder.buyer_email.setText(mData.get(position).getEmail());
+        holder.buyer_address.setText(mData.get(position).getAddress());
     }
-
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        CardView cardView;
+        TextView buyer_email;
         TextView buyer_name;
-        ImageView buyer_logo;
+        TextView buyer_address;
         public MyViewHolder(View itemView){
             super(itemView);
-            buyer_name =(TextView) itemView.findViewById(R.id.buyerName);
-            cardView = (CardView) itemView.findViewById(R.id.cardViewId);
+            buyer_name = itemView.findViewById(R.id.business_name_hardcoded);
+            buyer_email = itemView.findViewById(R.id.business_email_hardcoded);
+            buyer_address = itemView.findViewById(R.id.business_address_one_hardcoded);
+
             itemView.setOnClickListener(this);
         }
 
