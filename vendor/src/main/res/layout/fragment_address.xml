@@ -41,14 +41,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-
-            android:layout_width="30dp"
-            android:layout_height="22dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_notifications_black_24dp" />
-
     </LinearLayout>
 
     <TextView

@@ -24,6 +24,7 @@ import com.example.vendor.Utils;
 import com.example.vendor.adapters.BuyersAdapter;
 import com.example.vendor.models.User;
 import com.example.vendor.ui.BottomNavigation;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,24 +55,6 @@ public class BuyersFragment extends Fragment {
     private BuyersViewModel buyersViewModel;
     private List<User> buyerList;
     private RecyclerView rvBuyers;
-
-    private BuyersFragmentListener listener;
-
-    public interface BuyersFragmentListener{
-        void onInputNameSent(String buyerName);
-        void onInputEmailSent(String buyerEmail);
-        void onInputAddressSent(String buyerAddress);
-    }
-
-    public void updateName(String name){
-        mSupplierName.setText(name);
-    }
-    public void updateEmail(String email){
-       mSupplierName.setText(email);
-    }
-    public void updateAddress(String address){
-       mSupplierName.setText(address);
-    }
 
 
     @Override
@@ -105,22 +88,6 @@ public class BuyersFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if(context instanceof BuyersFragmentListener){
-            listener = (BuyersFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + "Must implement BuyerFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
-
     void getUsersById() {
         Call<List<User>> buyersId = Utils.getApi().getBuyerId(token);
 
@@ -135,8 +102,9 @@ public class BuyersFragment extends Fragment {
                     rvBuyers.setAdapter(myAdapter);
                     rvBuyers.setHasFixedSize(true);
                     myAdapter.setOnClickListener((view, position) -> {
-
-
+                        Snackbar snackbar = Snackbar
+                                .make(view, allBuyers.get(position).getFirstName(), Snackbar.LENGTH_LONG);
+                        snackbar.show();
 
 //                        Intent intent = new Intent(getActivity(), BottomNavigation.class);
 //                        String supplierName = mSupplierName.getText().toString();
@@ -146,13 +114,6 @@ public class BuyersFragment extends Fragment {
 //                        intent.putExtra(EXTRA_EMAIL, supplierEmail);
 //                        intent.putExtra(EXTRA_ADDRESS, supplierAddress);
 //                        getActivity().startActivity(intent);
-
-                        Log.d(TAG, "onResponse Buyer's Fragment: " + mSupplierName.getText().toString());
-                        Log.d(TAG, "onResponse Buyer's Fragment: " + mSupplierEmail.getText().toString());
-                        Log.d(TAG, "onResponse Buyer's Fragment: " + mSupplierAddress.getText().toString());
-                        listener.onInputNameSent(mSupplierName.getText().toString());
-                        listener.onInputEmailSent(mSupplierEmail.getText().toString());
-                        listener.onInputAddressSent(mSupplierAddress.getText().toString());
                     });
 
                 }

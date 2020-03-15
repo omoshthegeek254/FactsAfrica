@@ -12,13 +12,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class BottomNavigation extends AppCompatActivity implements BuyersFragment.BuyersFragmentListener {
+public class BottomNavigation extends AppCompatActivity {
 
     public static final String EXTRA_DETAIL = "detail";
     public static final String EXTRA_EMAIL = "email";
     public static final String EXTRA_ADDRESS = "address";
 
-    InvoiceFragment invoiceFragment = new InvoiceFragment();
 
 
     @Override
@@ -36,18 +35,4 @@ public class BottomNavigation extends AppCompatActivity implements BuyersFragmen
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    @Override
-    public void onInputNameSent(String buyerName) {
-        invoiceFragment.mBusinessName.setText(buyerName);
-    }
-
-    @Override
-    public void onInputEmailSent(String buyerEmail) {
-    invoiceFragment.mBusinessName.setText(buyerEmail);
-    }
-
-    @Override
-    public void onInputAddressSent(String buyerAddress) {
-    invoiceFragment.mBusinessAddress.setText(buyerAddress);
-    }
 }
