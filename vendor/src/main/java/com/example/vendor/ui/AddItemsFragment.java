@@ -1,6 +1,8 @@
 package com.example.vendor.ui;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vendor.R;
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -22,7 +27,7 @@ public class AddItemsFragment extends Fragment {
 
     private String title;
     private int page;
-
+    private InvoiceDbHelper invoiceDbHelper;
     private EditText mAddItem;
     private EditText mAddItemPrice;
     private EditText mAddItemQuantity;
@@ -56,33 +61,47 @@ public class AddItemsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_add_items, container, false);
+        invoiceDbHelper = new InvoiceDbHelper(view.getContext());
         mAddItem = view.findViewById(R.id.editText);
         mAddItemPrice = view.findViewById(R.id.editText2);
         mAddItemQuantity = view.findViewById(R.id.editText3);
         mSubmitButton = view.findViewById(R.id.fab_submit_items);
 
-        mSubmitButton.setOnClickListener(v -> {
-            String itemName = mAddItem.getText().toString().trim();
-            Double itemPrice = Double.parseDouble(mAddItemPrice.getText().toString().trim());
-            int itemQuantity = Integer.parseInt(mAddItemQuantity.getText().toString().trim());
-
-            InvoiceFragment invoiceFragment = new InvoiceFragment();
-
-            Bundle args = new Bundle();
-            args.putString("item", itemName);
-            args.putDouble("price",itemPrice);
-            args.putInt("quantity", itemQuantity);
-
-
-            invoiceFragment.setArguments(args);
-
-            Log.d(TAG, "onCreateView: "+itemName);
-            Log.d(TAG, "onCreateView: "+itemPrice);
-            Log.d(TAG, "onCreateView: "+itemQuantity);
-
-        });
+        mSubmitButton.setOnClickListener(v -> insertItemsToDb());
 
         return view;
+    }
+
+    private void insertItemsToDb(){
+
+        Log.d(TAG, "insertItemsToDb: Inserts");
+        String itemName = mAddItem.getText().toString().trim();
+        Double itemPrice = Double.parseDouble(mAddItemPrice.getText().toString().trim());
+        int itemQuantity = Integer.parseInt(mAddItemQuantity.getText().toString().trim());
+        Double priceQuantity = itemPrice*itemQuantity;
+        Double subTotal = priceQuantity*1;
+        Double a = subTotal- (subTotal*0.12)+(subTotal*0.16);
+        Double netTotal = Math.floor(a * 100) / 100D;
+
+
+
+        SQLiteDatabase db = invoiceDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME, itemName);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_AMOUNT, itemPrice);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_QUANTITY, itemQuantity);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL, priceQuantity);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL, subTotal);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL, netTotal);
+
+        long newRowId = db.insert(InvoiceContract.ItemsEntry.TABLE_NAME, null, contentValues);
+
+        if(newRowId==-1){
+            Toast.makeText(getContext(), "Error occurred, try again", Toast.LENGTH_SHORT).show();
+        } else  {
+            Toast.makeText(getContext(), "Successfully Added Items. Swipe to finalise the details", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }

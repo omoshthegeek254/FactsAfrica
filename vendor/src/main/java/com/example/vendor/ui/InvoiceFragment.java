@@ -3,11 +3,12 @@ package com.example.vendor.ui;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,28 +18,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
+import com.example.vendor.R;
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
+import com.example.vendor.models.Invoice;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
-import com.example.vendor.R;
-import com.example.vendor.models.Invoice;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -63,24 +62,21 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     TextView mPickDate;
     @BindView(R.id.business_name_details)
     TextView mBusinessName;
-    @BindView(R.id.business_email)
-    TextView mBusinessEmail;
-    @BindView(R.id.business_address)
-    TextView mBusinessAddress;
     @BindView(R.id.add_client)
     TextView mAddClient;
     @BindView(R.id.item_one)
     TextView mItemOne;
-    @BindView(R.id.price_one)
-    TextView mPriceOne;
-    @BindView(R.id.quantity_one)
-    TextView mQuantityOne;
     @BindView(R.id.add_photo_to_invoice)
     TextView mAddPhotoToInvoice;
     @BindView(R.id.invoice_photo)
     ImageView mInvoicePhoto;
     @BindView(R.id.wrap)
     TextView mSubmitInvoice;
+    @BindView(R.id.subtotal_amount)
+            TextView mSubtotalAmount;
+    @BindView(R.id.total_amount_to_be_paid)
+            TextView mTotalAmountToBePaid;
+
 
 
     ScrollView scrollView;
@@ -90,7 +86,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     private View rootView;
     private String dirpath;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    //private InvoiceFragmentListener listener;
+    InvoiceDbHelper dbHelper;
 
     //Calender
     private Calendar myCal = Calendar.getInstance();
@@ -104,21 +100,6 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-//    public interface InvoiceFragmentListener{
-//        void updateName(CharSequence name);
-//        void updateEmail(CharSequence email);
-//        void updateAddress(CharSequence address);
-//    }
-//
-//    public void updateNameField(CharSequence newName){
-//        mBusinessName.setText(newName);
-//    }
-//    public void updateEmailField(CharSequence newEmail){
-//        mBusinessEmail.setText(newEmail);
-//    }
-//    public void updateAddressField(CharSequence newAddress){
-//        mBusinessAddress.setText(newAddress);
-//    }
 
     public static InvoiceFragment newInstance(int page, String title) {
         InvoiceFragment invoiceFragment = new InvoiceFragment();
@@ -152,43 +133,24 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         rootView = inflater.inflate(R.layout.fragment_invoice, container, false);
+        dbHelper = new InvoiceDbHelper(rootView.getContext());
         scrollView = rootView.findViewById(R.id.scroll_view);
         ButterKnife.bind(this, rootView);
 
-        Log.d(TAG, "onCreateView: " + mBusinessName.getText().toString().trim());
+        //Log.d(TAG, "onCreateView: " + mBusinessName.getText().toString().trim());
 
         mPickDate.setOnClickListener(this);
         mAddClient.setOnClickListener(this);
         mAddPhotoToInvoice.setOnClickListener(this);
         mSubmitInvoice.setOnClickListener(this);
 
-        Bundle args = getArguments();
-        String personName = args.getString("foundPersonName");
-        String personEmail = args.getString("foundPersonEmail");
-        String personAddress = args.getString("foundPersonAddress");
-//
-        Log.d(TAG, "onCreateView: abc " + personName);
-//
-        String item = args.getString("item");
-        Double price = args.getDouble("price");
-        Integer quantity = args.getInt("quantity");
-//
-//
-        mBusinessName.setText(personName);
-        mBusinessEmail.setText(personEmail);
-        mBusinessAddress.setText(personAddress);
-//
-        mItemOne.setText(item);
-        mPriceOne.setText(price.toString().trim());
-        mQuantityOne.setText(quantity.toString().trim());
-
-        Log.d(TAG, "onCreateView: abcd" + quantity);
-
-//        listener.updateName(mBusinessName.getText().toString().trim());
-//        listener.updateEmail(mBusinessEmail.getText().toString().trim());
-//        listener.updateAddress(mBusinessAddress.getText().toString().trim());
-
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        displayDatabaseInfo();
     }
 
     @Override
@@ -325,24 +287,65 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             mInvoicePhoto.setImageBitmap(imageBitmap);
         }
 
-        //    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        if(context instanceof InvoiceFragmentListener){
-//            listener = (InvoiceFragmentListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "Must Implement Invoice Fragment Interface");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        listener = null;
-//    }
 
-        //date picker
+    }
+
+    private void displayDatabaseInfo(){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
 
+        String [] projection = {InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME,
+                InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER,
+                InvoiceContract.AddressEntry.COLUMN_EMAIL,
+                InvoiceContract.AddressEntry.COLUMN_ADDRESS
+
+        };
+        String [] projection1 = {InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
+                InvoiceContract.ItemsEntry.COLUMN_QUANTITY,
+                InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
+                InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL
+        };
+        Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
+        Cursor cursor1 = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection1, null, null, null, null, null );
+
+        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
+        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
+        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
+        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
+        int itemNameColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME);
+        int quantityColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_QUANTITY);
+        int priceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_AMOUNT);
+        int multipliedPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL);
+        int subTotalPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
+        int netColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
+
+        cursor.moveToLast();
+        cursor1.moveToLast();
+
+        String currentName = cursor.getString(nameColumnIndex);
+        String currentPhone = cursor.getString(phoneColumnIndex);
+        String currentEmail = cursor.getString(emailColumnIndex);
+        String currentAddress = cursor.getString(addressColumnIndex);
+        String currentItemName = cursor1.getString(itemNameColumnIndex);
+        String currentPrice = cursor1.getString(quantityColumnIndex);
+        String currentQuantity = cursor1.getString(priceColumnIndex);
+        String currentMultipliedPrice = cursor1.getString(multipliedPriceColumnIndex);
+        String currentSubTotal = cursor1.getString(subTotalPriceColumnIndex);
+        String currentNet = cursor1.getString(netColumnIndex);
+
+        try {
+            mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
+            mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
+            mSubtotalAmount.setText(currentSubTotal);
+            mTotalAmountToBePaid.setText(currentNet);
+
+
+        } finally {
+            cursor.close();
+            cursor1.close();
+        }
     }
 }
