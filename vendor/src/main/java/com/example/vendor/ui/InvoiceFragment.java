@@ -62,10 +62,10 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     TextView mPickDate;
     @BindView(R.id.business_name_details)
     TextView mBusinessName;
-    @BindView(R.id.business_email)
-    TextView mBusinessEmail;
-    @BindView(R.id.business_address)
-    TextView mBusinessAddress;
+////    @BindView(R.id.business_email)
+////    TextView mBusinessEmail;
+////    @BindView(R.id.business_address)
+////    TextView mBusinessAddress;
     @BindView(R.id.add_client)
     TextView mAddClient;
     @BindView(R.id.item_one)
@@ -140,7 +140,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         scrollView = rootView.findViewById(R.id.scroll_view);
         ButterKnife.bind(this, rootView);
 
-        Log.d(TAG, "onCreateView: " + mBusinessName.getText().toString().trim());
+        //Log.d(TAG, "onCreateView: " + mBusinessName.getText().toString().trim());
 
         mPickDate.setOnClickListener(this);
         mAddClient.setOnClickListener(this);
@@ -159,9 +159,9 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         Integer quantity = args.getInt("quantity");
 //
 //
-        mBusinessName.setText(personName);
-        mBusinessEmail.setText(personEmail);
-        mBusinessAddress.setText(personAddress);
+//        mBusinessName.setText(personName);
+//        mBusinessEmail.setText(personEmail);
+//        mBusinessAddress.setText(personAddress);
 //
         mItemOne.setText(item);
         mPriceOne.setText(price.toString().trim());
@@ -319,11 +319,30 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ InvoiceContract.AddressEntry.TABLE_NAME, null);
-        Cursor cursor1 = db.rawQuery("SELECT * FROM "+ InvoiceContract.ItemsEntry.TABLE_NAME, null);
+
+        String [] projection = {InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME,
+                InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER,
+                InvoiceContract.AddressEntry.COLUMN_EMAIL,
+                InvoiceContract.AddressEntry.COLUMN_ADDRESS
+
+        };
+        Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
+
+        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
+        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
+        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
+        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
+
+        cursor.moveToLast();
+
+        String currentName = cursor.getString(nameColumnIndex);
+        String currentPhone = cursor.getString(phoneColumnIndex);
+        String currentEmail = cursor.getString(emailColumnIndex);
+        String currentAddress = cursor.getString(addressColumnIndex);
+
         try {
-            mBusinessName.setText(Integer.toString(cursor.getCount()));
-            mItemOne.setText(Integer.toString(cursor1.getCount()));
+            mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
+
 
         } finally {
             cursor.close();
