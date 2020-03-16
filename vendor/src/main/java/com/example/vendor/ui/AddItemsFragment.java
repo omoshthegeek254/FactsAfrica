@@ -73,9 +73,17 @@ public class AddItemsFragment extends Fragment {
     }
 
     private void insertItemsToDb(){
+
+        Log.d(TAG, "insertItemsToDb: Inserts");
         String itemName = mAddItem.getText().toString().trim();
         Double itemPrice = Double.parseDouble(mAddItemPrice.getText().toString().trim());
         int itemQuantity = Integer.parseInt(mAddItemQuantity.getText().toString().trim());
+        Double priceQuantity = itemPrice*itemQuantity;
+        Double subTotal = priceQuantity*1;
+        Double a = subTotal- (subTotal*0.12)+(subTotal*0.16);
+        Double netTotal = Math.floor(a * 100) / 100D;
+
+
 
         SQLiteDatabase db = invoiceDbHelper.getWritableDatabase();
 
@@ -83,13 +91,16 @@ public class AddItemsFragment extends Fragment {
         contentValues.put(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME, itemName);
         contentValues.put(InvoiceContract.ItemsEntry.COLUMN_AMOUNT, itemPrice);
         contentValues.put(InvoiceContract.ItemsEntry.COLUMN_QUANTITY, itemQuantity);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL, priceQuantity);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL, subTotal);
+        contentValues.put(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL, netTotal);
 
         long newRowId = db.insert(InvoiceContract.ItemsEntry.TABLE_NAME, null, contentValues);
 
-        if(newRowId==1){
-            Toast.makeText(getContext(), "Successfully Added Items", Toast.LENGTH_SHORT).show();
-        } else if(newRowId==-1) {
+        if(newRowId==-1){
             Toast.makeText(getContext(), "Error occurred, try again", Toast.LENGTH_SHORT).show();
+        } else  {
+            Toast.makeText(getContext(), "Successfully Added Items. Swipe to finalise the details", Toast.LENGTH_LONG).show();
         }
 
     }

@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "invoices";
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 7;
 
     public InvoiceDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,7 +35,12 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
                 + InvoiceContract.ItemsEntry._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                 + InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
                 + InvoiceContract.ItemsEntry.COLUMN_AMOUNT + " REAL NOT NULL, "
-                + InvoiceContract.ItemsEntry.COLUMN_QUANTITY + " INTEGER NOT NULL);";
+                + InvoiceContract.ItemsEntry.COLUMN_QUANTITY + " INTEGER NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL +" REAL NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL + " REAL NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_DISCOUNT + " REAL NOT NULL DEFAULT 0.12, "
+                + InvoiceContract.ItemsEntry.COLUMN_VAT + " REAL NOT NULL DEFAULT 0.16, "
+                + InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL + " REAL NOT NULL);";
 
         db.execSQL(SQL_CREATE_ADDRESS_TABLE);
         db.execSQL(SQL_CREATE_ITEMS_TABLE);
@@ -44,9 +49,9 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL("DROP TABLE IF EXISTS " + InvoiceContract.AddressEntry.TABLE_NAME);
-//        db.execSQL("DROP TABLE IF EXISTS " + InvoiceContract.ItemsEntry.TABLE_NAME);
-//        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + InvoiceContract.AddressEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + InvoiceContract.ItemsEntry.TABLE_NAME);
+        onCreate(db);
 
     }
 }

@@ -100,7 +100,7 @@ public class AddressFragment extends Fragment {
 
         long newRowId = db.insert(InvoiceContract.AddressEntry.TABLE_NAME, null, contentValues);
 
-        if(newRowId ==1){
+        if(newRowId ==-1){
             Toast.makeText(getContext(), "Error inserting", Toast.LENGTH_SHORT).show();
         } else{
             Toast.makeText(getContext(), "Address Saved! Swipe to add items to the invoice", Toast.LENGTH_LONG).show();

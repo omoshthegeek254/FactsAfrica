@@ -62,24 +62,21 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     TextView mPickDate;
     @BindView(R.id.business_name_details)
     TextView mBusinessName;
-////    @BindView(R.id.business_email)
-////    TextView mBusinessEmail;
-////    @BindView(R.id.business_address)
-////    TextView mBusinessAddress;
     @BindView(R.id.add_client)
     TextView mAddClient;
     @BindView(R.id.item_one)
     TextView mItemOne;
-    @BindView(R.id.price_one)
-    TextView mPriceOne;
-    @BindView(R.id.quantity_one)
-    TextView mQuantityOne;
     @BindView(R.id.add_photo_to_invoice)
     TextView mAddPhotoToInvoice;
     @BindView(R.id.invoice_photo)
     ImageView mInvoicePhoto;
     @BindView(R.id.wrap)
     TextView mSubmitInvoice;
+    @BindView(R.id.subtotal_amount)
+            TextView mSubtotalAmount;
+    @BindView(R.id.total_amount_to_be_paid)
+            TextView mTotalAmountToBePaid;
+
 
 
     ScrollView scrollView;
@@ -147,28 +144,6 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         mAddPhotoToInvoice.setOnClickListener(this);
         mSubmitInvoice.setOnClickListener(this);
 
-        Bundle args = getArguments();
-        String personName = args.getString("foundPersonName");
-        String personEmail = args.getString("foundPersonEmail");
-        String personAddress = args.getString("foundPersonAddress");
-//
-        Log.d(TAG, "onCreateView: abc " + personName);
-//
-        String item = args.getString("item");
-        Double price = args.getDouble("price");
-        Integer quantity = args.getInt("quantity");
-//
-//
-//        mBusinessName.setText(personName);
-//        mBusinessEmail.setText(personEmail);
-//        mBusinessAddress.setText(personAddress);
-//
-        mItemOne.setText(item);
-        mPriceOne.setText(price.toString().trim());
-        mQuantityOne.setText(quantity.toString().trim());
-
-        Log.d(TAG, "onCreateView: abcd" + quantity);
-
         return rootView;
     }
 
@@ -176,6 +151,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         displayDatabaseInfo();
+        displayItemsInfo();
     }
 
     @Override
@@ -344,6 +320,45 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
 
 
+        } finally {
+            cursor.close();
+        }
+    }
+    private void displayItemsInfo(){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String [] projection = {InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
+                InvoiceContract.ItemsEntry.COLUMN_QUANTITY,
+                InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
+                InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL
+        };
+        Cursor cursor = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection, null, null, null, null, null );
+
+        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME);
+        int quantityColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_QUANTITY);
+        int priceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_AMOUNT);
+        int multipliedPriceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL);
+        int subTotalPriceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
+        int netColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
+
+        cursor.moveToLast();
+
+        String currentName = cursor.getString(nameColumnIndex);
+        String currentPrice = cursor.getString(quantityColumnIndex);
+        String currentQuantity = cursor.getString(priceColumnIndex);
+        String currentMultipliedPrice = cursor.getString(multipliedPriceColumnIndex);
+        String currentSubTotal = cursor.getString(subTotalPriceColumnIndex);
+        String currentNet = cursor.getString(netColumnIndex);
+
+
+        try {
+            mItemOne.append("\n"+ currentName + "\t\t\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
+
+            mSubtotalAmount.setText(currentSubTotal);
+            mTotalAmountToBePaid.setText(currentNet);
         } finally {
             cursor.close();
         }

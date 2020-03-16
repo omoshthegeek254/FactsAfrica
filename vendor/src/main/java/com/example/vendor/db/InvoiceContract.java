@@ -22,5 +22,11 @@ public final class InvoiceContract {
         public static final String COLUMN_ITEM_NAME = "item_name";
         public static final String COLUMN_AMOUNT = "amount";
         public static final String COLUMN_QUANTITY = "quantity";
+        public static final String COLUMN_MULTIPLIED_TOTAL = "quantity_amount";
+        public static final String COLUMN_SUB_TOTAL = "sub_total";
+        public static final String COLUMN_DISCOUNT = "discount";
+        public static final String COLUMN_VAT = "vat";
+        public static final String COLUMN_NET_TOTAL = "total";
+
     }
 }
