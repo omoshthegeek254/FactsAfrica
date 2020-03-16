@@ -45,4 +45,5 @@
     <string name="the_geek_electronics">The Geek Electronics</string>
     <string name="email_address">Email Address</string>
     <string name="physical_address">Physical Address</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

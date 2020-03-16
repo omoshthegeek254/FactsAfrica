@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/scroll_view"
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".ui.InvoiceFragment">
@@ -10,13 +11,45 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/invoice_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iconLeft"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/facts"
+
+            app:layout_constraintBottom_toBottomOf="@+id/customTopText"
+            app:layout_constraintEnd_toStartOf="@+id/customTopText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/customTopText" />
+
+        <TextView
+            android:id="@+id/customTopText"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="24dp"
+            android:text="Invoice"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/card_invoice_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="88dp"
             android:id="@+id/card_invoice_name"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:layout_marginEnd="15dp"
             android:layout_marginStart="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +88,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email_address"/>
             <TextView
-                android:id="@+id/business_address"
+                android:id="@+id/business_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="102dp"
+                android:layout_marginStart="18dp"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"/>
+            <TextView
+                android:id="@+id/business_address"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="132dp"
                 android:layout_marginStart="18dp"
                 android:layout_height="wrap_content"
                 android:text="@string/physical_address"/>
@@ -311,6 +351,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
             <TextView
+                android:id="@+id/add_photo_to_invoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_photo_optional"
