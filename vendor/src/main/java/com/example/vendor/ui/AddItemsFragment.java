@@ -86,7 +86,6 @@ public class AddItemsFragment extends Fragment {
 
 
         SQLiteDatabase db = invoiceDbHelper.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME, itemName);
         contentValues.put(InvoiceContract.ItemsEntry.COLUMN_AMOUNT, itemPrice);

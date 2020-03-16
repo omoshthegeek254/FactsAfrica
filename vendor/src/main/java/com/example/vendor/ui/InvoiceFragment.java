@@ -151,7 +151,6 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         displayDatabaseInfo();
-        displayItemsInfo();
     }
 
     @Override
@@ -302,65 +301,51 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
                 InvoiceContract.AddressEntry.COLUMN_ADDRESS
 
         };
-        Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
-
-        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
-        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
-        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
-        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
-
-        cursor.moveToLast();
-
-        String currentName = cursor.getString(nameColumnIndex);
-        String currentPhone = cursor.getString(phoneColumnIndex);
-        String currentEmail = cursor.getString(emailColumnIndex);
-        String currentAddress = cursor.getString(addressColumnIndex);
-
-        try {
-            mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
-
-
-        } finally {
-            cursor.close();
-        }
-    }
-    private void displayItemsInfo(){
-
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String [] projection = {InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
+        String [] projection1 = {InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
                 InvoiceContract.ItemsEntry.COLUMN_QUANTITY,
                 InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
                 InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
                 InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL,
                 InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL
         };
-        Cursor cursor = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection, null, null, null, null, null );
+        Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
+        Cursor cursor1 = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection1, null, null, null, null, null );
 
-        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME);
-        int quantityColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_QUANTITY);
-        int priceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_AMOUNT);
-        int multipliedPriceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL);
-        int subTotalPriceColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
-        int netColumnIndex = cursor.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
+        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
+        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
+        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
+        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
+        int itemNameColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME);
+        int quantityColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_QUANTITY);
+        int priceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_AMOUNT);
+        int multipliedPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL);
+        int subTotalPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
+        int netColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
 
         cursor.moveToLast();
+        cursor1.moveToLast();
 
         String currentName = cursor.getString(nameColumnIndex);
-        String currentPrice = cursor.getString(quantityColumnIndex);
-        String currentQuantity = cursor.getString(priceColumnIndex);
-        String currentMultipliedPrice = cursor.getString(multipliedPriceColumnIndex);
-        String currentSubTotal = cursor.getString(subTotalPriceColumnIndex);
-        String currentNet = cursor.getString(netColumnIndex);
-
+        String currentPhone = cursor.getString(phoneColumnIndex);
+        String currentEmail = cursor.getString(emailColumnIndex);
+        String currentAddress = cursor.getString(addressColumnIndex);
+        String currentItemName = cursor1.getString(itemNameColumnIndex);
+        String currentPrice = cursor1.getString(quantityColumnIndex);
+        String currentQuantity = cursor1.getString(priceColumnIndex);
+        String currentMultipliedPrice = cursor1.getString(multipliedPriceColumnIndex);
+        String currentSubTotal = cursor1.getString(subTotalPriceColumnIndex);
+        String currentNet = cursor1.getString(netColumnIndex);
 
         try {
-            mItemOne.append("\n"+ currentName + "\t\t\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
-
+            mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
+            mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
             mSubtotalAmount.setText(currentSubTotal);
             mTotalAmountToBePaid.setText(currentNet);
+
+
         } finally {
             cursor.close();
+            cursor1.close();
         }
     }
 }
