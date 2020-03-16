@@ -1,7 +1,9 @@
 package com.example.vendor.ui;
 
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vendor.R;
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -26,10 +31,11 @@ public class AddressFragment extends Fragment {
 
 
     //private AddressFragmentListener addressFragmentListener;
-
+    private InvoiceDbHelper invoiceDbHelper;
     private EditText personName;
     private EditText personEmail;
     private EditText personAddress;
+    private EditText personPhoneNumber;
     private FloatingActionButton mFloatingActionButton;
 
     private String title;
@@ -39,12 +45,6 @@ public class AddressFragment extends Fragment {
     public AddressFragment() {
         // Required empty public constructor
     }
-
-//    public interface AddressFragmentListener{
-//        void onPersonNameSent(CharSequence bName);
-//        void onPersonEmailSent(CharSequence bEmail);
-//        void onPersonAddressSent(CharSequence bAddress);
-//    }
 
 
 
@@ -69,33 +69,42 @@ public class AddressFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_address, container, false);
+        invoiceDbHelper = new InvoiceDbHelper(view.getContext());
         personName = view.findViewById(R.id.editTextPersonName);
         personEmail = view.findViewById(R.id.editTextPersonEmail);
         personAddress = view.findViewById(R.id.editTextPersonAddress);
+        personPhoneNumber = view.findViewById(R.id.editTextPhoneNumber);
+
         mFloatingActionButton = view.findViewById(R.id.fab_submit_address);
 
-        mFloatingActionButton.setOnClickListener(v -> {
-            String foundPersonName = personName.getText().toString().trim();
-            String foundPersonEmail = personEmail.getText().toString().trim();
-            String foundPersonAddress = personAddress.getText().toString();
-
-            Log.d(TAG, "onCreateView: Address Fragment: " + foundPersonName);
-            Log.d(TAG, "onCreateView: Address Fragment: " + foundPersonEmail);
-            Log.d(TAG, "onCreateView: Address Fragment: " + foundPersonAddress);
-
-//            addressFragmentListener.onPersonNameSent(foundPersonName);
-//            addressFragmentListener.onPersonEmailSent(foundPersonEmail);
-//            addressFragmentListener.onPersonAddressSent(foundPersonAddress);
-
-            InvoiceFragment invoiceFragment = new InvoiceFragment();
-            Bundle args = new Bundle();
-            args.putString("foundPersonName", foundPersonName );
-            args.putString("foundPersonEmail", foundPersonEmail);
-            args.putString("foundPersonAddress", foundPersonAddress);
-            invoiceFragment.setArguments(args);
-        });
+        mFloatingActionButton.setOnClickListener(v -> insertIntoDb());
 
         return view;
+
+    }
+
+    private void insertIntoDb(){
+        String foundPersonName = personName.getText().toString().trim();
+        String foundPersonEmail = personEmail.getText().toString().trim();
+        String foundPersonAddress = personAddress.getText().toString().trim();
+        String foundPersonPhoneNumber = personPhoneNumber.getText().toString().trim();
+
+
+        SQLiteDatabase db = invoiceDbHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(InvoiceContract.AddressEntry.COLUMN_ADDRESS, foundPersonAddress);
+        contentValues.put(InvoiceContract.AddressEntry.COLUMN_EMAIL, foundPersonEmail);
+        contentValues.put(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER, foundPersonPhoneNumber);
+        contentValues.put(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME, foundPersonName);
+
+        long newRowId = db.insert(InvoiceContract.AddressEntry.TABLE_NAME, null, contentValues);
+
+        if(newRowId ==1){
+            Toast.makeText(getContext(), "Error inserting", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getContext(), "Address Saved!", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

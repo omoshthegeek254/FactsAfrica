@@ -3,11 +3,12 @@ package com.example.vendor.ui;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,28 +18,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
+import com.example.vendor.R;
+import com.example.vendor.db.InvoiceContract;
+import com.example.vendor.db.InvoiceDbHelper;
+import com.example.vendor.models.Invoice;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
-import com.example.vendor.R;
-import com.example.vendor.models.Invoice;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -90,7 +89,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     private View rootView;
     private String dirpath;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    //private InvoiceFragmentListener listener;
+    InvoiceDbHelper dbHelper;
 
     //Calender
     private Calendar myCal = Calendar.getInstance();
@@ -104,21 +103,6 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-//    public interface InvoiceFragmentListener{
-//        void updateName(CharSequence name);
-//        void updateEmail(CharSequence email);
-//        void updateAddress(CharSequence address);
-//    }
-//
-//    public void updateNameField(CharSequence newName){
-//        mBusinessName.setText(newName);
-//    }
-//    public void updateEmailField(CharSequence newEmail){
-//        mBusinessEmail.setText(newEmail);
-//    }
-//    public void updateAddressField(CharSequence newAddress){
-//        mBusinessAddress.setText(newAddress);
-//    }
 
     public static InvoiceFragment newInstance(int page, String title) {
         InvoiceFragment invoiceFragment = new InvoiceFragment();
@@ -152,6 +136,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         rootView = inflater.inflate(R.layout.fragment_invoice, container, false);
+        dbHelper = new InvoiceDbHelper(rootView.getContext());
         scrollView = rootView.findViewById(R.id.scroll_view);
         ButterKnife.bind(this, rootView);
 
@@ -184,11 +169,13 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
         Log.d(TAG, "onCreateView: abcd" + quantity);
 
-//        listener.updateName(mBusinessName.getText().toString().trim());
-//        listener.updateEmail(mBusinessEmail.getText().toString().trim());
-//        listener.updateAddress(mBusinessAddress.getText().toString().trim());
-
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        displayDatabaseInfo();
     }
 
     @Override
@@ -325,24 +312,21 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             mInvoicePhoto.setImageBitmap(imageBitmap);
         }
 
-        //    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        if(context instanceof InvoiceFragmentListener){
-//            listener = (InvoiceFragmentListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "Must Implement Invoice Fragment Interface");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        listener = null;
-//    }
 
-        //date picker
+    }
 
+    private void displayDatabaseInfo(){
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ InvoiceContract.AddressEntry.TABLE_NAME, null);
+        Cursor cursor1 = db.rawQuery("SELECT * FROM "+ InvoiceContract.ItemsEntry.TABLE_NAME, null);
+        try {
+            mBusinessName.setText(Integer.toString(cursor.getCount()));
+            mItemOne.setText(Integer.toString(cursor1.getCount()));
+
+        } finally {
+            cursor.close();
+        }
     }
 }
