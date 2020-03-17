@@ -76,6 +76,14 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             TextView mSubtotalAmount;
     @BindView(R.id.total_amount_to_be_paid)
             TextView mTotalAmountToBePaid;
+    @BindView(R.id.invoice_number)
+            TextView mInvoiceNumber;
+    @BindView(R.id.item_price)
+            TextView mItemPrice;
+    @BindView(R.id.item_quantity)
+            TextView mQuantity;
+    @BindView(R.id.item_amount)
+            TextView mAmount;
 
 
 
@@ -298,6 +306,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
 
         String [] projection = {InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME,
+                InvoiceContract.AddressEntry._ID,
                 InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER,
                 InvoiceContract.AddressEntry.COLUMN_EMAIL,
                 InvoiceContract.AddressEntry.COLUMN_ADDRESS
@@ -308,11 +317,13 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
                 InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
                 InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
                 InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL,
-                InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL
+                InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_STATUS
         };
         Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
         Cursor cursor1 = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection1, null, null, null, null, null );
 
+        int idColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry._ID);
         int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
         int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
         int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
@@ -323,10 +334,13 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         int multipliedPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL);
         int subTotalPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
         int netColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
+        int statusColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_STATUS);
 
         cursor.moveToLast();
         cursor1.moveToLast();
 
+
+        String currentId = cursor.getString(idColumnIndex);
         String currentName = cursor.getString(nameColumnIndex);
         String currentPhone = cursor.getString(phoneColumnIndex);
         String currentEmail = cursor.getString(emailColumnIndex);
@@ -337,13 +351,18 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         String currentMultipliedPrice = cursor1.getString(multipliedPriceColumnIndex);
         String currentSubTotal = cursor1.getString(subTotalPriceColumnIndex);
         String currentNet = cursor1.getString(netColumnIndex);
+        String currentStatus = cursor1.getString(statusColumnIndex);
 
         try {
             mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
-            mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
+            mItemOne.setText(currentItemName);
+            mItemPrice.setText(currentPrice);
+            mQuantity.setText(currentQuantity);
+            mAmount.setText(currentMultipliedPrice);
+            //mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
             mSubtotalAmount.setText(currentSubTotal);
             mTotalAmountToBePaid.setText(currentNet);
-
+            mInvoiceNumber.setText(currentId);
 
         } finally {
             cursor.close();

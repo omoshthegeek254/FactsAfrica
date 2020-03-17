@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "invoices";
-    public static final int DATABASE_VERSION = 8;
+    public static final int DATABASE_VERSION = 9;
 
     public InvoiceDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +40,8 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
                 + InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL + " INTEGER NOT NULL, "
                 + InvoiceContract.ItemsEntry.COLUMN_DISCOUNT + " REAL NOT NULL DEFAULT 0.12, "
                 + InvoiceContract.ItemsEntry.COLUMN_VAT + " REAL NOT NULL DEFAULT 0.16, "
-                + InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL + " INTEGER NOT NULL);";
+                + InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL + " INTEGER NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_STATUS + " TEXT NOT NULL DEFAULT 'pending');";
 
         db.execSQL(SQL_CREATE_ADDRESS_TABLE);
         db.execSQL(SQL_CREATE_ITEMS_TABLE);
