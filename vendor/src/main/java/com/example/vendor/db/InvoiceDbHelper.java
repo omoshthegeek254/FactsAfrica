@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class InvoiceDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "invoices";
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 8;
 
     public InvoiceDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,13 +34,13 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_ITEMS_TABLE = " CREATE TABLE "+ InvoiceContract.ItemsEntry.TABLE_NAME + "("
                 + InvoiceContract.ItemsEntry._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                 + InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
-                + InvoiceContract.ItemsEntry.COLUMN_AMOUNT + " REAL NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_AMOUNT + " INTEGER NOT NULL, "
                 + InvoiceContract.ItemsEntry.COLUMN_QUANTITY + " INTEGER NOT NULL, "
-                + InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL +" REAL NOT NULL, "
-                + InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL + " REAL NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL +" INTEGER NOT NULL, "
+                + InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL + " INTEGER NOT NULL, "
                 + InvoiceContract.ItemsEntry.COLUMN_DISCOUNT + " REAL NOT NULL DEFAULT 0.12, "
                 + InvoiceContract.ItemsEntry.COLUMN_VAT + " REAL NOT NULL DEFAULT 0.16, "
-                + InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL + " REAL NOT NULL);";
+                + InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL + " INTEGER NOT NULL);";
 
         db.execSQL(SQL_CREATE_ADDRESS_TABLE);
         db.execSQL(SQL_CREATE_ITEMS_TABLE);

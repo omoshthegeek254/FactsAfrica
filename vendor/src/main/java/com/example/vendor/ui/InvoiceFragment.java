@@ -124,6 +124,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
             mPickDate.setText(date);
 
+
         };
     }
 
@@ -143,6 +144,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         mAddClient.setOnClickListener(this);
         mAddPhotoToInvoice.setOnClickListener(this);
         mSubmitInvoice.setOnClickListener(this);
+        displayDatabaseInfo();
 
         return rootView;
     }
@@ -150,7 +152,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        displayDatabaseInfo();
+
     }
 
     @Override
@@ -338,7 +340,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
         try {
             mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
-            mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
+            mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
             mSubtotalAmount.setText(currentSubTotal);
             mTotalAmountToBePaid.setText(currentNet);
 
