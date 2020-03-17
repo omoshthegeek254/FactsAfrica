@@ -27,6 +27,7 @@ public final class InvoiceContract {
         public static final String COLUMN_DISCOUNT = "discount";
         public static final String COLUMN_VAT = "vat";
         public static final String COLUMN_NET_TOTAL = "total";
+        public static final String COLUMN_STATUS = "status";
 
     }
 }
