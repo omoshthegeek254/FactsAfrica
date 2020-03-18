@@ -53,6 +53,8 @@ public class DashboardFragment extends Fragment {
 
     @BindView(R.id.account_user_name)
     TextView accUserName;
+    @BindView(R.id.acc_user_email)
+    TextView mUserEmail;
     @BindView(R.id.buyer_size)
     TextView mBuyerSize;
     @BindView(R.id.total_invoices_sent)
@@ -106,6 +108,27 @@ public class DashboardFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+            }
+        });
+    }
+    private void login(String email, String password) {
+        Login login = new Login(email, password);
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+        Call<User> call = service.login(login, Constants.ACCEPT_TYPE);
+        Log.v("MY URL", call.request().url().toString());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    accUserName.setText(response.body().getName());
+                    mUserEmail.setText(response.body().getEmail());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
             }
         });
     }
