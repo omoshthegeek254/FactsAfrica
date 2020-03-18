@@ -20,7 +20,7 @@ public class MakeInvoiceActivity extends AppCompatActivity {
 
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 4;
+        private static int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -37,13 +37,11 @@ public class MakeInvoiceActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return AddressFragment.newInstance(0,"Enter Address");
+                    return AddItemsFragment.newInstance(0,"Add Items");
                 case 1: // Fragment # 0 - This will show FirstFragment
-                    return AddItemsFragment.newInstance(1, "Add Items");
+                    return InvoiceFragment.newInstance(1, "Create Invoice");
                 case 2: // Fragment # 0 - This will show FirstFragment different title
-                    return InvoiceFragment.newInstance(2, "Create Invoice");
-                case 3:
-                    return PreviewFragment.newInstance(3,"Preview Invoice");
+                    return PreviewFragment.newInstance(2, "Preview Invoice");
                 default:
                     return null;
             }
@@ -55,15 +53,12 @@ public class MakeInvoiceActivity extends AppCompatActivity {
             String heading = "";
 
             if(position==0){
-                heading = "Enter Address";
-            } else if (position ==1){
                 heading = "Add Items";
-            } else if(position==2){
+            } else if (position ==1){
                 heading = "Create Invoice";
-            } else if(position==3){
+            } else if(position==2){
                 heading = "Preview Invoice";
             }
-
             return heading;
 
 

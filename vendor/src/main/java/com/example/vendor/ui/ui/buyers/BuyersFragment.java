@@ -1,11 +1,8 @@
 package com.example.vendor.ui.ui.buyers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +19,6 @@ import com.example.vendor.R;
 import com.example.vendor.Utils;
 import com.example.vendor.adapters.BuyersAdapter;
 import com.example.vendor.models.User;
-import com.example.vendor.ui.BottomNavigation;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -32,10 +27,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.vendor.ui.BottomNavigation.EXTRA_ADDRESS;
-import static com.example.vendor.ui.BottomNavigation.EXTRA_DETAIL;
-import static com.example.vendor.ui.BottomNavigation.EXTRA_EMAIL;
 
 
 public class BuyersFragment extends Fragment {
@@ -103,7 +94,7 @@ public class BuyersFragment extends Fragment {
                     rvBuyers.setHasFixedSize(true);
                     myAdapter.setOnClickListener((view, position) -> {
                         Snackbar snackbar = Snackbar
-                                .make(view, allBuyers.get(position).getFirstName(), Snackbar.LENGTH_LONG);
+                                .make(view, allBuyers.get(position).getName(), Snackbar.LENGTH_LONG);
                         snackbar.show();
 
 //                        Intent intent = new Intent(getActivity(), BottomNavigation.class);

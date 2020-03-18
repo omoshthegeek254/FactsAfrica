@@ -4,11 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vendor.R;
@@ -39,9 +37,9 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
     @Override
     public void onBindViewHolder(@NonNull BuyersAdapter.MyViewHolder holder, int position) {
 
-        holder.buyer_name.setText(mData.get(position).getFirstName());
+        holder.buyer_name.setText(mData.get(position).getName());
         holder.buyer_email.setText(mData.get(position).getEmail());
-        holder.buyer_address.setText(mData.get(position).getAddress());
+        holder.buyer_address.setText(mData.get(position).getCreatedAt());
     }
     @Override
     public int getItemCount() {
