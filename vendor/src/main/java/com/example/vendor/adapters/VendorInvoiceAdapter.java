@@ -29,13 +29,14 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
 
    ItemClickListener itemClickListener;
 
-
+   public VendorInvoiceAdapter(){}
 
    public VendorInvoiceAdapter(List<Invoice> mInvoices,Context mContext){
        this.mInvoices=mInvoices;
        this.mContext=mContext;
        mInvoiceList= new ArrayList<>(mInvoices);
    }
+
 
     @Override
     public Filter getFilter() {
@@ -138,4 +139,5 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
     public void setItemClickListener(ItemClickListener itemClickListener){
         this.itemClickListener = itemClickListener;
     }
+
 }
