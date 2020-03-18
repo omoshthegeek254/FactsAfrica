@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        below android:layout_below="@id/linearTop"
+        android:layout_below="@id/linearTop"
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
