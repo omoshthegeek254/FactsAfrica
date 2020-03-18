@@ -24,6 +24,7 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         this.mContext = mContext;
         this.mData = mData;
     }
+    public BuyersAdapter(){}
 
     @NonNull
     @Override
@@ -72,4 +73,5 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
     public interface ClickListener {
         void onClick(View view, int position);
     }
+
 }

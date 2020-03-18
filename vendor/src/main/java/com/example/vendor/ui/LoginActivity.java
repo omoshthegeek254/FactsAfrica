@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                     mEditor = mPreferences.edit();
                     mEditor.putString("token", bearerToken);
-                    mEditor.commit();
+                    mEditor.apply();
                     Intent homeIntent = new Intent(LoginActivity.this, BottomNavigation.class);
                     startActivity(homeIntent);
                     finish();

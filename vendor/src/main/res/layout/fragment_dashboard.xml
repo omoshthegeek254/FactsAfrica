@@ -20,13 +20,14 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/circc"/>
+                android:src="@drawable/ic_person_black"/>
             <TextView
+                android:id="@+id/account_user_name"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kamala Albert"
+                android:text="..........."
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textSize="21sp"
@@ -60,9 +61,10 @@
                         android:textSize="20sp"
                         />
                     <TextView
+                        android:id="@+id/total_invoices_sent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="38"
+                        android:text="..."
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
@@ -84,9 +86,10 @@
                         android:textSize="20sp"
                         />
                     <TextView
+                        android:id="@+id/buyer_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13"
+                        android:text="..."
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
@@ -110,7 +113,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21"
+                        android:drawableStart="@drawable/ic_trending_up"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
@@ -141,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginStart="80dp"
-                android:text="+254707070707"/>
+                android:text=".............."/>
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -149,11 +152,12 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="70dp"/>
             <TextView
+                android:id="@+id/acc_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="75dp"
                 android:layout_marginStart="80dp"
-                android:text="kamala@gmail.com"/>
+                android:text=".............."/>
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -165,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="125dp"
                 android:layout_marginStart="80dp"
-                android:text="Ngusso, South C"/>
+                android:text=".............."/>
 
 
         </androidx.cardview.widget.CardView>
