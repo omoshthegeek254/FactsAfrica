@@ -29,7 +29,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
 
-            android:text="Invoices"
+            android:text="View Text"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:layout_marginTop="5dp"
