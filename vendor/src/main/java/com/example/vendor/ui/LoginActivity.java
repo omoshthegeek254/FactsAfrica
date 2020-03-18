@@ -2,7 +2,6 @@ package com.example.vendor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -62,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     mProgressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(LoginActivity.this, "Welcome " + response.body().getFirstName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Welcome " + response.body().getName(), Toast.LENGTH_SHORT).show();
                     String token = response.body().getApiToken();
                     String bearerToken = "Bearer " + token;
                     mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
@@ -81,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 mProgressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(LoginActivity.this, "Network Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,40 +5,34 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
-
-@Parcel(Parcel.Serialization.BEAN)
 public class Invoice implements Serializable
 {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("user_id")
+    @SerializedName("supplier_id")
     @Expose
-    private Integer userId;
+    private Integer supplierId;
     @SerializedName("buyer_id")
     @Expose
     private Integer buyerId;
-    @SerializedName("due_date")
-    @Expose
-    private String dueDate;
-    @SerializedName("amount")
-    @Expose
-    private String amount;
     @SerializedName("invoice_status")
     @Expose
     private Integer invoiceStatus;
+    @SerializedName("invoice_amount")
+    @Expose
+    private String invoiceAmount;
+    @SerializedName("due_date")
+    @Expose
+    private String dueDate;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("is_checked")
-    @Expose
-    private boolean isChecked;
-    private final static long serialVersionUID = 7048087709706871645L;
+    private final static long serialVersionUID = 9150701147035518491L;
 
     /**
      * No args constructor for use in serialization
@@ -50,33 +44,24 @@ public class Invoice implements Serializable
     /**
      * 
      * @param createdAt
-     * @param amount
+     * @param supplierId
      * @param dueDate
+     * @param invoiceAmount
      * @param id
      * @param buyerId
      * @param invoiceStatus
-     * @param userId
      * @param updatedAt
      */
-    public Invoice(Integer id, Integer userId, Integer buyerId, String dueDate, String amount, Integer invoiceStatus, String createdAt, String updatedAt, boolean isChecked) {
+    public Invoice(Integer id, Integer supplierId, Integer buyerId, Integer invoiceStatus, String invoiceAmount, String dueDate, String createdAt, String updatedAt) {
         super();
         this.id = id;
-        this.userId = userId;
+        this.supplierId = supplierId;
         this.buyerId = buyerId;
-        this.dueDate = dueDate;
-        this.amount = amount;
         this.invoiceStatus = invoiceStatus;
+        this.invoiceAmount = invoiceAmount;
+        this.dueDate = dueDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.isChecked = isChecked;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
     }
 
     public Integer getId() {
@@ -87,12 +72,12 @@ public class Invoice implements Serializable
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getSupplierId() {
+        return supplierId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 
     public Integer getBuyerId() {
@@ -103,28 +88,28 @@ public class Invoice implements Serializable
         this.buyerId = buyerId;
     }
 
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
     public Integer getInvoiceStatus() {
         return invoiceStatus;
     }
 
     public void setInvoiceStatus(Integer invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
+    }
+
+    public String getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void setInvoiceAmount(String invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     public String getCreatedAt() {

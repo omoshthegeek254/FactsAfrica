@@ -1,12 +1,9 @@
 
 package com.example.vendor.models;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 
 public class User implements Serializable
 {
@@ -17,34 +14,25 @@ public class User implements Serializable
     @SerializedName("role")
     @Expose
     private Integer role;
-    @SerializedName("first_name")
+    @SerializedName("name")
     @Expose
-    private String firstName;
-    @SerializedName("last_name")
-    @Expose
-    private String lastName;
-    @SerializedName("phone")
-    @Expose
-    private String phone;
-    @SerializedName("address")
-    @Expose
-    private String address;
+    private String name;
     @SerializedName("email")
     @Expose
     private String email;
     @SerializedName("email_verified_at")
     @Expose
     private Object emailVerifiedAt;
+    @SerializedName("api_token")
+    @Expose
+    private String apiToken;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("api_token")
-    @Expose
-    private String apiToken;
-    private final static long serialVersionUID = 8013902098193481042L;
+    private final static long serialVersionUID = -1228530404757265103L;
 
     /**
      * No args constructor for use in serialization
@@ -55,31 +43,25 @@ public class User implements Serializable
 
     /**
      * 
-     * @param firstName
-     * @param lastName
      * @param createdAt
      * @param role
-     * @param address
      * @param apiToken
-     * @param phone
      * @param emailVerifiedAt
+     * @param name
      * @param id
      * @param email
      * @param updatedAt
      */
-    public User(Integer id, Integer role, String firstName, String lastName, String phone, String address, String email, Object emailVerifiedAt, String createdAt, String updatedAt, String apiToken) {
+    public User(Integer id, Integer role, String name, String email, Object emailVerifiedAt, String apiToken, String createdAt, String updatedAt) {
         super();
         this.id = id;
         this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.address = address;
+        this.name = name;
         this.email = email;
         this.emailVerifiedAt = emailVerifiedAt;
+        this.apiToken = apiToken;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.apiToken = apiToken;
     }
 
     public Integer getId() {
@@ -98,36 +80,12 @@ public class User implements Serializable
         this.role = role;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -146,6 +104,14 @@ public class User implements Serializable
         this.emailVerifiedAt = emailVerifiedAt;
     }
 
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
@@ -160,14 +126,6 @@ public class User implements Serializable
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getApiToken() {
-        return apiToken;
-    }
-
-    public void setApiToken(String apiToken) {
-        this.apiToken = apiToken;
     }
 
 }

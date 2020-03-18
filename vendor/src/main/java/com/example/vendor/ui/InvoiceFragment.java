@@ -305,14 +305,15 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
 
-        String [] projection = {InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME,
-                InvoiceContract.AddressEntry._ID,
-                InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER,
-                InvoiceContract.AddressEntry.COLUMN_EMAIL,
-                InvoiceContract.AddressEntry.COLUMN_ADDRESS
-
-        };
-        String [] projection1 = {InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
+//        String [] projection = {InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME,
+//                InvoiceContract.AddressEntry._ID,
+//                InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER,
+//                InvoiceContract.AddressEntry.COLUMN_EMAIL,
+//                InvoiceContract.AddressEntry.COLUMN_ADDRESS
+//
+//        };
+        String [] projection1 = {InvoiceContract.ItemsEntry._ID,
+                InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
                 InvoiceContract.ItemsEntry.COLUMN_QUANTITY,
                 InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
                 InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
@@ -320,14 +321,15 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
                 InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL,
                 InvoiceContract.ItemsEntry.COLUMN_STATUS
         };
-        Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
+        //Cursor cursor = db.query(InvoiceContract.AddressEntry.TABLE_NAME, projection, null, null, null, null, null );
         Cursor cursor1 = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection1, null, null, null, null, null );
 
-        int idColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry._ID);
-        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
-        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
-        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
-        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
+//        int idColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry._ID);
+//        int nameColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_BUSINESS_NAME);
+//        int phoneColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_PHONE_NUMBER);
+//        int emailColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_EMAIL);
+//        int addressColumnIndex = cursor.getColumnIndex(InvoiceContract.AddressEntry.COLUMN_ADDRESS);
+        int idColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry._ID);
         int itemNameColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME);
         int quantityColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_QUANTITY);
         int priceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_AMOUNT);
@@ -335,38 +337,38 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         int subTotalPriceColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL);
         int netColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
         int statusColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_STATUS);
+            //cursor.moveToLast();
+            cursor1.moveToLast();
 
-        cursor.moveToLast();
-        cursor1.moveToLast();
+//            String currentId = cursor.getString(idColumnIndex);
+//            String currentName = cursor.getString(nameColumnIndex);
+//            String currentPhone = cursor.getString(phoneColumnIndex);
+//            String currentEmail = cursor.getString(emailColumnIndex);
+//            String currentAddress = cursor.getString(addressColumnIndex);
+            String currentItemName = cursor1.getString(itemNameColumnIndex);
+            String currentPrice = cursor1.getString(quantityColumnIndex);
+            String currentQuantity = cursor1.getString(priceColumnIndex);
+            String currentMultipliedPrice = cursor1.getString(multipliedPriceColumnIndex);
+            String currentSubTotal = cursor1.getString(subTotalPriceColumnIndex);
+            String currentNet = cursor1.getString(netColumnIndex);
+            String currentId = cursor1.getString(idColumnIndex);
+            String currentStatus = cursor1.getString(statusColumnIndex);
 
+            try {
+               // mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
+                mItemOne.setText(currentItemName);
+                mItemPrice.setText(currentPrice);
+                mQuantity.setText(currentQuantity);
+                mAmount.setText(currentMultipliedPrice);
+                //mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
+                mSubtotalAmount.setText(currentSubTotal);
+                mTotalAmountToBePaid.setText(currentNet);
+                mInvoiceNumber.setText(currentId);
 
-        String currentId = cursor.getString(idColumnIndex);
-        String currentName = cursor.getString(nameColumnIndex);
-        String currentPhone = cursor.getString(phoneColumnIndex);
-        String currentEmail = cursor.getString(emailColumnIndex);
-        String currentAddress = cursor.getString(addressColumnIndex);
-        String currentItemName = cursor1.getString(itemNameColumnIndex);
-        String currentPrice = cursor1.getString(quantityColumnIndex);
-        String currentQuantity = cursor1.getString(priceColumnIndex);
-        String currentMultipliedPrice = cursor1.getString(multipliedPriceColumnIndex);
-        String currentSubTotal = cursor1.getString(subTotalPriceColumnIndex);
-        String currentNet = cursor1.getString(netColumnIndex);
-        String currentStatus = cursor1.getString(statusColumnIndex);
+            } finally {
+                //cursor.close();
+                cursor1.close();
+            }
 
-        try {
-            mBusinessName.append("\n"+ currentName + "\n" + currentPhone + "\n" + currentEmail + "\n" + currentAddress);
-            mItemOne.setText(currentItemName);
-            mItemPrice.setText(currentPrice);
-            mQuantity.setText(currentQuantity);
-            mAmount.setText(currentMultipliedPrice);
-            //mItemOne.append("\n"+ currentItemName + "\t\t\t\t\t\t" + currentPrice + "\t\t\t\t\t\t\t\t\t" + currentQuantity + "\t\t\t\t\t\t\t\t\t\t"+currentMultipliedPrice);
-            mSubtotalAmount.setText(currentSubTotal);
-            mTotalAmountToBePaid.setText(currentNet);
-            mInvoiceNumber.setText(currentId);
-
-        } finally {
-            cursor.close();
-            cursor1.close();
-        }
     }
 }

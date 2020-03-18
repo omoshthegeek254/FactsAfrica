@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -125,7 +124,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
           }
 
           mInvoiceId.setText(invoiceNumber + invoice.getBuyerId().toString());
-          mPayAmount.setText(currency + invoice.getAmount());
+          mPayAmount.setText(currency + invoice.getInvoiceAmount());
 
           mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());

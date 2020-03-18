@@ -33,7 +33,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 public class HomeFragment extends Fragment {
+
+    private static final String TAG = "HomeFragment";
     private String token;
     private SharedPreferences mPreference;
     @BindView(R.id.homeVendor) RecyclerView mInvoicesRecycler;
@@ -89,6 +92,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
+                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 VendorInvoiceAdapter adapter = new VendorInvoiceAdapter(invoices, rootView.getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
