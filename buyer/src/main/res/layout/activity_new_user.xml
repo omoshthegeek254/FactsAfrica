@@ -62,18 +62,18 @@
         app:layout_constraintVertical_bias="0.21"
         app:srcCompat="@drawable/facts" />
 
-    <TextView
-        android:id="@+id/new_user_back_to_login"
-        android:layout_width="104dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="232dp"
-        android:text="Sign In"
-        android:textColor="#124995"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/createAccResetButton"
-        app:layout_constraintStart_toStartOf="@+id/createAccResetButton" />
+<!--    <TextView-->
+<!--        android:id="@+id/new_user_back_login"-->
+<!--        android:layout_width="104dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginBottom="232dp"-->
+<!--        android:text="Sign In"-->
+<!--        android:textColor="#124995"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/createAccResetButton"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/createAccResetButton" />-->
 
     <ProgressBar
         android:id="@+id/progressBarNewPassword"
