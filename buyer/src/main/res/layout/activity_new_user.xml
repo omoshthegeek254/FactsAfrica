@@ -63,7 +63,7 @@
         app:srcCompat="@drawable/facts" />
 
     <TextView
-        android:id="@+id/new_user_back_to_login"
+        android:id="@+id/new_user_back_login"
         android:layout_width="104dp"
         android:layout_height="0dp"
         android:layout_marginBottom="232dp"

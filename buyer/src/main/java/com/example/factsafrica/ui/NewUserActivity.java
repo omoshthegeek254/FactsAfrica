@@ -34,7 +34,7 @@ public class NewUserActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mTextBackToLogin = findViewById(R.id.new_user_back_to_login);
+        mTextBackToLogin = findViewById(R.id.new_user_back_login);
         resetPasswordEditText = findViewById(R.id.editTextEmailCreate);
         mProgressBar = findViewById(R.id.progressBarNewPassword);
 
