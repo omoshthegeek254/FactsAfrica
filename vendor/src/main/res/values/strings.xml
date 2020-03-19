@@ -19,7 +19,7 @@
     <string name="email">supplier@mail.com</string>
     <string name="title_Login">FactsAfrica</string>
     <string name="create_invoice_fragment">create invoice fragment</string>
-    <string name="preview_fragment">Preview fragment</string>
+    <string name="preview_fragment">Preview Invoice fragment</string>
     <string name="invoice_001">INVOICE#00</string>
     <string name="due_on_receipt">Due on receipt</string>
     <string name="business_name_details">Business Name</string>

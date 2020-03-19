@@ -3,12 +3,15 @@ package com.example.vendor.ui;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -30,23 +34,16 @@ import com.example.vendor.R;
 import com.example.vendor.db.InvoiceContract;
 import com.example.vendor.db.InvoiceDbHelper;
 import com.example.vendor.models.Invoice;
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.example.vendor.models.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.OutputStreamWriter;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +52,8 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "InvoiceFragment";
     private static final int REQUEST_IMAGE_CAPTURE = 111;
-
+    private String token;
+    private SharedPreferences mPreference;
 
     //BindViews
     @BindView(R.id.date_today)
@@ -71,7 +69,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.invoice_photo)
     ImageView mInvoicePhoto;
     @BindView(R.id.wrap)
-    TextView mSubmitInvoice;
+    FloatingActionButton mSubmitInvoice;
     @BindView(R.id.subtotal_amount)
             TextView mSubtotalAmount;
     @BindView(R.id.total_amount_to_be_paid)
@@ -84,6 +82,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             TextView mQuantity;
     @BindView(R.id.item_amount)
             TextView mAmount;
+    ConstraintLayout constraintLayout;
 
 
 
@@ -143,7 +142,9 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.fragment_invoice, container, false);
         dbHelper = new InvoiceDbHelper(rootView.getContext());
+//        token = mPreference.getString("token", "");
         scrollView = rootView.findViewById(R.id.scroll_view);
+        constraintLayout = rootView.findViewById(R.id.invoice_constraint_layout);
         ButterKnife.bind(this, rootView);
 
         //Log.d(TAG, "onCreateView: " + mBusinessName.getText().toString().trim());
@@ -152,6 +153,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         mAddClient.setOnClickListener(this);
         mAddPhotoToInvoice.setOnClickListener(this);
         mSubmitInvoice.setOnClickListener(this);
+        mBusinessName.setOnClickListener(this);
         displayDatabaseInfo();
 
         return rootView;
@@ -179,108 +181,64 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             startGallery();
         } if(v==mSubmitInvoice){
             takeScreenShot();
+        } if(v==mBusinessName){
+            openBuyerFragment();
+            addInvoiceToApi();
         }
 
     }
-    public static Bitmap getBitmapFromView(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
-                view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
 
-        view.layout(view.getLeft(), view.getTop(), view.getRight(),
-                view.getBottom());
-        view.draw(canvas);
+    private void addInvoiceToApi() {
+        //User user = new User(1,2,"","",null, token,"","");
+        //Invoice invoice = new Invoice(1, user.getId(),)
+    }
 
-        return bitmap;
+    private void openBuyerFragment() {
+
     }
 
     private void takeScreenShot() {
-//First Check if the external storage is writable
-        String state = Environment.getExternalStorageState();
-        if (!Environment.MEDIA_MOUNTED.equals(state)) {
-            Toast.makeText(getActivity(), "......", Toast.LENGTH_SHORT).show();
-        }
-
-//Create a directory for your PDF
-        File pdfDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), "MyApp");
-        if (!pdfDir.exists()){
-            pdfDir.mkdir();
-        }
-
-//Then take the screen shot
-        LayoutInflater inflater = (LayoutInflater) rootView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        ScrollView root = (ScrollView) inflater.inflate
-                (R.layout.fragment_invoice, null); //RelativeLayout is root view of my UI(xml) file.
-        root.setDrawingCacheEnabled(true);
-        Bitmap screen= getBitmapFromView(getActivity().getWindow().findViewById
-                (R.id.invoice_constraint_layout));
-
-//Now create the name of your PDF file that you will generate
-        File pdfFile = new File(pdfDir, "myPdfFile.pdf");
+        File myFile = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "invoice.pdf");
         try {
-            Document  document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
-            document.open();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            screen.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            addImage(document,byteArray);
-            document.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        Uri uri = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", new File(pdfDir, "pdfFileName"));
-//        intent.setDataAndType(uri, "application/pdf");
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//        startActivity(intent);
+            PdfDocument pdfDocument = new PdfDocument();
+            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(constraintLayout.getWidth(),constraintLayout.getHeight(), 1).create();
+            PdfDocument.Page page = pdfDocument.startPage(pageInfo);
 
-        //Uri uri = Uri.fromFile(new File(pdfDir,  "pdfFileName"));
+            Canvas canvas = page.getCanvas();
+            Paint paint = new Paint();
+            canvas.drawPaint(paint);
+            scrollView.draw(canvas);
+            pdfDocument.finishPage(page);
+
+
+            FileOutputStream fileOutputStream = new FileOutputStream(myFile);
+            OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream);
+            pdfDocument.writeTo(fileOutputStream);
+            pdfDocument.close();
+            writer.close();
+            fileOutputStream.close();
+            Toast.makeText(getContext(), "File Saved", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception ex){
+            Toast.makeText(getContext(), ex.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
 
         Intent email = new Intent(Intent.ACTION_SEND);
+        email.setType("application/pdf");
         email.putExtra(Intent.EXTRA_EMAIL, "receiver_email_address");
         email.putExtra(Intent.EXTRA_SUBJECT, "subject");
         email.putExtra(Intent.EXTRA_TEXT, "email body");
-        Uri uri1 = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", new File(pdfDir, "pdfFileName"));
+        Uri uri1 = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "invoice.pdf"));
         email.putExtra(Intent.EXTRA_STREAM, uri1);
-        email.setType("application/pdf");
         email.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(email);
 
     }
-    private static void addImage(Document document,byte[] byteArray)
-    {
-        Image image = null;
-        try
-        {
-            image = Image.getInstance(byteArray);
-        }
-        catch (BadElementException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (MalformedURLException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // image.scaleAbsolute(150f, 150f);
-        try
-        {
-            document.add(image);
-        } catch (DocumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
 
     private void startGallery() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -371,4 +329,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             }
 
     }
+
+
+
 }

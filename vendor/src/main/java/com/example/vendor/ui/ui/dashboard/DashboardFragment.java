@@ -50,6 +50,10 @@ public class DashboardFragment extends Fragment {
 //    private BuyersAdapter adapter = new BuyersAdapter();
 //    private VendorInvoiceAdapter adapter1 = new VendorInvoiceAdapter();
 
+    private static final String TAG = "DashboardFragment";
+
+    private String mEmail;
+
 
     @BindView(R.id.account_user_name)
     TextView accUserName;
@@ -67,6 +71,8 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(root.getContext());
+        mEmail = mPreferences.getString(Constants.PREFERENCES_EMAIL_KEY, null);
+        Log.d(TAG, "onCreate: "+ mEmail);
         ButterKnife.bind(this, root);
         token = mPreferences.getString("token", "");
         Log.v("passed token", token);
@@ -108,27 +114,6 @@ public class DashboardFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-            }
-        });
-    }
-    private void login(String email, String password) {
-        Login login = new Login(email, password);
-        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<User> call = service.login(login, Constants.ACCEPT_TYPE);
-        Log.v("MY URL", call.request().url().toString());
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    accUserName.setText(response.body().getName());
-                    mUserEmail.setText(response.body().getEmail());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }

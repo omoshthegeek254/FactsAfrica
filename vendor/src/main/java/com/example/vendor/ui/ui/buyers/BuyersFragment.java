@@ -97,18 +97,10 @@ public class BuyersFragment extends Fragment {
                                 .make(view, allBuyers.get(position).getName(), Snackbar.LENGTH_LONG);
                         snackbar.show();
 
-//                        Intent intent = new Intent(getActivity(), BottomNavigation.class);
-//                        String supplierName = mSupplierName.getText().toString();
-//                        String supplierEmail = mSupplierEmail.getText().toString();
-//                        String supplierAddress = mSupplierAddress.getText().toString();
-//                        intent.putExtra(EXTRA_DETAIL, supplierName);
-//                        intent.putExtra(EXTRA_EMAIL, supplierEmail);
-//                        intent.putExtra(EXTRA_ADDRESS, supplierAddress);
-//                        getActivity().startActivity(intent);
                     });
 
                 }
-            }
+            } 
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
