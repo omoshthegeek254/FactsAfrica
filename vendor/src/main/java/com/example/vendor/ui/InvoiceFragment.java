@@ -34,6 +34,7 @@ import com.example.vendor.R;
 import com.example.vendor.db.InvoiceContract;
 import com.example.vendor.db.InvoiceDbHelper;
 import com.example.vendor.models.Invoice;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,7 +68,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.invoice_photo)
     ImageView mInvoicePhoto;
     @BindView(R.id.wrap)
-    TextView mSubmitInvoice;
+    FloatingActionButton mSubmitInvoice;
     @BindView(R.id.subtotal_amount)
             TextView mSubtotalAmount;
     @BindView(R.id.total_amount_to_be_paid)
