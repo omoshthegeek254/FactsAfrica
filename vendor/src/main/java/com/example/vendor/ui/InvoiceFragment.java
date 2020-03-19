@@ -34,6 +34,7 @@ import com.example.vendor.R;
 import com.example.vendor.db.InvoiceContract;
 import com.example.vendor.db.InvoiceDbHelper;
 import com.example.vendor.models.Invoice;
+import com.example.vendor.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
@@ -182,29 +183,23 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             takeScreenShot();
         } if(v==mBusinessName){
             openBuyerFragment();
+            addInvoiceToApi();
         }
 
+    }
+
+    private void addInvoiceToApi() {
+        //User user = new User(1,2,"","",null, token,"","");
+        //Invoice invoice = new Invoice(1, user.getId(),)
     }
 
     private void openBuyerFragment() {
 
     }
 
-    public static Bitmap getBitmapFromView(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
-                view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-
-        view.layout(view.getLeft(), view.getTop(), view.getRight(),
-                view.getBottom());
-        view.draw(canvas);
-
-        return bitmap;
-    }
-
     private void takeScreenShot() {
         File myFile = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), "MyApp.pdf");
+                Environment.DIRECTORY_DOCUMENTS), "invoice.pdf");
         try {
             PdfDocument pdfDocument = new PdfDocument();
             PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(constraintLayout.getWidth(),constraintLayout.getHeight(), 1).create();
@@ -237,7 +232,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         email.putExtra(Intent.EXTRA_SUBJECT, "subject");
         email.putExtra(Intent.EXTRA_TEXT, "email body");
         Uri uri1 = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), "MyApp.pdf"));
+                Environment.DIRECTORY_DOCUMENTS), "invoice.pdf"));
         email.putExtra(Intent.EXTRA_STREAM, uri1);
         email.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(email);
@@ -334,6 +329,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             }
 
     }
+
 
 
 }
