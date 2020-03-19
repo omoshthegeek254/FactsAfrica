@@ -7,14 +7,12 @@
     android:clickable="true">
 
     <androidx.cardview.widget.CardView
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
         android:id="@+id/first_contact_card"
         android:layout_width="match_parent"
         android:elevation="10dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_height="100dp">
         <TextView
             android:id="@+id/business_name_hardcoded"

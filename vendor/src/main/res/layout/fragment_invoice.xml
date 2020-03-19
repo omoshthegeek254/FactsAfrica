@@ -89,9 +89,11 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="36dp"
                 android:textStyle="bold"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_person_add"
                 android:layout_marginStart="18dp"
                 android:layout_height="96dp"
-                android:text=""/>
+                android:text=" Add Buyer"/>
 
             <TextView
                 android:id="@+id/date_today"

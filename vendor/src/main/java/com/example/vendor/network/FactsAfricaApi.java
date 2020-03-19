@@ -23,6 +23,10 @@ public interface FactsAfricaApi {
     @GET("loggeduser")
     Call<User> getUser(@Header("Authorization") String bearerToken);
 
+    @POST("invoice")
+    Call<Invoice>postInvoice(@Header("Authorization") String bearerToken,
+                             @Body Invoice invoice);
+
     @GET("buyers")
     Call<List<User>> getBuyerId(@Header("Authorization") String bearerToken);
 
@@ -32,6 +36,5 @@ public interface FactsAfricaApi {
     );
     @GET("invoice")
     Call<List<Invoice>> getAllInvoices(@Header("Authorization") String bearerToken);
-    @GET("user/2")
-    Call<List<User>> getUserByRole();
+
 }

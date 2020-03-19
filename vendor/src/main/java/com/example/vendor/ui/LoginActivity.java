@@ -2,6 +2,7 @@ package com.example.vendor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
+    SharedPreferences sharedpreferences;
     @BindView(R.id.mail) EditText mEmail;
     @BindView(R.id.password) EditText mPassword;
     @BindView(R.id.login) Button mLogin;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mProgressBar = findViewById(R.id.login_progress_bar);
+        sharedpreferences = getSharedPreferences(Constants.PREFERENCES_EMAIL_KEY, Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         mLogin.setOnClickListener(this);
     }
@@ -48,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v == mLogin) {
             mProgressBar.setVisibility(View.VISIBLE);
             login(mEmail.getText().toString(), mPassword.getText().toString());
+            addEmailToSharedPreferences(mEmail.getText().toString());
         }
     }
 
@@ -83,5 +87,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void addNameToSharedPreferences(String name){
+        mEditor.putString(Constants.PREFRENCES_NAME_KEY, name).apply();
+    }
+    private void addEmailToSharedPreferences(String email){
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(Constants.PREFERENCES_EMAIL_KEY, email).apply();
     }
 }

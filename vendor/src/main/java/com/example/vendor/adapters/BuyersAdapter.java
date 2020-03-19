@@ -24,7 +24,6 @@ public class BuyersAdapter  extends RecyclerView.Adapter<BuyersAdapter.MyViewHol
         this.mContext = mContext;
         this.mData = mData;
     }
-    public BuyersAdapter(){}
 
     @NonNull
     @Override
