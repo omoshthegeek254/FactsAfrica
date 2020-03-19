@@ -23,7 +23,7 @@ public class NewUserActivity extends AppCompatActivity {
     @BindView(R.id.createAccResetButton) Button resetPasswordButton;
     @BindView(R.id.go_to_create_acc) TextView mCreateAcc;
     private EditText resetPasswordEditText;
-    private TextView mTextBackToLogin;
+   // private TextView mTextBackToLogin;
     private ProgressBar mProgressBar;
     private FirebaseAuth mAuth;
 
@@ -34,7 +34,7 @@ public class NewUserActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mTextBackToLogin = findViewById(R.id.new_user_back_login);
+       // mTextBackToLogin = findViewById(R.id.new_user_back_login);
         resetPasswordEditText = findViewById(R.id.editTextEmailCreate);
         mProgressBar = findViewById(R.id.progressBarNewPassword);
 
@@ -65,10 +65,12 @@ public class NewUserActivity extends AppCompatActivity {
 
         });
 
-        mTextBackToLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(NewUserActivity.this, LoginActivity.class);
-            startActivity(intent);
-        });
+        //commented out mBack
+
+//        mTextBackToLogin.setOnClickListener(v -> {
+//            Intent intent = new Intent(NewUserActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//        });
     }
 
 }
