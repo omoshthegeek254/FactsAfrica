@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
         mProgressBarLogin = findViewById(R.id.progressBarLoginPage);
         findViewById(R.id.textView2).setOnClickListener(this);
+        sharedpreferences = getSharedPreferences(ConstantsBuyer.PREFERENCES_EMAIL_KEY, Context.MODE_PRIVATE);
         findViewById(R.id.button).setOnClickListener(this);
         mGoBack.setOnClickListener(this);
         //signInWithGoogle.setOnClickListener(this);

@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
 //        mSearch = rootView.findViewById(R.id.invoiceSearch);
 //        mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ButterKnife.bind(this, rootView);
-        getInvoices();
+        //getInvoices();
 //        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
