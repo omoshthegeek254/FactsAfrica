@@ -114,6 +114,7 @@ public class DashboardFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

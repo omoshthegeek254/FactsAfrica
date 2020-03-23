@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 public class NewUserActivity extends AppCompatActivity {
 
     @BindView(R.id.createAccResetButton) Button resetPasswordButton;
-    @BindView(R.id.go_to_create_acc) TextView mCreateAcc;
+    //@BindView(R.id.go_to_create_acc) TextView mCreateAcc;
     private EditText resetPasswordEditText;
    // private TextView mTextBackToLogin;
     private ProgressBar mProgressBar;
