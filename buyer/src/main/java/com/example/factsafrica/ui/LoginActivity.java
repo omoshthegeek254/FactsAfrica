@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login(String email, String password) {
         LoginBuyer login = new LoginBuyer(email, password);
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<User> call = service.login(login, Constants.ACCEPT_TYPE);
+        Call<User> call = service.login(login, ConstantsBuyer.ACCEPT_TYPE);
         Log.v("MY URL", call.request().url().toString());
         call.enqueue(new Callback<User>() {
             @Override
