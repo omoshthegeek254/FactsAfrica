@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -48,8 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //    @BindView(R.id.googleSignIn)
 //    Button signInWithGoogle;
     ProgressBar mProgressBarLogin;
-    private GoogleSignInClient mGoogleSigInClient;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+    SharedPreferences sharedpreferences;
     private int RC_SIGN_IN = 123;
 
 
@@ -122,14 +124,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     mProgressBarLogin.setVisibility(View.INVISIBLE);
-                    Toast.makeText(LoginActivity.this, "Welcome " + response.body().getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Karibu " + response.body().getName(), Toast.LENGTH_SHORT).show();
                     String token = response.body().getApiToken();
                     String bearerToken = "Bearer " + token;
                     mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                     mEditor = mPreferences.edit();
                     mEditor.putString("token", bearerToken);
                     mEditor.apply();
-                    Intent homeIntent = new Intent(LoginActivity.this, BottomNavigation.class);
+                    Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(homeIntent);
                     finish();
                 } else {
