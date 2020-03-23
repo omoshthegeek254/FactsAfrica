@@ -103,9 +103,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.button:
                 mProgressBarLogin.setVisibility(View.VISIBLE);
-                userlogin(mEmail.getText().toString(), mPassword.getText().toString());
+                login(mEd1.getText().toString(), mEd2.getText().toString());
                 addEmailToSharedPreferences(mEmail.getText().toString());
-                userLogin();
                 break;
         }
 
