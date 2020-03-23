@@ -74,10 +74,10 @@ public class AddItemsFragment extends Fragment {
 
     private void insertItemsToDb(){
 
-        Log.d(TAG, "insertItemsToDb: Inserts");
         String itemName = mAddItem.getText().toString().trim();
         Double itemPrice = Double.parseDouble(mAddItemPrice.getText().toString().trim());
         int itemQuantity = Integer.parseInt(mAddItemQuantity.getText().toString().trim());
+        
         Double priceQuantity = itemPrice*itemQuantity;
         Double subTotal = priceQuantity*1;
         Double a = subTotal- (subTotal*0.12)+(subTotal*0.16);
