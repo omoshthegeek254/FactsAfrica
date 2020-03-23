@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button:
                 mProgressBarLogin.setVisibility(View.VISIBLE);
                 login(mEd1.getText().toString(), mEd2.getText().toString());
-                addEmailToSharedPreferences(mEmail.getText().toString());
+                addEmailToSharedPreferences(mEd1.getText().toString());
                 break;
         }
 
@@ -145,6 +145,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void addEmailToSharedPreferences(String email){
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(ConstantsBuyer.PREFERENCES_EMAIL_KEY, email).apply();
     }
 
 
