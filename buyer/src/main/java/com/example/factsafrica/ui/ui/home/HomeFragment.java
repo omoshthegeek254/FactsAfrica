@@ -43,32 +43,32 @@ public class HomeFragment extends Fragment {
          root = inflater.inflate(R.layout.fragment_home, container, false);
 
         ButterKnife.bind(this, root);
-        getOrders();
+        //getOrders();
 
         return root;
 
     }
     // request and get order//
 
-    public void getOrders() {
-        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<List<PurchaseOrder>> call = service.getAllOrders();
-        call.enqueue(new Callback<List<PurchaseOrder>>() {
-            @Override
-            public void onResponse(Call<List<PurchaseOrder>> call, Response<List<PurchaseOrder>> response) {
-                purchaseorders = response.body();
-                PurchaseOrderAdapter adapter = new PurchaseOrderAdapter(purchaseorders, root.getContext());
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
-                mOrderRecycler.setLayoutManager(layoutManager);
-                mOrderRecycler.setHasFixedSize(true);
-                mOrderRecycler.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<PurchaseOrder>> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void getOrders() {
+//        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+//        Call<List<PurchaseOrder>> call = service.getAllOrders();
+//        call.enqueue(new Callback<List<PurchaseOrder>>() {
+//            @Override
+//            public void onResponse(Call<List<PurchaseOrder>> call, Response<List<PurchaseOrder>> response) {
+//                purchaseorders = response.body();
+//                PurchaseOrderAdapter adapter = new PurchaseOrderAdapter(purchaseorders, root.getContext());
+//                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+//                mOrderRecycler.setLayoutManager(layoutManager);
+//                mOrderRecycler.setHasFixedSize(true);
+//                mOrderRecycler.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PurchaseOrder>> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 }
