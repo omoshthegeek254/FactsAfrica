@@ -3,9 +3,17 @@ package com.example.factsafrica;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import butterknife.BindView;
+
 
 public class StatusChanger extends AppCompatActivity {
-
+    @BindView(R.id.radioGroup) RadioGroup mRadioGroup;
+    @BindView(R.id.radioButton)
+    RadioButton mDecline;
+    @BindView(R.id.radioButton2) RadioGroup mApprove;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
