@@ -3,13 +3,15 @@ package com.example.factsafrica;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
-public class StatusChanger extends AppCompatActivity {
+public class StatusChanger extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.radioGroup) RadioGroup mRadioGroup;
     @BindView(R.id.radioButton)
     RadioButton mDecline;
@@ -18,6 +20,12 @@ public class StatusChanger extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_changer);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
 /*RadioGroup radiogroup =  (RadioGroup) findViewById(R.id.groupid);
