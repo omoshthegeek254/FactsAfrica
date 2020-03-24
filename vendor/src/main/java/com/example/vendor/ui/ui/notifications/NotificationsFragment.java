@@ -25,6 +25,7 @@ import com.example.vendor.models.Invoice;
 import com.example.vendor.network.FactsAfricaApi;
 import com.example.vendor.network.FactsAfricaClient;
 import com.example.vendor.ui.ui.buyers.BuyersViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -70,6 +71,10 @@ public class NotificationsFragment extends Fragment {
                 mInvoicesRecycler.setLayoutManager(linearLayoutManager);
                 mInvoicesRecycler.setHasFixedSize(true);
                 adapter.notifyDataSetChanged();
+                adapter.setOnClickListener((View view, int position) -> {
+                    Toast.makeText(getContext(), invoices.get(position).getInvoiceAmount(), Toast.LENGTH_SHORT).show();
+
+                });
             }
             @Override
             public void onFailure(Call<List<Invoice>> call, Throwable t) {

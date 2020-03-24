@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vendor.R;
 import com.example.vendor.models.Invoice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,7 +22,7 @@ public class ApprovedInvoicesAdapter extends RecyclerView.Adapter<ApprovedInvoic
 
     private List<Invoice> mInvoices;
     private Context mContext;
-
+    private static OnClickListener clickListener;
 
     public ApprovedInvoicesAdapter(List<Invoice> mInvoices,Context mContext){
         this.mInvoices=mInvoices;
@@ -49,7 +48,7 @@ public class ApprovedInvoicesAdapter extends RecyclerView.Adapter<ApprovedInvoic
         return mInvoices.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.invoiceNo)
         TextView mInvoiceId;
         @BindView(R.id.payAmount) TextView mPayAmount;
@@ -64,6 +63,7 @@ public class ApprovedInvoicesAdapter extends RecyclerView.Adapter<ApprovedInvoic
             super(itemView);
             this.mContext = mContext;
             ButterKnife.bind(this, itemView);
+
         }
         public void bindInvoice(Invoice invoice) {
 
@@ -86,6 +86,19 @@ public class ApprovedInvoicesAdapter extends RecyclerView.Adapter<ApprovedInvoic
 
             mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
+    }
+    public void setOnClickListener(OnClickListener clickListener){
+        ApprovedInvoicesAdapter.clickListener = clickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(View view, int position);
     }
 }
