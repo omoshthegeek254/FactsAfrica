@@ -7,6 +7,7 @@
     tools:context=".StatusChanger">
 
     <RadioGroup
+        android:background="@color/colorPrimary"
         android:layout_width="276dp"
         android:layout_height="101dp"
         app:layout_constraintBottom_toBottomOf="parent"
