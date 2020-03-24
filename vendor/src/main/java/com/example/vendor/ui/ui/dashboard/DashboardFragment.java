@@ -53,12 +53,18 @@ public class DashboardFragment extends Fragment {
     private static final String TAG = "DashboardFragment";
 
     private String mEmail;
+    List<User> userData;
 
 
     @BindView(R.id.account_user_name)
     TextView accUserName;
     @BindView(R.id.acc_user_email)
     TextView mUserEmail;
+    @BindView(R.id.acc_user_phone)
+    TextView mUserPhone;
+    @BindView(R.id.acc_user_address)
+    TextView mUserAddress;
+
     @BindView(R.id.buyer_size)
     TextView mBuyerSize;
     @BindView(R.id.total_invoices_sent)
@@ -109,7 +115,17 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    userData =response.body();
+                    //String mail = userData.get(0).getEmail();
                     mBuyerSize.setText(Integer.toString(response.body().size()));
+                    mUserAddress.setText(userData.get(1).getId());
+                    mUserEmail.setText(userData.get(1).getEmail());
+                    accUserName.setText(userData.get(1).getName());
+                    mUserPhone.setText(userData.get(1).getApiToken());
+
+
+
+
                 }
             }
             @Override

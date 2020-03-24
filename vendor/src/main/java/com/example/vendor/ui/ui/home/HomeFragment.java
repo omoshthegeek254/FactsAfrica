@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MakeInvoiceActivity.class);
@@ -87,17 +88,23 @@ public class HomeFragment extends Fragment {
     public void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+
         Call<List<Invoice>> call = service.getAllInvoices(token);
+
         Log.v("URL", call.request().url().toString());
+
         call.enqueue(new Callback<List<Invoice>>() {
+
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
-                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
+                //Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 VendorInvoiceAdapter adapter = new VendorInvoiceAdapter(invoices, rootView.getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
+
                 mInvoicesRecycler.setHasFixedSize(true);
+
                 mInvoicesRecycler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

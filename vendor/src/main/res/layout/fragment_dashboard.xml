@@ -139,12 +139,14 @@
                 android:src="@drawable/ic_contact_phone_black"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"/>
+
             <TextView
+                android:id="@+id/acc_user_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginStart="80dp"
-                android:text=".............."/>
+                android:layout_marginTop="25dp"
+                android:text=".............." />
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -164,12 +166,14 @@
                 android:src="@drawable/ic_place_black"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="120dp"/>
+
             <TextView
+                android:id="@+id/acc_user_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="125dp"
                 android:layout_marginStart="80dp"
-                android:text=".............."/>
+                android:layout_marginTop="125dp"
+                android:text=".............." />
 
 
         </androidx.cardview.widget.CardView>
