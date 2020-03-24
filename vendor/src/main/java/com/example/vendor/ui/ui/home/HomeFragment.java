@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -54,6 +55,8 @@ public class HomeFragment extends Fragment {
     private View rootView;
     FloatingActionButton floatingActionButton;
 
+    SearchView searchView;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -64,6 +67,23 @@ public class HomeFragment extends Fragment {
         floatingActionButton = rootView.findViewById(R.id.fab_invoice);
         mPreference = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
         token = mPreference.getString("token", "");
+
+
+        searchView = (SearchView) rootView.findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(adapter != null) {
+                    adapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
