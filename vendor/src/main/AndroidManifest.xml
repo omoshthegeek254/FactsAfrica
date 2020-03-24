@@ -21,10 +21,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.BankRequestActivity"></activity>
+        <activity android:name=".ui.BankRequestActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.vendor.MainActivity" />
+        </activity>
         <activity
             android:name=".ui.BottomNavigation"
-            android:theme="@style/NoActionBarTheme"></activity>
+            android:theme="@style/NoActionBarTheme">
+
+        </activity>
         <activity android:name=".ui.ui.buyers.BuyerActivity" />
         <activity android:name=".ui.MakeInvoiceActivity">
             <meta-data
