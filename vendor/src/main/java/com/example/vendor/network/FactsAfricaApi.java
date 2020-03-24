@@ -38,4 +38,8 @@ public interface FactsAfricaApi {
     @GET("invoice")
     Call<List<Invoice>> getAllInvoices(@Header("Authorization") String bearerToken);
 
+    @GET("user/{id}/invoices/approved")
+    Call<List<Invoice>> getApprovedInvoices(@Header("Authorization") String bearerToken,
+                                            @Path("id")int id);
+
 }
