@@ -1,5 +1,6 @@
 package com.example.vendor.ui.ui.notifications;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,12 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.vendor.Constants;
 import com.example.vendor.R;
 import com.example.vendor.adapters.ApprovedInvoicesAdapter;
 import com.example.vendor.adapters.VendorInvoiceAdapter;
 import com.example.vendor.models.Invoice;
 import com.example.vendor.network.FactsAfricaApi;
 import com.example.vendor.network.FactsAfricaClient;
+import com.example.vendor.ui.BankRequestActivity;
 import com.example.vendor.ui.ui.buyers.BuyersViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -72,7 +75,16 @@ public class NotificationsFragment extends Fragment {
                 mInvoicesRecycler.setHasFixedSize(true);
                 adapter.notifyDataSetChanged();
                 adapter.setOnClickListener((View view, int position) -> {
-                    Toast.makeText(getContext(), invoices.get(position).getInvoiceAmount(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), invoices.get(position).getInvoiceAmount(), Toast.LENGTH_SHORT).show();
+                    TextView invoiceName = root.findViewById(R.id.invoiceNo);
+                    TextView invoiceDate = root.findViewById(R.id.invoice_date);
+                    TextView amountPaid = root.findViewById(R.id.payAmount);
+
+                    Intent intent = new Intent(getActivity(), BankRequestActivity.class);
+                    intent.putExtra(Constants.NAME, invoiceName.getText().toString().trim());
+                    intent.putExtra(Constants.DATE, invoiceDate.getText().toString().trim());
+                    intent.putExtra(Constants.AMOUNT_PAID, amountPaid.getText().toString().trim());
+                    startActivity(intent);
 
                 });
             }

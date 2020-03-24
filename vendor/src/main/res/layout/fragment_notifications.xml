@@ -26,6 +26,15 @@
             android:layout_marginTop="18dp"
             android:textAlignment="center"
             android:textSize="25sp" />
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The following is a list of approved invoices by the buyer. Click on an invoice to make a request to the bank."
+        android:layout_below="@id/customTopText"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="15dp"/>
 
 <!--        <ImageView-->
 <!--            android:layout_width="30dp"-->
@@ -37,9 +46,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/approved_requests_recycler_view"
         android:layout_width="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:scrollbars="horizontal"
         android:layout_height="wrap_content"
-        android:layout_below="@id/customTopText"
+        android:layout_below="@id/instructions"
         />
 </RelativeLayout>
