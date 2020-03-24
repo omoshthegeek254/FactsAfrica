@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.vendor.R;
+import com.example.vendor.adapters.ApprovedInvoicesAdapter;
 import com.example.vendor.adapters.VendorInvoiceAdapter;
 import com.example.vendor.models.Invoice;
 import com.example.vendor.network.FactsAfricaApi;
@@ -62,16 +64,16 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
-                VendorInvoiceAdapter adapter = new VendorInvoiceAdapter(invoices, root.getContext());
+                ApprovedInvoicesAdapter adapter = new ApprovedInvoicesAdapter(invoices,root.getContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setAdapter(adapter);
                 mInvoicesRecycler.setLayoutManager(linearLayoutManager);
                 mInvoicesRecycler.setHasFixedSize(true);
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onFailure(Call<List<Invoice>> call, Throwable t) {
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
