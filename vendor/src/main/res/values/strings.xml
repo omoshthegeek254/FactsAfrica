@@ -1,3 +1,50 @@
 <resources>
-    <string name="app_name">vendor</string>
+    <string name="app_name">Facts Africa</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="account">Account</string>
+    <string name="invoices_vendor">Invoices</string>
+    <string name="invoice_statement">Invoice Statements</string>
+    <string name="past_requests">Past Requests</string>
+    <string name="buyers">Buyers</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">John Doe</string>
+    <string name="email">supplier@mail.com</string>
+    <string name="title_Login">FactsAfrica</string>
+    <string name="create_invoice_fragment">create invoice fragment</string>
+    <string name="preview_fragment">Preview Invoice fragment</string>
+    <string name="invoice_001">INVOICE#00</string>
+    <string name="due_on_receipt">Due on receipt</string>
+    <string name="business_name_details">Business Name</string>
+    <string name="date_today">Invoice Due Date</string>
+    <string name="to_client">To Client</string>
+    <string name="add_items">Add items</string>
+    <string name="item">Item</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="amount">Amount</string>
+    <string name="subtotal_amount">.............</string>
+    <string name="swipe_to_preview_invoice_and_send">Swipe to preview invoice and send</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="discount">Discount</string>
+    <string name="_8">8%</string>
+    <string name="tax">Tax</string>
+    <string name="_5">5%</string>
+    <string name="total">Total</string>
+    <string name="amount_to_be_paid">........</string>
+    <string name="add_photo_optional">Add Photo (Optional)</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="the_geek_electronics">The Geek Electronics</string>
+    <string name="email_address">Email Address</string>
+    <string name="physical_address">Physical Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="i_have_read_and_understood_the_terms_and_conditions_stated_in_the_contract">I have read and understood the terms and conditions stated in the contract</string>
 </resources>

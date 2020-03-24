@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/scroll_view"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.InvoiceFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/invoice_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iconLeft"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/facts"
+
+            app:layout_constraintBottom_toBottomOf="@+id/customTopText"
+            app:layout_constraintEnd_toStartOf="@+id/customTopText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/customTopText" />
+
+        <TextView
+            android:id="@+id/customTopText"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="24dp"
+            android:text="Invoice"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/card_invoice_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="88dp"
+            android:id="@+id/card_invoice_name"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/invoice_001"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/invoice_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="133"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="108dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="@string/due_on_receipt"
+                android:layout_marginStart="290dp"
+                android:textColor="@color/colorAccent" />
+            <TextView
+                android:id="@+id/business_name_details"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_person_add"
+                android:layout_marginStart="18dp"
+                android:layout_height="96dp"
+                android:text=" Add Client"/>
+
+            <TextView
+                android:id="@+id/date_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="270dp"
+                android:layout_marginTop="76dp"
+                android:drawableEnd="@drawable/ic_chevron_right"
+                android:text="@string/date_today"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_customer_and_product"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/card_invoice_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_invoice_name">
+
+            <TextView
+                android:id="@+id/add_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="22dp"
+                android:textStyle="bold"
+                android:text="@string/to_client"
+                android:textColor="@color/colorAccent" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="60dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_customer_and_product">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/item"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/price"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/quantity"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/amount"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/item_one"
+                android:layout_width="76dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:text="" />
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="56dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="40dp"
+                android:text="" />
+            <TextView
+                android:id="@+id/item_quantity"
+                android:layout_width="56dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="40dp"
+                android:text="" />
+            <TextView
+                android:id="@+id/item_amount"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="40dp"
+                android:text="" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="120dp"
+                android:text="@string/subtotal"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtotal_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="120dp"
+                android:text="@string/subtotal_amount" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="170dp"
+                android:text="@string/discount" />
+
+            <TextView
+                android:id="@+id/discount_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="170dp"
+                android:text="@string/_8" />
+
+            <TextView
+                android:id="@+id/tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="190dp"
+                android:text="@string/tax" />
+
+            <TextView
+                android:id="@+id/tax_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="190dp"
+                android:text="@string/_5" />
+
+            <TextView
+                android:id="@+id/total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="220dp"
+                android:text="@string/total"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_amount_to_be_paid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="230dp"
+                android:text="@string/amount_to_be_paid" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="12dp"
+            android:id="@+id/card_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:elevation="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <TextView
+                android:id="@+id/add_photo_to_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_photo_optional"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/ic_attach_file"/>
+            <ImageView
+                android:id="@+id/invoice_photo"
+                android:layout_width="100dp"
+                android:contentDescription="@string/add_photo"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_attach_file"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="12dp"/>
+
+            <View
+                style="@style/Divider"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="182dp"
+                />
+
+            <EditText
+                android:id="@+id/additional_info"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:ems="10"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="200dp"
+                android:hint="@string/additional_information"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/wrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorAccent"
+            android:elevation="10dp"
+            android:src="@drawable/ic_email"
+            app:fabCustomSize="60dp"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toEndOf="@+id/card_bottom"
+            app:layout_constraintHorizontal_bias="0.993"
+            app:layout_constraintStart_toStartOf="@+id/card_bottom"
+            app:layout_constraintTop_toBottomOf="@+id/card_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="@+id/wrap"
+            app:layout_constraintStart_toStartOf="@+id/wrap"
+            app:layout_constraintTop_toBottomOf="@+id/wrap"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

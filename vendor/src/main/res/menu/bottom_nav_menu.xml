@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Invoices" />
+
+
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="Past Requests" />
+    <item
+        android:id="@+id/navigation_buyers"
+        android:icon="@drawable/ic_multiline_chart_black_24dp"
+        android:title="Buyers" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Account" />
+
+</menu>

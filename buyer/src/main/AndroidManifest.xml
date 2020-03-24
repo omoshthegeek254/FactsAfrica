@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.factsafrica">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".StatusChanger"></activity>
+        <activity android:name=".ui.NewUserActivity"></activity>
+        <activity
+            android:name=".ui.HomeActivity"
+            android:label="@string/title_activity_home" />
         <activity android:name=".ui.ForgotPasswordActivity"></activity>
         <activity android:name=".ui.CreateAccountActivity" />
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.SplashActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.CreateAccountActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <ImageView
+            android:id="@+id/factsLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            app:srcCompat="@drawable/facts" />
+
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="300dp"
+            android:background="@drawable/login_edits"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/factsLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:hint="Username" />
+
+        <ProgressBar
+            android:id="@+id/progressBarCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/factsLogo"
+            android:layout_marginEnd="24sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24sp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/create_account_email"
+            android:layout_width="300dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/login_edits"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="Email" />
+
+
+        <EditText
+            android:id="@+id/create_account_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edits"
+            android:textAlignment="center"
+            android:layout_below="@id/create_account_email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            />
+        <EditText
+            android:id="@+id/create_account_confirm_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edits"
+            android:textAlignment="center"
+            android:layout_below="@id/create_account_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:hint="Confirm Password" />
+
+
+
+        <Button
+            android:layout_below="@id/create_account_confirm_password"
+            android:layout_centerHorizontal="true"
+            android:layout_width="304sp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/signUpButton"
+            android:background="@drawable/btn_edit"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="SIGN UP"/>
+
+        <TextView
+            android:textColor="#124995"
+            android:layout_marginTop="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a User? Go to login"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/go_to_logIn"
+            android:layout_below="@id/signUpButton"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
+
+
+
+
+</ScrollView>
