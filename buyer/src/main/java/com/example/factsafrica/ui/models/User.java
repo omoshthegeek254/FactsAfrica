@@ -11,32 +11,57 @@ public class User implements Serializable
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("role")
+    @Expose
+    private Integer role;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("email")
     @Expose
     private String email;
-    private final static long serialVersionUID = -8565019623756487073L;
+    @SerializedName("email_verified_at")
+    @Expose
+    private Object emailVerifiedAt;
+    @SerializedName("api_token")
+    @Expose
+    private String apiToken;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    private final static long serialVersionUID = -1228530404757265103L;
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public User() {
     }
 
     /**
-     * 
+     *
+     * @param createdAt
+     * @param role
+     * @param apiToken
+     * @param emailVerifiedAt
      * @param name
      * @param id
      * @param email
+     * @param updatedAt
      */
-    public User(Integer id, String name, String email) {
+    public User(Integer id, Integer role, String name, String email, Object emailVerifiedAt, String apiToken, String createdAt, String updatedAt) {
         super();
         this.id = id;
+        this.role = role;
         this.name = name;
         this.email = email;
+        this.emailVerifiedAt = emailVerifiedAt;
+        this.apiToken = apiToken;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Integer getId() {
@@ -45,6 +70,14 @@ public class User implements Serializable
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -61,6 +94,38 @@ public class User implements Serializable
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Object getEmailVerifiedAt() {
+        return emailVerifiedAt;
+    }
+
+    public void setEmailVerifiedAt(Object emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
+    }
+
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }

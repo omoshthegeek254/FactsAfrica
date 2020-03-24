@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.factsafrica.R;
+import com.example.factsafrica.ui.models.LoginBuyer;
+import com.example.factsafrica.ui.models.User;
+import com.example.factsafrica.ui.network.FactsAfricaApi;
+import com.example.factsafrica.ui.network.FactsAfricaClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,6 +38,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //@BindView(R.id.go_to_create_account) TextView mGoToCreateAccount;
@@ -39,8 +50,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //    @BindView(R.id.googleSignIn)
 //    Button signInWithGoogle;
     ProgressBar mProgressBarLogin;
-    private GoogleSignInClient mGoogleSigInClient;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+    SharedPreferences sharedpreferences;
     private int RC_SIGN_IN = 123;
 
 
@@ -54,30 +66,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
         mProgressBarLogin = findViewById(R.id.progressBarLoginPage);
         findViewById(R.id.textView2).setOnClickListener(this);
+        sharedpreferences = getSharedPreferences(ConstantsBuyer.PREFERENCES_EMAIL_KEY, Context.MODE_PRIVATE);
         findViewById(R.id.button).setOnClickListener(this);
         mGoBack.setOnClickListener(this);
         //signInWithGoogle.setOnClickListener(this);
         //mGoToCreateAccount.setOnClickListener(this);
 
-        auth = FirebaseAuth.getInstance();
+//        auth = FirebaseAuth.getInstance();
 
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null && user.isEmailVerified()) {
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
 
-        };
-
-        GoogleSignInOptions signInOptions= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSigInClient = GoogleSignIn.getClient(this, signInOptions);
     }
 
     @Override
@@ -108,7 +105,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.button:
                 mProgressBarLogin.setVisibility(View.VISIBLE);
-                userLogin();
+                login(mEd1.getText().toString(), mEd2.getText().toString());
+                addEmailToSharedPreferences(mEd1.getText().toString());
                 break;
         }
 
@@ -116,134 +114,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void signIn() {
-            Intent googleSignInIntent = mGoogleSigInClient.getSignInIntent();
-            startActivityForResult(googleSignInIntent, RC_SIGN_IN);
 
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-
-    }
-    private void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount signInAccount = task.getResult(ApiException.class);
-            //Toast.makeText(this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(signInAccount);
-
-        } catch (ApiException e){
-            Toast.makeText(this, "Sign In Unsuccessful. Try Again", Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void FirebaseGoogleAuth(GoogleSignInAccount signInAccount) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-        auth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
-            mProgressBarLogin.setVisibility(View.INVISIBLE);
-            if(task.isSuccessful()){
-                Toast.makeText(this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-                FirebaseUser user = auth.getCurrentUser();
-                updateUI(user);
-            } else {
-                mProgressBarLogin.setVisibility(View.INVISIBLE);
-                Toast.makeText(this, "Sign In Unsuccessful!", Toast.LENGTH_SHORT).show();
-                updateUI(null);
-            }        });
-
-    }
-    private void updateUI(FirebaseUser user) {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-        if(account!=null){
-            String name = account.getDisplayName();
-            String givenName = account.getGivenName();
-            Toast.makeText(this, "Welcome: "+name, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void userLogin() {
-        String email = mEd1.getText().toString().trim();
-        String password = mEd2.getText().toString().trim();
-        if (email.isEmpty()) {
-            mEd1.setError("Email is required"); //mail validation
-            mProgressBarLogin.setVisibility(View.INVISIBLE);
-            mEd1.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mEd1.setError("Please enter a valid email");
-            mProgressBarLogin.setVisibility(View.INVISIBLE);
-            mEd1.requestFocus();
-            return;
-        }
-
-        if (password.isEmpty()) {
-            mEd2.setError("Password is required"); //password validation
-            mProgressBarLogin.setVisibility(View.INVISIBLE);
-            mEd2.requestFocus();
-            return;
-        }
-
-
-        if (password.length() < 6) {
-            mEd2.setError("Minimum length of password should be 6"); //password length
-            mProgressBarLogin.setVisibility(View.INVISIBLE);
-            mEd2.requestFocus();
-            return;
-        }
-
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    private void login(String email, String password) {
+        LoginBuyer login = new LoginBuyer(email, password);
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+        Call<User> call = service.login(login, ConstantsBuyer.ACCEPT_TYPE);
+        Log.v("MY URL", call.request().url().toString());
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                mProgressBarLogin.setVisibility(View.INVISIBLE);
-                if(task.isSuccessful()){
-                    if(auth.getCurrentUser().isEmailVerified()){
-                        finish();
-                        Intent intent = new Intent (LoginActivity.this, HomeActivity.class);
-
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Please Verify your email address first", Toast.LENGTH_LONG).show();
-                    }
-
-
-                }else {
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
                     mProgressBarLogin.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(LoginActivity.this, "Karibu " + response.body().getName(), Toast.LENGTH_SHORT).show();
+                    String token = response.body().getApiToken();
+                    String bearerToken = "Bearer " + token;
+                    mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    mEditor = mPreferences.edit();
+                    mEditor.putString("token", bearerToken);
+                    mEditor.apply();
+                    Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                } else {
+                    mProgressBarLogin.setVisibility(View.INVISIBLE);
+                    Toast.makeText(LoginActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                 }
+            }
 
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                mProgressBarLogin.setVisibility(View.INVISIBLE);
+                Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        auth.addAuthStateListener(mAuthListener);
-
-//        if(auth.getCurrentUser()!=null){
-//            finish();
-//        }
-//        startActivity(new Intent(this,MainActivity.class));
-
-
-
+    private void addEmailToSharedPreferences(String email){
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(ConstantsBuyer.PREFERENCES_EMAIL_KEY, email).apply();
     }
-    @Override
-    public void onStop() {
-        super.onStop();
-        auth.removeAuthStateListener(mAuthListener);
-    }
+
+
+
 
 
 

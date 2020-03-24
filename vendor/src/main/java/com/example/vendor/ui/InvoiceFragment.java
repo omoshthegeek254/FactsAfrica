@@ -15,6 +15,7 @@ import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,19 +32,28 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.example.vendor.R;
+import com.example.vendor.Utils;
 import com.example.vendor.db.InvoiceContract;
 import com.example.vendor.db.InvoiceDbHelper;
 import com.example.vendor.models.Invoice;
+import com.example.vendor.models.InvoicePosted;
 import com.example.vendor.models.User;
+import com.example.vendor.network.FactsAfricaApi;
+import com.example.vendor.network.FactsAfricaClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,7 +136,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         mDateSetListener = (datePicker, year, month, day) -> {
             month = month + 1;
 
-            String date = month + "/" + day + "/" + year;
+            String date = year + "-" + month + "-" + day;
 
 
             mPickDate.setText(date);
@@ -142,7 +152,8 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.fragment_invoice, container, false);
         dbHelper = new InvoiceDbHelper(rootView.getContext());
-//        token = mPreference.getString("token", "");
+        mPreference = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+        token = mPreference.getString("token", "");
         scrollView = rootView.findViewById(R.id.scroll_view);
         constraintLayout = rootView.findViewById(R.id.invoice_constraint_layout);
         ButterKnife.bind(this, rootView);
@@ -181,16 +192,55 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             startGallery();
         } if(v==mSubmitInvoice){
             takeScreenShot();
+            addInvoiceToApi();
         } if(v==mBusinessName){
             openBuyerFragment();
-            addInvoiceToApi();
+
         }
 
     }
 
     private void addInvoiceToApi() {
-        //User user = new User(1,2,"","",null, token,"","");
-        //Invoice invoice = new Invoice(1, user.getId(),)
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String [] projection1 = {InvoiceContract.ItemsEntry._ID,
+                InvoiceContract.ItemsEntry.COLUMN_ITEM_NAME,
+                InvoiceContract.ItemsEntry.COLUMN_QUANTITY,
+                InvoiceContract.ItemsEntry.COLUMN_AMOUNT,
+                InvoiceContract.ItemsEntry.COLUMN_MULTIPLIED_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_SUB_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL,
+                InvoiceContract.ItemsEntry.COLUMN_STATUS
+        };
+        Cursor cursor1 = db.query(InvoiceContract.ItemsEntry.TABLE_NAME, projection1, null, null, null, null, null );
+        int netColumnIndex = cursor1.getColumnIndex(InvoiceContract.ItemsEntry.COLUMN_NET_TOTAL);
+        cursor1.moveToLast();
+        String currentNet = cursor1.getString(netColumnIndex);
+
+        User user = new User(1,2,"","",null, token,"","");
+        User user1 = new User(3,3,"","", null,token,"","");
+        Invoice invoice3 = new Invoice(1,user.getId(),user1.getId(),1, currentNet, mPickDate.getText().toString(), dtf.format(now), dtf.format(now));
+        InvoicePosted invoicePosted = new InvoicePosted(4, mPickDate.getText().toString(), currentNet);
+
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+        Call<Invoice> call = service.postInvoice(token, invoicePosted);
+        call.enqueue(new Callback<Invoice>() {
+            @Override
+            public void onResponse(Call<Invoice> call, Response<Invoice> response) {
+                int statusCode = response.code();
+                Invoice invoiceOne = response.body();
+
+
+                Log.d(TAG, "onResponse Response: "+statusCode);
+            }
+
+            @Override
+            public void onFailure(Call<Invoice> call, Throwable t) {
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void openBuyerFragment() {
@@ -258,7 +308,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void displayDatabaseInfo(){
+    public void displayDatabaseInfo(){
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 

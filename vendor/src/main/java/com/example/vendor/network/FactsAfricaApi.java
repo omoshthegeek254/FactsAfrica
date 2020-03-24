@@ -2,6 +2,7 @@ package com.example.vendor.network;
 
 
 import com.example.vendor.models.Invoice;
+import com.example.vendor.models.InvoicePosted;
 import com.example.vendor.models.Login;
 import com.example.vendor.models.User;
 
@@ -25,7 +26,7 @@ public interface FactsAfricaApi {
 
     @POST("invoice")
     Call<Invoice>postInvoice(@Header("Authorization") String bearerToken,
-                             @Body Invoice invoice);
+                             @Body InvoicePosted invoicePosted);
 
     @GET("buyers")
     Call<List<User>> getBuyerId(@Header("Authorization") String bearerToken);
