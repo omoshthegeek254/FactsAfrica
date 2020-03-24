@@ -221,7 +221,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         User user = new User(1,2,"","",null, token,"","");
         User user1 = new User(3,3,"","", null,token,"","");
         Invoice invoice3 = new Invoice(1,user.getId(),user1.getId(),1, currentNet, mPickDate.getText().toString(), dtf.format(now), dtf.format(now));
-        InvoicePosted invoicePosted = new InvoicePosted(1, mPickDate.getText().toString(), currentNet);
+        InvoicePosted invoicePosted = new InvoicePosted(4, mPickDate.getText().toString(), currentNet);
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
         Call<Invoice> call = service.postInvoice(token, invoicePosted);
