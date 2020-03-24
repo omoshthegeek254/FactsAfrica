@@ -2,14 +2,26 @@ package com.example.factsafrica;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.factsafrica.ui.ConstantsBuyer;
+import com.example.factsafrica.ui.models.Invoice;
+import com.example.factsafrica.ui.models.User;
+import com.example.factsafrica.ui.network.FactsAfricaApi;
+import com.example.factsafrica.ui.network.FactsAfricaClient;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class StatusChanger extends AppCompatActivity implements View.OnClickListener {
@@ -33,5 +45,9 @@ public class StatusChanger extends AppCompatActivity implements View.OnClickList
                 radioButton.getText(), Toast.LENGTH_SHORT).show();
 
     }
+public void statusUpdate(){
+        //to update
+}
+
 
 }
