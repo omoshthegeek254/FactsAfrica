@@ -1,6 +1,8 @@
 
 package com.example.vendor.models;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -127,5 +129,13 @@ public class Invoice implements Serializable
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.invoiceAmount + " " + this.invoiceStatus.toString(); ///selects many properties form model
+    }
+
+
 
 }
