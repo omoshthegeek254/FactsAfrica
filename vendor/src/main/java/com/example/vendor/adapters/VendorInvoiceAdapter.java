@@ -68,7 +68,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mInvoices.clear();
-            mInvoiceListAll.addAll((List)results.values);
+            mInvoices.addAll((List)results.values);
             notifyDataSetChanged();
 
         }
