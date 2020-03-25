@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ import retrofit2.Response;
 
 public class NotificationsFragment extends Fragment {
 
+    private static final String TAG = "NotificationsFragment";
+
 
     private String token;
     private SharedPreferences mPreference;
@@ -68,6 +71,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
+                //Log.d(TAG, "Approved: "+ response.body().get(0).getInvoiceAmount());
                 ApprovedInvoicesAdapter adapter = new ApprovedInvoicesAdapter(invoices,root.getContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setAdapter(adapter);

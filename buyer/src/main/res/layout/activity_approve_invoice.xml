@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ApproveInvoiceActivity">
+
+    <ImageView
+        android:id="@+id/iconLeft"
+        android:layout_width="48dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:src="@drawable/facts"
+        app:layout_constraintBottom_toBottomOf="@+id/customTopText"
+        app:layout_constraintEnd_toStartOf="@+id/customTopText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/customTopText" />
+
+    <TextView
+        android:id="@+id/customTopText"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="24dp"
+        android:text="Approve/Decline Invoice"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:elevation="10dp"
+        android:layout_marginTop="88dp"
+        android:id="@+id/card_invoice_name_past_request"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/invoice_number_past_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:text="Invoice Number"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date_today_past_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:text="Date"
+            android:layout_marginStart="230dp"
+            android:textColor="@color/colorAccent" />
+        <TextView
+            android:id="@+id/business_name_past_request"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="44dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:drawableStart="@drawable/ic_person_add"
+            android:layout_marginStart="18dp"
+            android:layout_height="wrap_content"
+            android:text="Client Name"/>
+        <TextView
+            android:id="@+id/business_name_details"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="74dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:drawableStart="@drawable/ic_email_black"
+            android:layout_marginStart="18dp"
+            android:layout_height="wrap_content"
+            android:text="Client Email"/>
+        <TextView
+            android:id="@+id/vendor_name_past_request"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="44dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:drawableStart="@drawable/ic_person_add"
+            android:layout_marginStart="230dp"
+            android:layout_height="wrap_content"
+            android:text="Vendor Name"/>
+        <TextView
+            android:id="@+id/vendor_email_past_request"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="74dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_email_black"
+            android:layout_marginStart="230dp"
+            android:layout_height="wrap_content"
+            android:text="Vendor Email"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="15dp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/card_invoice_name_past_request"
+        app:layout_constraintStart_toStartOf="@+id/card_invoice_name_past_request"
+        app:layout_constraintTop_toBottomOf="@+id/card_invoice_name_past_request">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/item"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/price"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/quantity"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/amount"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <View
+            style="@style/Divider"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/item_one_past_request"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/item_price_past_request"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/item_quantity_past_request"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/item_amount_past_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="76dp"
+            android:text="Total"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="106dp"
+            android:gravity="center"
+            android:text="(Vat(16pc) and Discount(8pc) inclusive)" />
+
+        <TextView
+            android:id="@+id/item_total_past_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="8dp"
+            android:text="..................." />
+
+    </androidx.cardview.widget.CardView>
+
+    <CheckBox
+        android:layout_marginTop="32dp"
+        android:id="@+id/contract_terms"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/i_have_read_and_understood_the_terms_and_conditions_stated_in_the_contract"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+    <Button
+        android:id="@+id/make_request_button"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/btn_edit"
+        android:elevation="10dp"
+        android:text="Approve invoice"
+        android:textColor="#FFFF"
+        app:layout_constraintEnd_toEndOf="@+id/contract_terms"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="@+id/contract_terms"
+        app:layout_constraintTop_toBottomOf="@+id/contract_terms" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFF"
+        android:text="Decline Invoice"
+        android:background="@drawable/btn_edit"
+        app:layout_constraintBaseline_toBaselineOf="@+id/make_request_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/make_request_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

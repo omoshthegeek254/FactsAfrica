@@ -1,5 +1,6 @@
 package com.example.factsafrica.ui.ui.dashboard;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.factsafrica.R;
+import com.example.factsafrica.ui.ApproveInvoiceActivity;
 import com.example.factsafrica.ui.adapter.InvoiceAdapter;
 import com.example.factsafrica.ui.models.Invoice;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
@@ -91,6 +93,10 @@ public class DashboardFragment extends Fragment {
                 mInvoicesRecycler.setHasFixedSize(true);
                 mInvoicesRecycler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                adapter.setOnClickListener((View view, int position)->{
+                    Intent intent = new Intent(getActivity(), ApproveInvoiceActivity.class);
+                    startActivity(intent);
+                });
             }
 
             @Override
