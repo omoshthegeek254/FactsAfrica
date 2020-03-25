@@ -31,6 +31,8 @@ import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
+    private String token;
 
     @BindView(R.id.invoicesRecycler) RecyclerView mInvoicesRecycler;
     private List<Invoice> invoices;
@@ -53,7 +55,7 @@ public class DashboardFragment extends Fragment {
 //        mSearch = rootView.findViewById(R.id.invoiceSearch);
 //        mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ButterKnife.bind(this, rootView);
-        //getInvoices();
+        getAllInvoices();
 //        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
