@@ -27,7 +27,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
 
-            android:text="View Text"
+            android:text="Account"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:layout_marginTop="5dp"
