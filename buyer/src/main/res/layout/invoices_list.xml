@@ -50,5 +50,13 @@
             android:text="approved"
             android:layout_alignParentBottom="true"
             />
+        <TextView
+            android:id="@+id/payAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Amount"
+            android:textColor="#cc0000"
+            android:textStyle="bold"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

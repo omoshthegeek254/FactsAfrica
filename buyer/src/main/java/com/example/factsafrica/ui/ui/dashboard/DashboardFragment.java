@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -68,15 +69,16 @@ public class DashboardFragment extends Fragment {
         return rootView;
     }
 
-    public void getInvoices() {
+    public void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<List<Invoice>> call = service.getAllInvoices();
+        Call<List<Invoice>> call = service.getAllInvoices(token);
         Log.v("URL", call.request().url().toString());
         call.enqueue(new Callback<List<Invoice>>() {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
+                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 InvoiceAdapter adapter = new InvoiceAdapter(invoices, rootView.getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
@@ -87,7 +89,7 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Invoice>> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
