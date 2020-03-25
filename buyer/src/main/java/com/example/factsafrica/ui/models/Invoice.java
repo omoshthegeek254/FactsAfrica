@@ -11,42 +11,57 @@ public class Invoice implements Serializable
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("name")
+    @SerializedName("supplier_id")
     @Expose
-    private String name;
-    @SerializedName("status")
+    private Integer supplierId;
+    @SerializedName("buyer_id")
     @Expose
-    private String status;
-    @SerializedName("userId")
+    private Integer buyerId;
+    @SerializedName("invoice_status")
     @Expose
-    private Integer userId;
-    @SerializedName("invoiceDate")
+    private Integer invoiceStatus;
+    @SerializedName("invoice_amount")
     @Expose
-    private String invoiceDate;
-    private final static long serialVersionUID = 7250269546991406573L;
+    private String invoiceAmount;
+    @SerializedName("due_date")
+    @Expose
+    private String dueDate;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    private final static long serialVersionUID = 9150701147035518491L;
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public Invoice() {
     }
 
     /**
-     * 
-     * @param name
+     *
+     * @param createdAt
+     * @param supplierId
+     * @param dueDate
+     * @param invoiceAmount
      * @param id
-     * @param invoiceDate
-     * @param userId
-     * @param status
+     * @param buyerId
+     * @param invoiceStatus
+     * @param updatedAt
      */
-    public Invoice(Integer id, String name, String status, Integer userId, String invoiceDate) {
+    public Invoice(Integer id, Integer supplierId, Integer buyerId, Integer invoiceStatus, String invoiceAmount, String dueDate, String createdAt, String updatedAt) {
         super();
         this.id = id;
-        this.name = name;
-        this.status = status;
-        this.userId = userId;
-        this.invoiceDate = invoiceDate;
+        this.supplierId = supplierId;
+        this.buyerId = buyerId;
+        this.invoiceStatus = invoiceStatus;
+        this.invoiceAmount = invoiceAmount;
+        this.dueDate = dueDate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Integer getId() {
@@ -57,36 +72,60 @@ public class Invoice implements Serializable
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getSupplierId() {
+        return supplierId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 
-    public String getStatus() {
-        return status;
+    public Integer getBuyerId() {
+        return buyerId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setBuyerId(Integer buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getInvoiceStatus() {
+        return invoiceStatus;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setInvoiceStatus(Integer invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
     }
 
-    public String getInvoiceDate() {
-        return invoiceDate;
+    public String getInvoiceAmount() {
+        return invoiceAmount;
     }
 
-    public void setInvoiceDate(String invoiceDate) {
-        this.invoiceDate = invoiceDate;
+    public void setInvoiceAmount(String invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }
