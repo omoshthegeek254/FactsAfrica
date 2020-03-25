@@ -1,6 +1,8 @@
 package com.example.factsafrica.ui.ui.dashboard;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +33,9 @@ import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
-    private static final String TAG = "HomeFragment";
+    private static final String TAG = "DashBoardFragment";
     private String token;
+    private SharedPreferences mPreference;
 
     @BindView(R.id.invoicesRecycler) RecyclerView mInvoicesRecycler;
     private List<Invoice> invoices;
@@ -51,7 +54,8 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
 
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        mPreference = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+        token = mPreference.getString("token", "");
 //        mSearch = rootView.findViewById(R.id.invoiceSearch);
 //        mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ButterKnife.bind(this, rootView);
