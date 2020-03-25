@@ -86,7 +86,7 @@ public class DashboardFragment extends Fragment {
                 invoices = response.body();
                 Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 InvoiceAdapter adapter = new InvoiceAdapter(invoices, rootView.getContext());
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
                 mInvoicesRecycler.setHasFixedSize(true);
                 mInvoicesRecycler.setAdapter(adapter);
