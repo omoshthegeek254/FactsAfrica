@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
-                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
+//                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 adapter = new VendorInvoiceAdapter(invoices, rootView.getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);

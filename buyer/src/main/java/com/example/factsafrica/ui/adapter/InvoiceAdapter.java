@@ -26,6 +26,8 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     private List<Invoice> invoiceList;
     private Context mContext;
 
+    public static OnClickListener clickListener;
+
     public InvoiceAdapter(List<Invoice> invoices, Context mContext) {
         this.invoices = invoices;
         this.mContext = mContext;
@@ -84,7 +86,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         }
     };
 
-    public class InvoiceViewHolder extends RecyclerView.ViewHolder {
+    public class InvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.invoiceNo) TextView mInvoiceId;
         @BindView(R.id.invoiceDate) TextView mInvoiceDate;
         @BindView(R.id.payAmount) TextView mPayAble;
@@ -99,6 +101,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
             super(itemView);
             this.mContext = mContext;
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void bindInvoice(Invoice invoice) {
@@ -123,5 +126,20 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
             mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());
         }
+
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public void setOnClickListener(OnClickListener clickListener){
+        InvoiceAdapter.clickListener = clickListener;
+
+    }
+
+    public interface OnClickListener{
+        void onClick(View view, int position);
     }
 }
