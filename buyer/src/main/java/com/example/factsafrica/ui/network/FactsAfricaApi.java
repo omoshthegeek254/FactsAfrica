@@ -17,7 +17,7 @@ public interface FactsAfricaApi {
     @POST("login")
     Call<User> login(@Body LoginBuyer login,
                      @Header("Accept") String acceptType);
-    @GET("invoices")
+    @GET("invoice")
     Call<List<Invoice>> getAllInvoices();
     @GET("purchase_orders")
     Call<List<PurchaseOrder>> getAllOrders();
