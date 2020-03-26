@@ -49,9 +49,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.VendorVi
 
     //view holder class
     public class VendorViewHolder extends RecyclerView.ViewHolder {
-//        @BindView(R.id.pOrder) TextView mOrderno;
-//        @BindView(R.id.pDate) TextView mDate;
-@BindView(R.id.vendor_name) TextView mName;
+        @BindView(R.id.vendor_name) TextView mName;
         @BindView(R.id.vendor_email) TextView mMail;
         @BindView(R.id.vendor_address) TextView mAddress;
 
