@@ -1,16 +1,12 @@
 package com.example.factsafrica.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.factsafrica.R;
-import com.example.factsafrica.ui.db.InvoiceContract;
-import com.example.factsafrica.ui.db.InvoiceDbHelper;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.factsafrica.R;
+import com.example.factsafrica.ui.db.InvoiceDbHelper;
 
 import butterknife.BindView;
 
