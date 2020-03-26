@@ -1,6 +1,8 @@
 package com.example.factsafrica.ui.ui.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.factsafrica.R;
 import com.example.factsafrica.ui.adapter.PurchaseOrderAdapter;
+import com.example.factsafrica.ui.adapter.VendorsAdapter;
 import com.example.factsafrica.ui.models.PurchaseOrder;
+import com.example.factsafrica.ui.models.User;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
 import com.example.factsafrica.ui.network.FactsAfricaClient;
 
@@ -30,45 +34,50 @@ import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
-    @BindView(R.id.homeRecycler) RecyclerView mOrderRecycler;
-    private List<PurchaseOrder> purchaseorders;
-    private View root;
 
+    private String token;
+    private SharedPreferences mPreference;
+    @BindView(R.id.homeRecycler) RecyclerView mVendorRecycler;
+    private List<User> mVendors;
     private HomeViewModel homeViewModel;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
          root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        mPreference = PreferenceManager.getDefaultSharedPreferences(root.getContext());
+        token = mPreference.getString("token", "");
         ButterKnife.bind(this, root);
-        //getOrders();
+
+        getVendors(); //call get Vendors
 
         return root;
 
     }
-    // request and get order//
+    // request and get Vendors//
 
-//    public void getOrders() {
-//        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-//        Call<List<PurchaseOrder>> call = service.getAllOrders();
-//        call.enqueue(new Callback<List<PurchaseOrder>>() {
-//            @Override
-//            public void onResponse(Call<List<PurchaseOrder>> call, Response<List<PurchaseOrder>> response) {
-//                purchaseorders = response.body();
-//                PurchaseOrderAdapter adapter = new PurchaseOrderAdapter(purchaseorders, root.getContext());
-//                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
-//                mOrderRecycler.setLayoutManager(layoutManager);
-//                mOrderRecycler.setHasFixedSize(true);
-//                mOrderRecycler.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<PurchaseOrder>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    public void getVendors() {
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+       // call
+        Call<List<User>> call = service.getVendors(token);
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                mVendors = response.body();
+                VendorsAdapter adapter = new VendorsAdapter(mVendors, root.getContext());
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+                mVendorRecycler.setLayoutManager(layoutManager);
+                mVendorRecycler.setHasFixedSize(true);
+                mVendorRecycler.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
+            }
+        });
+    }
 }

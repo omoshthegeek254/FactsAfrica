@@ -27,5 +27,5 @@ public interface FactsAfricaApi {
                                    @Body Invoice invoice);
     //
     @GET("buyer/suppliers")
-    Call<User>getVendors(@Header("Authorization") String bearerToken);
+    Call<List<User>>getVendors(@Header("Authorization") String bearerToken);
 }
