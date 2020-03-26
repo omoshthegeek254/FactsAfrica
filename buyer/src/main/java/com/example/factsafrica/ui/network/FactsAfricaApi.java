@@ -25,4 +25,7 @@ public interface FactsAfricaApi {
     @POST("invoice/update/{id}")
     Call<List<Invoice>>setReviewed(@Header("Authorization") String bearerToken,
                                    @Body Invoice invoice);
+    //
+    @GET("buyer/suppliers")
+    Call<User>getVendors(@Header("Authorization") String bearerToken);
 }
