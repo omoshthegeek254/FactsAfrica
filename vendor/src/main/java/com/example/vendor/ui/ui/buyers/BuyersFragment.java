@@ -92,7 +92,7 @@ public class BuyersFragment extends Fragment {
                     rvBuyers.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rvBuyers.setAdapter(myAdapter);
                     rvBuyers.setHasFixedSize(true);
-                    myAdapter.setOnClickListener((view, position) -> {
+                    myAdapter.setOnClickListener((View view, int position) -> {
                         Snackbar snackbar = Snackbar
                                 .make(view, allBuyers.get(position).getName(), Snackbar.LENGTH_LONG);
                         snackbar.show();

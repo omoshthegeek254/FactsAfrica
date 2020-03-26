@@ -26,6 +26,8 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     private List<Invoice> invoiceList;
     private Context mContext;
 
+    public static OnClickListener clickListener;
+
     public InvoiceAdapter(List<Invoice> invoices, Context mContext) {
         this.invoices = invoices;
         this.mContext = mContext;
@@ -65,7 +67,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for(Invoice invoice: invoiceList){
-                    if(invoice.getStatus().toLowerCase().contains(filterPattern)){
+                    if(invoice.getInvoiceStatus().toString().toLowerCase().contains(filterPattern)){
                         filteredList.add(invoice);
                     }
                 }
@@ -84,35 +86,60 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         }
     };
 
-    public class InvoiceViewHolder extends RecyclerView.ViewHolder {
+    public class InvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.invoiceNo) TextView mInvoiceId;
         @BindView(R.id.invoiceDate) TextView mInvoiceDate;
-        @BindView(R.id.invoice_status) TextView mInvoiceStatus;
+        @BindView(R.id.payAmount) TextView mPayAble;
         Context mContext;
+
+        //illegal vars
+        String currency = " Amount Ksh: ";
+        String dueBy = "Due by: ";
+        String invoiceNumber = " Invoice Number: ";
 
         public InvoiceViewHolder(@NonNull View itemView) {
             super(itemView);
             this.mContext = mContext;
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void bindInvoice(Invoice invoice) {
 
-            if(invoice.getStatus().equals("pending") || invoice.getStatus().equals("Pending")){
-                mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
-            mInvoiceStatus.setText(invoice.getStatus());
-            } else if(invoice.getStatus().equals("approved") || invoice.getStatus().equals("Approved")){
-                mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
-                mInvoiceStatus.setText(invoice.getStatus());
-            } else if(invoice.getStatus().equals("declined") || invoice.getStatus().equals("Declined")){
-                mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
-                mInvoiceStatus.setText(invoice.getStatus());
-            }
+//            if(invoice.getInvoiceStatus().toString().equals("1")){
+//                mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
+//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+//                mInvoiceStatus.setText("pending");
+//            } else if(invoice.getInvoiceStatus().toString().equals("2")){
+//                mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
+//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+//                mInvoiceStatus.setText("approved");
+//            } else if(invoice.getInvoiceStatus().toString().equals("3")){
+//                mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
+//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+//                mInvoiceStatus.setText("declined");
+//            }
 
-            mInvoiceId.setText(invoice.getName());
+            mInvoiceId.setText(invoiceNumber + invoice.getBuyerId().toString());
+            mPayAble.setText(currency + invoice.getInvoiceAmount());
 
-            mInvoiceDate.setText(invoice.getInvoiceDate());
+            mInvoiceDate.setText(dueBy + invoice.getDueDate());
 //            mInvoiceStatus.setText(invoice.getStatus());
         }
+
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public void setOnClickListener(OnClickListener clickListener){
+        InvoiceAdapter.clickListener = clickListener;
+
+    }
+
+    public interface OnClickListener{
+        void onClick(View view, int position);
     }
 }

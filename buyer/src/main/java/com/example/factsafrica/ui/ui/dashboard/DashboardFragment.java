@@ -1,12 +1,16 @@
 package com.example.factsafrica.ui.ui.dashboard;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.factsafrica.R;
+import com.example.factsafrica.ui.ApproveInvoiceActivity;
 import com.example.factsafrica.ui.adapter.InvoiceAdapter;
 import com.example.factsafrica.ui.models.Invoice;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
@@ -30,6 +35,9 @@ import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
+    private static final String TAG = "DashBoardFragment";
+    private String token;
+    private SharedPreferences mPreference;
 
     @BindView(R.id.invoicesRecycler) RecyclerView mInvoicesRecycler;
     private List<Invoice> invoices;
@@ -48,11 +56,12 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
 
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        mPreference = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
+        token = mPreference.getString("token", "");
 //        mSearch = rootView.findViewById(R.id.invoiceSearch);
 //        mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ButterKnife.bind(this, rootView);
-        //getInvoices();
+        getAllInvoices();
 //        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
@@ -68,26 +77,31 @@ public class DashboardFragment extends Fragment {
         return rootView;
     }
 
-    public void getInvoices() {
+    public void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<List<Invoice>> call = service.getAllInvoices();
+        Call<List<Invoice>> call = service.getAllInvoices(token);
         Log.v("URL", call.request().url().toString());
         call.enqueue(new Callback<List<Invoice>>() {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
+                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
                 InvoiceAdapter adapter = new InvoiceAdapter(invoices, rootView.getContext());
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
                 mInvoicesRecycler.setHasFixedSize(true);
                 mInvoicesRecycler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                adapter.setOnClickListener((View view, int position)->{
+                    Intent intent = new Intent(getActivity(), ApproveInvoiceActivity.class);
+                    startActivity(intent);
+                });
             }
 
             @Override
             public void onFailure(Call<List<Invoice>> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

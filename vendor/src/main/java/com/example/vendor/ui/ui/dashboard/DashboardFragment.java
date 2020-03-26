@@ -54,6 +54,7 @@ public class DashboardFragment extends Fragment {
 
     private String mEmail;
     List<User> userData;
+    User userInfo;
 
 
     @BindView(R.id.account_user_name)
@@ -89,17 +90,20 @@ public class DashboardFragment extends Fragment {
         super.onStart();
         getAllInvoices();
         getUsersById();
+        getUserInfo();
     }
 
     private void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
         Call<List<Invoice>> call = service.getAllInvoices(token);
-        Log.v("URL", call.request().url().toString());
+        Log.v("URL1", call.request().url().toString());
         call.enqueue(new Callback<List<Invoice>>() {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 mInvoicesNumber.setText(Integer.toString(response.body().size()));
+                Log.v("Responsible",response.body().toString());
+
             }
 
             @Override
@@ -115,13 +119,18 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
                     userData =response.body();
+
                     //String mail = userData.get(0).getEmail();
-                    mBuyerSize.setText(Integer.toString(response.body().size()));
-                    mUserAddress.setText(userData.get(1).getId());
-                    mUserEmail.setText(userData.get(1).getEmail());
-                    accUserName.setText(userData.get(1).getName());
-                    mUserPhone.setText(userData.get(1).getApiToken());
+                    mBuyerSize.setText(Integer.toString(userData.size()));
+
+                    mUserAddress.setText("- Ngong Lane Plaza ");
+                    mUserEmail.setText("- example@mail.com");
+                    accUserName.setText("Your Name");
+                    mUserPhone.setText("- 0722000000");
+
+
 
 
 
@@ -133,6 +142,38 @@ public class DashboardFragment extends Fragment {
                 Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void  getUserInfo(){
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+        Call<User> call1 = service.getUser(token);
+        Log.v("wabebe", call1.request().url().toString());
+        call1.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+
+                if (response.isSuccessful() && response.body() != null){
+                    userInfo= response.body();
+                    accUserName.setText(userInfo.getName());
+                    mUserAddress.setText("User Address");
+                    mUserEmail.setText(userInfo.getEmail());
+                    mUserPhone.setText("User Phone");
+
+                }
+                else {
+                    Toast.makeText(getContext(), "Error ! null response || no response from server", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getContext(), "Error"+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+
+
     }
 
 }

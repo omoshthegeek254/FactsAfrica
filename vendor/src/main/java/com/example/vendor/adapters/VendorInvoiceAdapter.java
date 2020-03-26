@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdapter.VendorInvoiceViewHolder> implements Filterable {
    private List<Invoice> mInvoices;
-   private List<Invoice>mInvoiceList;
+   private List<Invoice>mInvoiceListAll;
    private Context mContext;
    int row_index = -1;
 
@@ -34,7 +34,7 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
    public VendorInvoiceAdapter(List<Invoice> mInvoices,Context mContext){
        this.mInvoices=mInvoices;
        this.mContext=mContext;
-       mInvoiceList= new ArrayList<>(mInvoices);
+       mInvoiceListAll= new ArrayList<>(mInvoices);
    }
 
 
@@ -49,26 +49,26 @@ public class VendorInvoiceAdapter extends RecyclerView.Adapter<VendorInvoiceAdap
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Invoice> filteredList = new ArrayList<>();
-            if(constraint == null || constraint.length()==0){
-                filteredList.addAll(mInvoiceList);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for(Invoice invoice: mInvoiceList){
-                    if(invoice.getInvoiceStatus().toString().toLowerCase().contains(filterPattern)){
+            if(constraint.toString().isEmpty()){
+                filteredList.addAll(mInvoiceListAll);
+            }else{
+                for(Invoice invoice:mInvoiceListAll){
+                    if(invoice.toString().toLowerCase().contains(constraint.toString().toLowerCase())){
                         filteredList.add(invoice);
                     }
                 }
+
             }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mInvoices.clear();
-            mInvoiceList.addAll((List)results.values);
+            mInvoices.addAll((List)results.values);
             notifyDataSetChanged();
 
         }

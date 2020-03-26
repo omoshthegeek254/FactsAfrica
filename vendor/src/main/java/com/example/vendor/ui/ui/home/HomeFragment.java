@@ -12,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,7 @@ import com.example.vendor.network.FactsAfricaClient;
 import com.example.vendor.ui.MakeInvoiceActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,10 +47,15 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.count_rows)
     TextView mCountRows;
     private List<Invoice> invoices;
+    private Invoice invoice;
+    VendorInvoiceAdapter adapter;
+    private List<Invoice> addedInvoice = new ArrayList<>();
 
     private HomeViewModel homeViewModel;
     private View rootView;
     FloatingActionButton floatingActionButton;
+
+    SearchView searchView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +69,24 @@ public class HomeFragment extends Fragment {
         token = mPreference.getString("token", "");
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        searchView = (SearchView) rootView.findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(adapter != null) {
+                    adapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MakeInvoiceActivity.class);
@@ -79,8 +103,37 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         getAllInvoices();
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(mInvoicesRecycler);
+
         return rootView;
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            int position = viewHolder.getAdapterPosition();
+
+            switch (direction){
+                case ItemTouchHelper.LEFT:
+                    invoice = invoices.get(position);
+                    addedInvoice.add(invoice);
+                    invoices.remove(position);
+                    adapter.notifyItemRemoved(position);
+                    Toast.makeText(getContext(),"Item added to batch",Toast.LENGTH_LONG).show();
+
+                    break;
+
+            }
+
+        }
+    };
 
 
 
@@ -88,23 +141,17 @@ public class HomeFragment extends Fragment {
     public void getAllInvoices() {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-
         Call<List<Invoice>> call = service.getAllInvoices(token);
-
         Log.v("URL", call.request().url().toString());
-
         call.enqueue(new Callback<List<Invoice>>() {
-
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {
                 invoices = response.body();
-                //Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
-                VendorInvoiceAdapter adapter = new VendorInvoiceAdapter(invoices, rootView.getContext());
+//                Log.d(TAG, "onResponse: "+invoices.get(0).getInvoiceAmount());
+                adapter = new VendorInvoiceAdapter(invoices, rootView.getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 mInvoicesRecycler.setLayoutManager(layoutManager);
-
                 mInvoicesRecycler.setHasFixedSize(true);
-
                 mInvoicesRecycler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
