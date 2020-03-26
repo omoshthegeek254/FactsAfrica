@@ -406,7 +406,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
                 .setContentText("DUE DATE: "+mPickDate.getText().toString().trim())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setColor(Color.GREEN)
+                .setColor(Color.parseColor("#0B6B4D"))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
