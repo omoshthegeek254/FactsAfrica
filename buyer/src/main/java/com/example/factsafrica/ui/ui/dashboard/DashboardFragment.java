@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.factsafrica.R;
 import com.example.factsafrica.ui.ApproveInvoiceActivity;
+import com.example.factsafrica.ui.ConstantsBuyer;
 import com.example.factsafrica.ui.adapter.InvoiceAdapter;
 import com.example.factsafrica.ui.models.Invoice;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
@@ -35,6 +36,7 @@ import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
+
     private static final String TAG = "DashBoardFragment";
     private String token;
     private SharedPreferences mPreference;
@@ -94,7 +96,19 @@ public class DashboardFragment extends Fragment {
                 mInvoicesRecycler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 adapter.setOnClickListener((View view, int position)->{
+                    String status = Integer.toString(invoices.get(position).getInvoiceStatus());
+                    int id = invoices.get(position).getId();
+                    if(status.equals("1")){
+                        status = "PENDING";
+                    } else if(status.equals("2")){
+                        status = "APPROVED";
+                    } else
+                        status = "DECLINED";
+
+                    Log.d(TAG, "Invoice Status: "+invoices.get(position).getInvoiceStatus());
                     Intent intent = new Intent(getActivity(), ApproveInvoiceActivity.class);
+                    intent.putExtra(ConstantsBuyer.INVOICE_POSITION, id);
+                    intent.putExtra(ConstantsBuyer.INVOICE_STATUS, status);
                     startActivity(intent);
                 });
             }

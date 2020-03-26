@@ -90,6 +90,8 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         @BindView(R.id.invoiceNo) TextView mInvoiceId;
         @BindView(R.id.invoiceDate) TextView mInvoiceDate;
         @BindView(R.id.payAmount) TextView mPayAble;
+        @BindView(R.id.status_of_invoice)
+                TextView mInvoiceStatus;
         Context mContext;
 
         //illegal vars
@@ -106,25 +108,25 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
 
         public void bindInvoice(Invoice invoice) {
 
-//            if(invoice.getInvoiceStatus().toString().equals("1")){
-//                mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
-//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
-//                mInvoiceStatus.setText("pending");
-//            } else if(invoice.getInvoiceStatus().toString().equals("2")){
-//                mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
-//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
-//                mInvoiceStatus.setText("approved");
-//            } else if(invoice.getInvoiceStatus().toString().equals("3")){
-//                mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
-//                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
-//                mInvoiceStatus.setText("declined");
-//            }
+            if(invoice.getInvoiceStatus().toString().equals("1")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#ECB753"));
+                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+                mInvoiceStatus.setText("pending");
+            } else if(invoice.getInvoiceStatus().toString().equals("2")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#0B6623"));
+                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+                mInvoiceStatus.setText("approved");
+            } else if(invoice.getInvoiceStatus().toString().equals("3")){
+                mInvoiceStatus.setTextColor(Color.parseColor("#FF0000"));
+                mInvoiceStatus.setText(invoice.getInvoiceStatus().toString());
+                mInvoiceStatus.setText("declined");
+            }
 
             mInvoiceId.setText(invoiceNumber + invoice.getBuyerId().toString());
             mPayAble.setText(currency + invoice.getInvoiceAmount());
 
             mInvoiceDate.setText(dueBy + invoice.getDueDate());
-//            mInvoiceStatus.setText(invoice.getStatus());
+            //mInvoiceStatus.setText(invoice.getInvoiceStatus());
         }
 
 
