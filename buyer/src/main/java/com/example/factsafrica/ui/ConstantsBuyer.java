@@ -5,4 +5,6 @@ public class ConstantsBuyer {
     public static String ACCEPT_TYPE = "application/json";
     public static String PREFRENCES_NAME_KEY = "name";
     public static final String PREFERENCES_EMAIL_KEY = "email";
+    public static final String INVOICE_STATUS = "status";
+    public static final String INVOICE_POSITION = "position";
 }

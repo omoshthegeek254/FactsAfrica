@@ -109,6 +109,16 @@
             android:layout_height="wrap_content"
             android:text="Vendor Email"/>
 
+        <TextView
+            android:id="@+id/invoice_status_buyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invoice Status: "
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="102dp"
+            android:layout_gravity="center_horizontal"/>
+
 
     </androidx.cardview.widget.CardView>
 
@@ -248,7 +258,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <Button
-        android:id="@+id/make_request_button"
+        android:id="@+id/btn_approve_invoice"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -263,14 +273,14 @@
         app:layout_constraintTop_toBottomOf="@+id/contract_terms" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_decline_invoice"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:textColor="#FFFF"
         android:text="Decline Invoice"
         android:background="@drawable/btn_edit"
-        app:layout_constraintBaseline_toBaselineOf="@+id/make_request_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_approve_invoice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/make_request_button" />
+        app:layout_constraintStart_toEndOf="@+id/btn_approve_invoice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.factsafrica.ui.network;
 import com.example.factsafrica.ui.models.Invoice;
 import com.example.factsafrica.ui.models.LoginBuyer;
 import com.example.factsafrica.ui.models.PurchaseOrder;
+import com.example.factsafrica.ui.models.Status;
 import com.example.factsafrica.ui.models.User;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface FactsAfricaApi {
     @POST("login")
@@ -25,6 +27,11 @@ public interface FactsAfricaApi {
     @POST("invoice/update/{id}")
     Call<List<Invoice>>setReviewed(@Header("Authorization") String bearerToken,
                                    @Body Invoice invoice);
+
+    @POST("invoice/update/{id}")
+    Call<Invoice> updateStatus(@Header("Authorization") String bearerToken,
+                               @Path("id") int id,
+                               @Body Status status);
     //
     @GET("buyer/suppliers")
     Call<List<User>>getVendors(@Header("Authorization") String bearerToken);
