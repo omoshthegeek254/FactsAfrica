@@ -21,7 +21,7 @@ public interface FactsAfricaApi {
     Call<User> login(@Body Login login,
                      @Header("Accept") String acceptType);
 
-    @GET("loggeduser")
+    @GET("user")
     Call<User> getUser(@Header("Authorization") String bearerToken);
 
     @POST("invoice")

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +71,9 @@ public class DashboardFragment extends Fragment {
     TextView mBuyerSize;
     @BindView(R.id.total_invoices_sent)
     TextView mInvoicesNumber;
+
+    @BindView(R.id.logout_image)
+    ImageView mLogout;
     private String token;
     private SharedPreferences mPreferences;
     private DashboardViewModel dashboardViewModel;
@@ -81,16 +85,20 @@ public class DashboardFragment extends Fragment {
         mEmail = mPreferences.getString(Constants.PREFERENCES_EMAIL_KEY, null);
         Log.d(TAG, "onCreate: "+ mEmail);
         ButterKnife.bind(this, root);
-        getUserInfo();
+
         token = mPreferences.getString("token", "");
         Log.v("passed token", token);
         return root;
+
+
     }
     @Override
     public void onStart() {
         super.onStart();
         getAllInvoices();
         getUsersById();
+        getUserInfo();
+        logout();
 
     }
 
@@ -126,18 +134,6 @@ public class DashboardFragment extends Fragment {
                     //String mail = userData.get(0).getEmail();
                     mBuyerSize.setText(Integer.toString(userData.size()));
 
-                    //HARD CODE
-
-                    mUserAddress.setText("- Ngong Lane Plaza ");
-                    mUserEmail.setText("- suppliermaker@mail.com");
-                    accUserName.setText("Supplier Maker");
-                    mUserPhone.setText("- 0722000000");
-
-
-
-
-
-
                 }
             }
             @Override
@@ -158,16 +154,14 @@ public class DashboardFragment extends Fragment {
                     Log.v("wabebe1", response.body().toString());
                     userInfo= response.body();
 
-                    mUserAddress.setText("- Ngong Lane Plaza "); // hard coded
+                    mUserAddress.setText("1 - Ngong Lane Plaza "); // hard coded
                     mUserEmail.setText(userInfo.getEmail());
                     accUserName.setText(userInfo.getName());
-                    mUserPhone.setText("0722000000"); //hardcoded
+                    mUserPhone.setText("1 -0722000000"); //hardcoded
 
 
                 }
-                else {
-//                    Toast.makeText(getContext(), "Error ! null response || no response from server", Toast.LENGTH_LONG).show();
-                }
+
             }
 
             @Override
@@ -180,5 +174,7 @@ public class DashboardFragment extends Fragment {
 
 
     }
+
+
 
 }
