@@ -175,6 +175,17 @@ public class DashboardFragment extends Fragment {
 
     }
 
+    public void logout(){
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(getContext(), "logged out", Toast.LENGTH_LONG).show();
+                mPreferences.edit().remove("token").commit();
+                Intent logoutIntent = new Intent(getContext(), LoginActivity.class);
+                startActivity(logoutIntent);
 
+            }
+        });
+    }
 
 }
