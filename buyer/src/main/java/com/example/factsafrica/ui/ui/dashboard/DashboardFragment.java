@@ -120,4 +120,8 @@ public class DashboardFragment extends Fragment {
         });
     }
 
+    //get user info
+
+
+
 }

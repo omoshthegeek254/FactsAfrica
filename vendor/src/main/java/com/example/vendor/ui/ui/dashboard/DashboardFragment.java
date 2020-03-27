@@ -183,6 +183,7 @@ public class DashboardFragment extends Fragment {
                 mPreferences.edit().remove("token").commit();
                 Intent logoutIntent = new Intent(getContext(), LoginActivity.class);
                 startActivity(logoutIntent);
+                getActivity().finish();
 
             }
         });

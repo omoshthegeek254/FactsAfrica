@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.factsafrica.R;
 import com.example.factsafrica.ui.ConstantsBuyer;
+import com.example.factsafrica.ui.LoginActivity;
 import com.example.factsafrica.ui.models.Invoice;
 import com.example.factsafrica.ui.models.User;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
@@ -47,16 +49,25 @@ public class AccountFragment extends Fragment {
     TextView mBuyerSize;
     @BindView(R.id.total_invoices_sent)
     TextView mInvoicesNumber;
+    @BindView(R.id.buyerAddress)
+    TextView  mUserAddress;
+    @BindView(R.id.buyerPhone)
+    TextView  mUserPhone;
+    @BindView(R.id.logout_image)
+    ImageView mLogout;
     private String token;
     private SharedPreferences mPreferences;
 
     private AccountViewModel accountViewModel;
+    User userInfo;
 
     @Override
     public void onStart() {
         super.onStart();
         getAllInvoices();
         getAllBuyers();
+        getUserInfo();
+        logout();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -106,4 +117,40 @@ public class AccountFragment extends Fragment {
             }
         });
     }
+
+    //
+
+    public void  getUserInfo(){
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+
+        Call<User> call1 = service.getUser(token);
+        Log.v("wabebe", call1.request().url().toString());
+        call1.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()&& response.body()!= null){
+
+                    userInfo= response.body();
+
+                    mUserAddress.setText("1 - Ngong Lane Plaza "); // hard coded
+                    mUserEmail.setText(userInfo.getEmail());
+                    accUserName.setText(userInfo.getName());
+                    mUserPhone.setText("1 -0722000000"); //hardcoded
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+
+
+
 }

@@ -35,4 +35,8 @@ public interface FactsAfricaApi {
     //
     @GET("buyer/suppliers")
     Call<List<User>>getVendors(@Header("Authorization") String bearerToken);
+
+    //users
+    @GET("user")
+    Call<User>getUser(@Header("Authorization") String bearerToken);
 }
