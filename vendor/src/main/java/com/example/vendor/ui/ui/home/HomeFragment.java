@@ -142,7 +142,7 @@ public class HomeFragment extends Fragment {
 
         FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
         Call<List<Invoice>> call = service.getAllInvoices(token);
-        Log.v("URL", call.request().url().toString());
+        Log.v("URL22", call.request().url().toString());
         call.enqueue(new Callback<List<Invoice>>() {
             @Override
             public void onResponse(Call<List<Invoice>> call, Response<List<Invoice>> response) {

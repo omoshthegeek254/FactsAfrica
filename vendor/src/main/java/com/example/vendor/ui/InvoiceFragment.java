@@ -2,6 +2,8 @@ package com.example.vendor.ui;
 
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -28,6 +30,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -40,6 +44,8 @@ import com.example.vendor.models.InvoicePosted;
 import com.example.vendor.models.User;
 import com.example.vendor.network.FactsAfricaApi;
 import com.example.vendor.network.FactsAfricaClient;
+import com.example.vendor.notifications.FactsAfrica;
+import com.example.vendor.notifications.NotificationReceiver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
@@ -64,6 +70,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private String token;
     private SharedPreferences mPreference;
+    private NotificationManagerCompat managerCompat;
 
     //BindViews
     @BindView(R.id.date_today)
@@ -137,9 +144,10 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
             month = month + 1;
 
             String date = year + "-" + month + "-" + day;
-
-
             mPickDate.setText(date);
+
+            managerCompat = NotificationManagerCompat.from(rootView.getContext());
+
 
 
         };
@@ -193,6 +201,7 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
         } if(v==mSubmitInvoice){
             takeScreenShot();
             addInvoiceToApi();
+            sendToChannel(rootView);
         } if(v==mBusinessName){
             openBuyerFragment();
 
@@ -377,6 +386,34 @@ public class InvoiceFragment extends Fragment implements View.OnClickListener {
                 //cursor.close();
                 cursor1.close();
             }
+
+    }
+
+    public void sendToChannel(View view){
+
+        Intent intent = new Intent(getActivity(), BottomNavigation.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
+
+        Intent broadCastIntent = new Intent(getActivity(), NotificationReceiver.class);
+        broadCastIntent.putExtra("Facts Africa", mInvoiceNumber.getText().toString().trim());
+
+        PendingIntent actionIntent = PendingIntent.getBroadcast(getActivity(), 0, broadCastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Notification notification = new NotificationCompat.Builder(rootView.getContext(), FactsAfrica.INVOICE_SENT)
+                .setSmallIcon(R.drawable.facts)
+                .setContentTitle("INVOICE " + mInvoiceNumber.getText().toString().trim() + " SENT \n")
+                .setContentText("DUE DATE: "+mPickDate.getText().toString().trim())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.parseColor("#0B6B4D"))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.facts, "View Invoice", actionIntent)
+                .build();
+
+        managerCompat.notify(1,notification);
 
     }
 

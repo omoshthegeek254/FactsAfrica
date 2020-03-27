@@ -81,6 +81,7 @@ public class DashboardFragment extends Fragment {
         mEmail = mPreferences.getString(Constants.PREFERENCES_EMAIL_KEY, null);
         Log.d(TAG, "onCreate: "+ mEmail);
         ButterKnife.bind(this, root);
+        getUserInfo();
         token = mPreferences.getString("token", "");
         Log.v("passed token", token);
         return root;
@@ -90,7 +91,7 @@ public class DashboardFragment extends Fragment {
         super.onStart();
         getAllInvoices();
         getUsersById();
-        getUserInfo();
+
     }
 
     private void getAllInvoices() {
@@ -125,9 +126,11 @@ public class DashboardFragment extends Fragment {
                     //String mail = userData.get(0).getEmail();
                     mBuyerSize.setText(Integer.toString(userData.size()));
 
+                    //HARD CODE
+
                     mUserAddress.setText("- Ngong Lane Plaza ");
-                    mUserEmail.setText("- example@mail.com");
-                    accUserName.setText("Your Name");
+                    mUserEmail.setText("- suppliermaker@mail.com");
+                    accUserName.setText("Supplier Maker");
                     mUserPhone.setText("- 0722000000");
 
 
@@ -144,8 +147,7 @@ public class DashboardFragment extends Fragment {
         });
     }
     public void  getUserInfo(){
-        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
-        Call<User> call1 = service.getUser(token);
+        Call<User> call1 = Utils.getApi().getUser(token);
         Log.v("wabebe", call1.request().url().toString());
         call1.enqueue(new Callback<User>() {
             @Override
@@ -153,15 +155,18 @@ public class DashboardFragment extends Fragment {
 
 
                 if (response.isSuccessful() && response.body() != null){
+                    Log.v("wabebe1", response.body().toString());
                     userInfo= response.body();
-                    accUserName.setText(userInfo.getName());
-                    mUserAddress.setText("User Address");
+
+                    mUserAddress.setText("- Ngong Lane Plaza "); // hard coded
                     mUserEmail.setText(userInfo.getEmail());
-                    mUserPhone.setText("User Phone");
+                    accUserName.setText(userInfo.getName());
+                    mUserPhone.setText("0722000000"); //hardcoded
+
 
                 }
                 else {
-                    Toast.makeText(getContext(), "Error ! null response || no response from server", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(), "Error ! null response || no response from server", Toast.LENGTH_LONG).show();
                 }
             }
 

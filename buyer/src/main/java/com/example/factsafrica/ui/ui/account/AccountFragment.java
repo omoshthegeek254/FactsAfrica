@@ -1,5 +1,6 @@
 package com.example.factsafrica.ui.ui.account;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.factsafrica.R;
 import com.example.factsafrica.ui.ConstantsBuyer;
 import com.example.factsafrica.ui.models.Invoice;
+import com.example.factsafrica.ui.models.User;
 import com.example.factsafrica.ui.network.FactsAfricaApi;
 import com.example.factsafrica.ui.network.FactsAfricaClient;
 
@@ -54,6 +56,7 @@ public class AccountFragment extends Fragment {
     public void onStart() {
         super.onStart();
         getAllInvoices();
+        getAllBuyers();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -84,6 +87,22 @@ public class AccountFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Invoice>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getAllBuyers(){
+        FactsAfricaApi service = FactsAfricaClient.getClient().create(FactsAfricaApi.class);
+        Call<List<User>> call = service.getVendors(token);
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                mBuyerSize.setText(Integer.toString(response.body().size()));
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
             }
         });
     }
